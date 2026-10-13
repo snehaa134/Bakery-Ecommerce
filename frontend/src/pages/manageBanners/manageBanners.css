@@ -1,153 +1,87 @@
 
 .manage-categories {
-    width: 100%;
-    padding: 25px;
-    background-color: #fffaf7;
+    padding: 30px;
     min-height: 100vh;
-    box-sizing: border-box;
+    background-color: #fff8f5;
 }
 
-/* Heading */
 .manage-categories h2 {
+    margin-bottom: 20px;
+    color: #a9336e;
     font-size: 28px;
-    color: #5b3028;
-    margin-bottom: 25px;
-    font-weight: 700;
 }
 
-/* Add Banner Button */
 .manage-categories > button {
-    background-color: #a65d45;
+    background-color: #d85b91;
     color: white;
+    padding: 10px 18px;
     border: none;
-    padding: 11px 20px;
-    border-radius: 6px;
-    font-size: 15px;
-    font-weight: 600;
+    border-radius: 5px;
     cursor: pointer;
     margin-bottom: 25px;
     transition: background-color 0.3s ease;
 }
 
 .manage-categories > button:hover {
-    background-color: #874632;
+    background-color: #b83d73;
 }
 
-/* Table Wrapper */
-.manage-categories .table {
+.table {
     width: 100%;
     overflow-x: auto;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 3px 12px rgba(91, 48, 40, 0.08);
 }
 
-/* Table */
 .manage-categories table {
     width: 100%;
     border-collapse: collapse;
-    border: none;
+    background-color: white;
 }
 
-/* Table Header */
-.manage-categories table thead {
-    background-color: #f7b3eb;
-}
-
-.manage-categories table th {
-    padding: 16px 14px;
-    color: #5b3028;
-    font-size: 15px;
-    font-weight: 700;
+.manage-categories th,
+.manage-categories td {
+    border: 1px solid #f0d6e1;
+    padding: 12px;
     text-align: center;
-    border: 1px solid #ead5cb;
-    white-space: nowrap;
 }
 
-/* Table Cells */
-.manage-categories table td {
-    padding: 15px;
-    text-align: center;
-    vertical-align: middle;
-    color: #51413c;
-    font-size: 14px;
-    border: 1px solid #eee2dc;
+.manage-categories th {
+    background-color: #0b0709;
+    color: #ffffff;
 }
 
-/* Alternate Rows */
-.manage-categories table tbody tr:nth-child(even) {
-    background-color: #fff8f4;
-}
-
-.manage-categories table tbody tr:hover {
-    background-color: #fdf0e9;
-}
-
-/* Banner Images */
-.banner-images {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    padding: 5px;
-}
-
-.banner-images img {
-    width: 100px;
-    height: 70px;
+.manage-categories td img {
+    width: 60px;
+    height: 60px;
     object-fit: cover;
-    border-radius: 7px;
-    border: 1px solid #e5cfc4;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease;
-}
-
-.banner-images img:hover {
-    transform: scale(1.08);
-}
-
-/* No Image Message */
-.manage-categories table td p {
-    color: #999;
-    margin: 0;
-}
-
-/* Edit Button */
-.manage-categories table td button:first-child {
-    background-color: #d9a441;
-    color: #fff;
-    border: none;
-    padding: 8px 15px;
     border-radius: 5px;
-    cursor: pointer;
-    margin: 4px;
-    font-size: 13px;
-    transition: background-color 0.3s ease;
 }
 
-.manage-categories table td button:first-child:hover {
-    background-color: #bd8b2e;
-}
-
-/* Delete Button */
-.manage-categories table td button:last-child {
-    background-color: #c65353;
-    color: #fff;
+.manage-categories td button {
+    padding: 7px 12px;
+    margin: 3px;
     border: none;
-    padding: 8px 15px;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
-    margin: 4px;
-    font-size: 13px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
 }
 
-.manage-categories table td button:last-child:hover {
-    background-color: #a83e3e;
+/* Update button */
+.manage-categories td button:first-child {
+    background-color: #e78bb2;
+    color: white;
 }
 
-.manage-categories table td button:disabled {
+/* Delete button */
+.manage-categories td button:last-child {
+    background-color: #d85b91;
+    color: white;
+}
+
+.manage-categories td button:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+}
+
+.manage-categories td button:hover:not(:disabled) {
+    opacity: 0.8;
 }

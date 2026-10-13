@@ -9,6 +9,7 @@ const adminAuthRouter = require("./routes/adminAuthRoutes");
 const adminRouter = require("./routes/adminRoutes");
 const categoryRouter = require("./routes/categoryRoutes");
 const bannerRouter = require("./routes/bannerRoutes");
+const productRouter = require("./routes/productRoutes")
 const cors = require("cors");
 const app = express();
 
@@ -25,6 +26,7 @@ app.use("/", adminAuthRouter);
 app.use("/", adminRouter);
 app.use("/", categoryRouter);
 app.use("/", bannerRouter);
+app.use("/", productRouter);
 app.use("/uploads", express.static("uploads"));
 
 

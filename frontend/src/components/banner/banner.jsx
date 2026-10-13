@@ -41,6 +41,11 @@ const Banner = () => {
                 <div className="banner-content">
                     <h2>{banner.title}</h2>
                     <p>{banner.description}</p>
+                    <button className="buy-btn" onClick={() => {
+                        document.getElementById("categories")?.scrollIntoView({
+                            behavior: "smooth"
+                        })
+                    }}>Buy Now</button>
                 </div>
 
                 {banner?.images?.[0] && (
@@ -49,6 +54,7 @@ const Banner = () => {
 
                 {banners?.length > 1 && (
                     <div className="banner-buttons">
+
                         <button onClick={() => setIndex((index + 1) % banners?.length)}>Next</button>
                         <button onClick={() => setIndex((index - 1 + banners?.length) % banners?.length)}>Previous</button>
 

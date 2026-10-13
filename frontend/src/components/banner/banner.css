@@ -19,7 +19,7 @@
 }
 
 .banner-content h2 {
-    font-size: 44px;
+    font-size: 50px;
     font-weight: bold;
     color: #6b293e;
     margin-bottom: 20px;
@@ -33,10 +33,28 @@
     margin-bottom: 25px;
 }
 
+.buy-btn{
+     padding: 11px 24px;
+    font-size: 15px;
+    font-weight: 600;
+    border: 1px solid #8b3a50;
+    border-radius: 25px;
+    background-color: #9e5f6f;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.buy-btn:hover {
+    background-color: #fff;
+    color: #8b3a50;
+}
+
+
 /* Banner image */
 .banner-img {
-    width: 45%;
-    height: 330px;
+    width: 60%;
+    height: 520px;
     object-fit: cover;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(91, 39, 56, 0.15);
@@ -45,7 +63,7 @@
 /* Next and Previous buttons */
 .banner-buttons {
     position: absolute;
-    bottom: 25px;
+    bottom: 55px;
     left: 8%;
     display: flex;
     gap: 12px;

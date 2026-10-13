@@ -7,22 +7,23 @@
 
 .manage-categories h2 {
     margin-bottom: 20px;
-    color: #f1ebeb;
+    color: #a9336e;
     font-size: 28px;
 }
 
 .manage-categories > button {
-    background-color: #d474a7;
+    background-color: #d85b91;
     color: white;
     padding: 10px 18px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     margin-bottom: 25px;
+    transition: background-color 0.3s ease;
 }
 
 .manage-categories > button:hover {
-    background-color: #704545;
+    background-color: #b83d73;
 }
 
 .table {
@@ -38,14 +39,14 @@
 
 .manage-categories th,
 .manage-categories td {
-    border: 1px solid #ddd;
+    border: 1px solid #f0d6e1;
     padding: 12px;
     text-align: center;
 }
 
 .manage-categories th {
-    background-color: #f1bdd3;
-    color: white;
+    background-color: #e9a3c2;
+    color: #ffffff;
 }
 
 .manage-categories td img {
@@ -61,15 +62,17 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
 }
 
+
 .manage-categories td button:first-child {
-    background-color: #d9a066;
+    background-color: #e78bb2;
     color: white;
 }
 
 .manage-categories td button:last-child {
-    background-color: #b83232;
+    background-color: #d85b91;
     color: white;
 }
 
