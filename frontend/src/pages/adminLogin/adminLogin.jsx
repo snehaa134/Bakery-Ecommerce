@@ -29,11 +29,11 @@ const AdminLogin = () => {
             try {
                 const response = await adminLogin(values).unwrap();
                 console.log("response", response);
-                setUser(response.data);
+                setUser(response?.data);
                 setIsLoggedIn(true);
                 formik.resetForm();
                 toast.success(response.message);
-                navigate("/")
+                navigate("/manage-categories");
 
 
             } catch (error) {

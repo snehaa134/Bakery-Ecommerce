@@ -5,13 +5,19 @@ import { AuthContext } from "../../authContext/authContext";
 
 const Profile = () => {
     const [logout] = useLogoutMutation();
-    const{setIsLoggedIn}=useContext(AuthContext);
+    const{setIsLoggedIn,setUser}=useContext(AuthContext);
     const navigate=useNavigate();
 
     const handleLogout= async()=>{
-        const response= await logout();
+        try {
+            const response= await logout().unwrap();
         setIsLoggedIn(false);
+        setUser(null);
         navigate("/")
+        } catch (error) {
+            console.log("error",error)
+        }
+        
 
     }
     return (

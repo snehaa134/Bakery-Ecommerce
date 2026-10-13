@@ -189,4 +189,19 @@ const resendOtp = async (req, res) => {
 
 }
 
-module.exports = { createUser, verifyOtp, resendOtp }
+const getCurrentUser = async(req,res)=>{
+    try {
+       return res.status(STATUS_CODE.OK).json({
+        message:"current user fetched successfully",
+        data: req.user
+       })
+        
+    } catch (error) {
+        return res.status(STATUS_CODE.INTERNAL_SERVER_ERROR).json({
+            message: error.message
+        })
+        
+    }
+}
+
+module.exports = { createUser, verifyOtp, resendOtp ,getCurrentUser}

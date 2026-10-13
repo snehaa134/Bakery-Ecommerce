@@ -8,11 +8,13 @@ import { AuthProvider } from './authContext/authContext.jsx'
 import { Provider } from 'react-redux'
 
 createRoot(document.getElementById('root')).render(
-  <AuthProvider>
+  
     <BrowserRouter>
       <Provider store={Store}>
-        <App />
+        <AuthProvider>
+             <App />
+        </AuthProvider>
       </Provider>
     </BrowserRouter>
-  </AuthProvider>
+ 
 )

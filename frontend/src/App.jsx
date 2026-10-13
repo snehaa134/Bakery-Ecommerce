@@ -13,6 +13,12 @@ import ProtectedRoute from "./Routes/protectedRoutes/protectedRoutes";
 import AdminRoute from "./Routes/adminRoutes/adminRoutes";
 import AdminDashboard from "./pages/adminDashboard/adminDashboard";
 import PublicRoute from "./Routes/publicRoutes/publicRoutes";
+import AddCategory from "./pages/addCategory/addCategory";
+import UpdateCategory from "./pages/updateCategory/updateCategory";
+import ManageCategories from "./pages/manageCategories/manageCategories";
+import AddBanner from "./pages/addBanner/addBanner";
+import UpdateBanner from "./pages/updateBanner/updateBanner";
+import ManageBanners from "./pages/manageBanners/manageBanners";
 
 const App = () => {
   return (
@@ -25,9 +31,11 @@ const App = () => {
 
           <Route path="/login" element={<Login />} />
           <Route path="/signUp" element={<SignUp />} />
-          <Route path="admin-SignUp" element={<AdminSignUp />} />
-          <Route path="admin-Login" element={<AdminLogin />} />
-          <Route path="verify-otp" element={<VerifyOtp />} />
+          <Route path="/admin-SignUp" element={<AdminSignUp />} />
+          <Route path="/admin-Login" element={<AdminLogin />} />
+          <Route path="/verify-otp" element={<VerifyOtp />} />
+        
+          
 
         </Route>
 
@@ -37,6 +45,12 @@ const App = () => {
 
         <Route element={<AdminRoute />}>
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
+          <Route path="/add-category" element={<AddCategory />} />
+          <Route path="/update-category/:id" element={<UpdateCategory />} />
+          <Route path="/manage-categories" element={<ManageCategories />} />
+          <Route path="/manage-banners" element={<ManageBanners/>} />
+           <Route path="/add-banner" element={<AddBanner/>} />
+          <Route path="/update-banner/:id" element={<UpdateBanner/>} />
         </Route>
 
       </Routes>

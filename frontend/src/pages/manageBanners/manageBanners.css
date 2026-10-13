@@ -1,0 +1,153 @@
+
+.manage-categories {
+    width: 100%;
+    padding: 25px;
+    background-color: #fffaf7;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* Heading */
+.manage-categories h2 {
+    font-size: 28px;
+    color: #5b3028;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+/* Add Banner Button */
+.manage-categories > button {
+    background-color: #a65d45;
+    color: white;
+    border: none;
+    padding: 11px 20px;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 25px;
+    transition: background-color 0.3s ease;
+}
+
+.manage-categories > button:hover {
+    background-color: #874632;
+}
+
+/* Table Wrapper */
+.manage-categories .table {
+    width: 100%;
+    overflow-x: auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(91, 48, 40, 0.08);
+}
+
+/* Table */
+.manage-categories table {
+    width: 100%;
+    border-collapse: collapse;
+    border: none;
+}
+
+/* Table Header */
+.manage-categories table thead {
+    background-color: #f7b3eb;
+}
+
+.manage-categories table th {
+    padding: 16px 14px;
+    color: #5b3028;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+    border: 1px solid #ead5cb;
+    white-space: nowrap;
+}
+
+/* Table Cells */
+.manage-categories table td {
+    padding: 15px;
+    text-align: center;
+    vertical-align: middle;
+    color: #51413c;
+    font-size: 14px;
+    border: 1px solid #eee2dc;
+}
+
+/* Alternate Rows */
+.manage-categories table tbody tr:nth-child(even) {
+    background-color: #fff8f4;
+}
+
+.manage-categories table tbody tr:hover {
+    background-color: #fdf0e9;
+}
+
+/* Banner Images */
+.banner-images {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding: 5px;
+}
+
+.banner-images img {
+    width: 100px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 7px;
+    border: 1px solid #e5cfc4;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+}
+
+.banner-images img:hover {
+    transform: scale(1.08);
+}
+
+/* No Image Message */
+.manage-categories table td p {
+    color: #999;
+    margin: 0;
+}
+
+/* Edit Button */
+.manage-categories table td button:first-child {
+    background-color: #d9a441;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 4px;
+    font-size: 13px;
+    transition: background-color 0.3s ease;
+}
+
+.manage-categories table td button:first-child:hover {
+    background-color: #bd8b2e;
+}
+
+/* Delete Button */
+.manage-categories table td button:last-child {
+    background-color: #c65353;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 4px;
+    font-size: 13px;
+    transition: background-color 0.3s ease;
+}
+
+.manage-categories table td button:last-child:hover {
+    background-color: #a83e3e;
+}
+
+.manage-categories table td button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}

@@ -1,9 +1,11 @@
+import Banner from "../../components/banner/banner";
 import Navbar from "../../components/navbar/navbar";
 
-const Home =()=>{
-    return(
+const Home = () => {
+    return (
         <>
-       
+            <Banner />
+
         </>
     )
 }

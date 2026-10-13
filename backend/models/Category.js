@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 const categorySchema = new mongoose.Schema(
     {
-        categoryNme: {
+        categoryName: {
             type: String,
             required: true,
             unique: true,
