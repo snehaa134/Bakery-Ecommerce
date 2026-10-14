@@ -19,6 +19,9 @@ import ManageCategories from "./pages/manageCategories/manageCategories";
 import AddBanner from "./pages/addBanner/addBanner";
 import UpdateBanner from "./pages/updateBanner/updateBanner";
 import ManageBanners from "./pages/manageBanners/manageBanners";
+import AddProduct from "./pages/addProduct/addProduct";
+import UpdateProduct from "./pages/updateProduct/updateProduct";
+import ManageProducts from "./pages/manageProducts/manageProducts";
 
 const App = () => {
   return (
@@ -34,8 +37,8 @@ const App = () => {
           <Route path="/admin-SignUp" element={<AdminSignUp />} />
           <Route path="/admin-Login" element={<AdminLogin />} />
           <Route path="/verify-otp" element={<VerifyOtp />} />
-        
-          
+
+
 
         </Route>
 
@@ -48,9 +51,12 @@ const App = () => {
           <Route path="/add-category" element={<AddCategory />} />
           <Route path="/update-category/:id" element={<UpdateCategory />} />
           <Route path="/manage-categories" element={<ManageCategories />} />
-          <Route path="/manage-banners" element={<ManageBanners/>} />
-           <Route path="/add-banner" element={<AddBanner/>} />
-          <Route path="/update-banner/:id" element={<UpdateBanner/>} />
+          <Route path="/manage-banners" element={<ManageBanners />} />
+          <Route path="/add-banner" element={<AddBanner />} />
+          <Route path="/update-banner/:id" element={<UpdateBanner />} />
+          <Route path="/add-product" element={<AddProduct />} />
+          <Route path="/update-product" element={<UpdateProduct />} />
+          <Route path="/manage-products" element={<ManageProducts />} />
         </Route>
 
       </Routes>

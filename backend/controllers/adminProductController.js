@@ -5,7 +5,9 @@ const STATUS_CODE = require("../helpers/enum");
 const addProduct = async (req, res) => {
     try {
 
-        const { productName, description, sellingPrice, category, stock, isAvailable } = req.body;
+        const { productName, description, category, isAvailable } = req.body;
+        const sellingPrice = Number(req.body.sellingprice);
+        const stock = Number(req.body.stock);
 
         const image = req.file ? req.file.fileName : "";
 
@@ -74,7 +76,10 @@ const getProduct = async (req, res) => {
 
 const updateProduct = async (req, res) => {
     try {
-        const { productName, description, sellingPrice, category, stock, isAvailable } = req.body;
+        const { productName, description, category, isAvailable } = req.body;
+        const sellingPrice = Number(req.body.sellingprice);
+        const stock = Number(req.body.stock);
+
 
         const updateData = {
             productName,

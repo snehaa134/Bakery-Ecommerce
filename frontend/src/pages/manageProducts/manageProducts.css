@@ -1,0 +1,153 @@
+
+.manage-products {
+    padding: 40px 7%;
+    background-color: #fff0f5;
+    min-height: 80vh;
+    text-align: center;
+}
+
+.manage-products h2 {
+    color: #5c3028;
+    margin-bottom: 25px;
+    font-size: 28px;
+}
+
+.manage-products > button {
+    display: block;
+    margin-bottom: 25px;
+    padding: 11px 20px;
+    background-color: #d96c91;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.manage-products > button:hover {
+    background-color: #c6537a;
+}
+
+.manage-products .table {
+    width: 100%;
+    overflow-x: auto;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.manage-products table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border: none;
+}
+
+.manage-products table th {
+    background-color: #f4c2d2;
+    color: #5c3028;
+    padding: 15px 12px;
+    font-weight: 600;
+    border: 1px solid #f0d5df;
+}
+
+.manage-products table td {
+    padding: 13px 12px;
+    color: #5c3028;
+    border: 1px solid #f0d5df;
+}
+
+.manage-products table tbody tr:nth-child(even) {
+    background-color: #fff7fa;
+}
+
+.manage-products table tbody tr:hover {
+    background-color: #ffe8f0;
+}
+
+.manage-products table img {
+    width: 65px;
+    height: 65px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #f0d5df;
+}
+
+.manage-products table td button {
+    padding: 8px 14px;
+    margin: 4px;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.manage-products table td button:first-child {
+    background-color: #d96c91;
+}
+
+.manage-products table td button:first-child:hover {
+    background-color: #c6537a;
+}
+
+.manage-products table td button:last-child {
+    background-color: #b85c70;
+}
+
+.manage-products table td button:last-child:hover {
+    background-color: #963e52;
+}
+
+.manage-products table td button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
+/* Actions column */
+.manage-products .product-actions {
+    min-width: 180px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* Both buttons */
+.manage-products .product-actions button {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    padding: 9px 16px;
+    margin: 4px;
+    border: none;
+    border-radius: 6px;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Edit */
+.manage-products .product-actions .edit-btn {
+    background-color: #d96c91;
+}
+
+.manage-products .product-actions .edit-btn:hover {
+    background-color: #c6537a;
+}
+
+/* Delete */
+.manage-products .product-actions .delete-btn {
+    background-color: #b85c70;
+}
+
+.manage-products .product-actions .delete-btn:hover {
+    background-color: #963e52;
+}
+
+.manage-products .product-actions button:disabled {
+    opacity: 0.6 !important;
+    cursor: not-allowed;
+}
+
