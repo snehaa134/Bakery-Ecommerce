@@ -32,6 +32,19 @@ export const productApi = createApi({
             }),
             invalidatesTags: ["Product"]
         }),
+        filterProducts: builder.query({
+            query: ({category,search,sort}) => ({
+                url: "/filter-products",
+                method: "GET",
+                params:{
+                    category,
+                    search,
+                    sort
+                }
+
+            }),
+            providesTags: ["Product"]
+        }),
 
         getAllProducts: builder.query({
             query: () => "/get-products",
@@ -46,4 +59,4 @@ export const productApi = createApi({
     })
 })
 
-export const { useAddProductMutation, useUpdateProductMutation, useDeleteProductMutation, useGetAllProductsQuery, useGetProductQuery } = productApi;
+export const { useAddProductMutation, useUpdateProductMutation, useDeleteProductMutation, useGetAllProductsQuery, useGetProductQuery ,useFilterProductsQuery} = productApi;

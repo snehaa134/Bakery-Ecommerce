@@ -22,6 +22,8 @@ import ManageBanners from "./pages/manageBanners/manageBanners";
 import AddProduct from "./pages/addProduct/addProduct";
 import UpdateProduct from "./pages/updateProduct/updateProduct";
 import ManageProducts from "./pages/manageProducts/manageProducts";
+import Products from "./pages/productPage/product";
+import ProductDetails from "./pages/productDetailPage/productDetail";
 
 const App = () => {
   return (
@@ -30,6 +32,8 @@ const App = () => {
         <Route element={<PublicRoute />}>
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
+            <Route path="/products/:id" element={<Products />} />
+            <Route path="/product-details/:id" element={<ProductDetails/>}/>
           </Route>
 
           <Route path="/login" element={<Login />} />
@@ -55,7 +59,7 @@ const App = () => {
           <Route path="/add-banner" element={<AddBanner />} />
           <Route path="/update-banner/:id" element={<UpdateBanner />} />
           <Route path="/add-product" element={<AddProduct />} />
-          <Route path="/update-product" element={<UpdateProduct />} />
+          <Route path="/update-product/:id" element={<UpdateProduct />} />
           <Route path="/manage-products" element={<ManageProducts />} />
         </Route>
 

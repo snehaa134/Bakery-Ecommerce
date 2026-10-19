@@ -6,8 +6,8 @@ const authMiddleware = require("../middlewares/authMiddleware");
 const upload = require("../middlewares/multerMiddleware");
 
 bannerRouter.post("/add-banner", authMiddleware, adminMiddleware, upload.array("images",6), addBanner);
-bannerRouter.get("/get-banners", authMiddleware, adminMiddleware, getAllBanners);
-bannerRouter.get("/get-banner/:id", authMiddleware, adminMiddleware, getBanner);
+bannerRouter.get("/get-banners",  getAllBanners);
+bannerRouter.get("/get-banner/:id",  getBanner);
 bannerRouter.put("/update-banner/:id", authMiddleware, adminMiddleware, upload.array("images",6), updateBanner);
 bannerRouter.delete("/delete-banner/:id", authMiddleware, adminMiddleware, deleteBanner);
 

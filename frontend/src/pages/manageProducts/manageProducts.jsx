@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import formatPrice from "../../utils/formatPrice";
 import { useDeleteProductMutation, useGetAllProductsQuery } from "../../servicesApis/adminProductServices/adminProductServices";
 import "../manageProducts/manageProducts.css";
 
@@ -9,6 +10,7 @@ const ManageProducts = () => {
     const [deleteProduct, { isLoading: isDeleting }] = useDeleteProductMutation();
     const navigate = useNavigate();
     const products = data?.data || [];
+    console.log("products",products)
 
     const handleDelete = async (id) => {
         const confirmDelete = window.confirm(
@@ -50,8 +52,9 @@ const ManageProducts = () => {
                         <thead>
                             <tr>
                                 <th>S.No</th>
-                                <th>Image</th>
+                                <th>Images</th>
                                 <th>Product Name</th>
+                                <th>Product Category</th>
                                 <th>Selling Price</th>
                                 <th>Stock</th>
                                 <th>Actions</th>
@@ -64,10 +67,11 @@ const ManageProducts = () => {
                                     <tr key={product?._id}>
                                         <td>{index + 1}</td>
                                         <td>
-                                            <img src={`http://localhost:5000/uploads/${product.image}`} alt={product.productName} width="60" />
+                                            <img src={`http://localhost:5000/uploads/${product?.images[0]}`} alt={product?.productName} width="60" />
                                         </td>
                                         <td>{product?.productName}</td>
-                                        <td>{product?.sellingPrice}</td>
+                                        <td>{product?.category?.categoryName}</td>
+                                        <td>{formatPrice(product?.sellingPrice)}</td>
                                         <td>{product?.stock}</td>
 
                                         <td className="product-actions">
@@ -78,7 +82,7 @@ const ManageProducts = () => {
                                 ))
                             ) : (
                                 <tr>
-                                    <td colSpan="6">No Products Found</td>
+                                    <td colSpan="7">No Products Found</td>
                                 </tr>
 
                             )}

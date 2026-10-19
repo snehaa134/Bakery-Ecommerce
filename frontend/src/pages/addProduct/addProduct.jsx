@@ -1,7 +1,7 @@
 
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import {  useGetAllCategoriesQuery } from "../../servicesApis/adminCategoryServices/adminCategoryServices";
+import { useGetAllCategoriesQuery } from "../../servicesApis/adminCategoryServices/adminCategoryServices";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAddProductMutation } from "../../servicesApis/adminProductServices/adminProductServices";
@@ -19,13 +19,13 @@ const AddProduct = () => {
             sellingPrice: "",
             stock: "",
             category: "",
-            image: null
+            images: []
         },
         validationSchema: Yup.object({
             productName: Yup.string().required("productName is required"),
             description: Yup.string().required("description is required"),
             sellingPrice: Yup.number().typeError("Selling price must be a number").required("Selling price is required").positive("Selling price must be greater than 0"),
-            image: Yup.mixed().required("image is required"),
+            images: Yup.array().min(1, "Please select at least one image").required("images are required").max(6, "Maximum 6 images are selected"),
             stock: Yup.number().typeError("stock must be a number").required("stock is required").integer("Stock must be an integer").min(0, "stock cannot be negative"),
             category: Yup.string().required("Please select a category")
         }),
@@ -37,7 +37,10 @@ const AddProduct = () => {
             formData.append("sellingPrice", values.sellingPrice);
             formData.append("stock", values.stock);
             formData.append("category", values.category);
-            formData.append("image", values.image);
+
+            values.images.forEach((image) => {
+                formData.append("images", image)
+            })
 
 
 
@@ -72,30 +75,35 @@ const AddProduct = () => {
 
                 <form onSubmit={formik.handleSubmit}>
                     <div className="form-group">
+                        <label>Product Name:</label>
                         <input type="text" name="productName" placeholder="Enter product Name" value={formik.values.productName} onChange={formik.handleChange} onBlur={formik.handleBlur} />
                         {formik.touched.productName && formik.errors.productName && (<p>{formik.errors.productName}</p>)}
                     </div>
 
 
                     <div className="form-group">
+                        <label>Product Description:</label>
                         <input type="text" name="description" placeholder="Enter description here" value={formik.values.description} onChange={formik.handleChange} onBlur={formik.handleBlur} />
                         {formik.touched.description && formik.errors.description && (<p>{formik.errors.description}</p>)}
                     </div>
 
                     <div className="form-group">
-                        <input type="number" name="sellingPrice" placeholder="Enter Product Selling Price" value={formik.values.sellingPrice} onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                        <label>Product Selling Price (INR):</label>
+                        <input type="number" name="sellingPrice" placeholder="Enter Product Selling Price" min="0" value={formik.values.sellingPrice} onChange={formik.handleChange} onBlur={formik.handleBlur} />
                         {formik.touched.sellingPrice && formik.errors.sellingPrice && (<p>{formik.errors.sellingPrice}</p>)}
                     </div>
 
                     <div className="form-group">
-                        <input type="number" name="stock" placeholder="Enter Stock " value={formik.values.stock} onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                        <label>Stock:</label>
+                        <input type="number" name="stock" placeholder="Enter Stock " value={formik.values.stock} min="0" onChange={formik.handleChange} onBlur={formik.handleBlur} />
                         {formik.touched.stock && formik.errors.stock && (<p>{formik.errors.stock}</p>)}
                     </div>
-                    
+
                     <div className="form-group">
+                        <label>Select Product Category:</label>
                         <select name="category" value={formik.values.category} onChange={formik.handleChange} onBlur={formik.handleBlur}>
 
-                            <option value="">Select Category</option>
+                            <option value="">Select category</option>
                             {categories?.map((category) => (
                                 <option key={category._id} value={category._id}>
                                     {category.categoryName}
@@ -109,15 +117,21 @@ const AddProduct = () => {
 
 
                     <div className="form-group">
-                        <input type="file" name="image" placeholder="upload image here"
-                            accept="image/*" onChange={(e) => {
-                                const selectedImage = e.currentTarget.files[0] || null;
-                                formik.setFieldValue("image", selectedImage);
+                        <label>Product Image:</label>
+                        <input type="file" name="images" placeholder="upload images here"
+                            accept="image/*" multiple onChange={(e) => {
+                                const selectedImages = Array.from(
+                                    e.currentTarget.files || []
+                                )
+                                formik.setFieldValue("images", selectedImages);
                             }}
 
-                            onBlur={() => formik.setFieldTouched("image", true)}
+                            onBlur={() => formik.setFieldTouched("images", true)}
                         />
-                        {formik.touched.image && formik.errors.image && (<p>{formik.errors.image}</p>)}
+                        {formik.values.images.length > 0 && (
+                            <p>{formik.values.images.length} images selected</p>
+                        )}
+                        {formik.touched.images && formik.errors.images && (<p>{formik.errors.images}</p>)}
                     </div>
 
                     <button type="submit" disabled={isLoading}>{isLoading ? "AddingProduct.." : "Add Product"}</button>

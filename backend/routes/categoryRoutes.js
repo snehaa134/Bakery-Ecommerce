@@ -6,8 +6,8 @@ const authMiddleware = require("../middlewares/authMiddleware");
 const upload = require("../middlewares/multerMiddleware");
 
 categoryRouter.post("/add-category", authMiddleware, adminMiddleware, upload.single("image"), addCategory);
-categoryRouter.get("/get-categories", authMiddleware, adminMiddleware, getAllCategories);
-categoryRouter.get("/get-category/:id", authMiddleware, adminMiddleware, getCategory);
+categoryRouter.get("/get-categories",getAllCategories);
+categoryRouter.get("/get-category/:id", getCategory);
 categoryRouter.put("/update-category/:id", authMiddleware, adminMiddleware, upload.single("image"), updateCategory);
 categoryRouter.delete("/delete-category/:id", authMiddleware, adminMiddleware, deleteCategory);
 

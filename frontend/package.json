@@ -19,6 +19,7 @@
     "react-redux": "^9.3.0",
     "react-router-dom": "^7.18.4",
     "react-toastify": "^11.1.0",
+    "swiper": "^14.3.0",
     "yup": "^1.7.1"
   },
   "devDependencies": {

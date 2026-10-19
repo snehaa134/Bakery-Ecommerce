@@ -1,3 +1,7 @@
+* {
+    margin: 0;
+    padding: 0;
+}
 
 .main-banner {
     width: 100%;
@@ -12,7 +16,7 @@
     background: linear-gradient(135deg, #fff1f3, #f9dce3);
 }
 
-/* Banner title and description */
+
 .banner-content {
     flex: 1;
     max-width: 500px;
@@ -33,8 +37,8 @@
     margin-bottom: 25px;
 }
 
-.buy-btn{
-     padding: 11px 24px;
+.buy-btn {
+    padding: 11px 24px;
     font-size: 15px;
     font-weight: 600;
     border: 1px solid #8b3a50;
@@ -51,7 +55,6 @@
 }
 
 
-/* Banner image */
 .banner-img {
     width: 60%;
     height: 520px;
@@ -60,7 +63,7 @@
     box-shadow: 0 10px 30px rgba(91, 39, 56, 0.15);
 }
 
-/* Next and Previous buttons */
+
 .banner-buttons {
     position: absolute;
     bottom: 55px;

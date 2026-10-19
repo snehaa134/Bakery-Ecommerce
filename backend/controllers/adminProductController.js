@@ -1,22 +1,23 @@
 
 const Product = require("../models/Product");
 const STATUS_CODE = require("../helpers/enum");
+const { default: mongoose } = require("mongoose");
 
 const addProduct = async (req, res) => {
     try {
 
         const { productName, description, category, isAvailable } = req.body;
-        const sellingPrice = Number(req.body.sellingprice);
+        const sellingPrice = Number(req.body.sellingPrice);
         const stock = Number(req.body.stock);
 
-        const image = req.file ? req.file.fileName : "";
+        const images = req.files?.map((file) => file.filename)
 
         const product = await Product.create({
             productName,
             description,
             sellingPrice,
             category,
-            image,
+            images,
             stock,
             isAvailable
         });
@@ -74,12 +75,37 @@ const getProduct = async (req, res) => {
     }
 }
 
+
 const updateProduct = async (req, res) => {
     try {
         const { productName, description, category, isAvailable } = req.body;
-        const sellingPrice = Number(req.body.sellingprice);
-        const stock = Number(req.body.stock);
 
+        const sellingPrice = Number(req.body.sellingPrice);
+        const stock = Number(req.body.stock);
+        const product = await Product.findById(req.params.id);
+        if (!product) {
+            return res.status(STATUS_CODE.NOT_FOUND).json({
+                message: "Product not found"
+            });
+        }
+
+        let existingImages = product.images;
+
+        if (req.body.existingImages !== undefined) {
+            existingImages = JSON.parse(req.body.existingImages);
+        }
+
+        existingImages = product.images.filter((image) =>
+            existingImages.includes(image)
+        );
+
+        const newImages = req.files ? req.files.map((file) => file.filename) : [];
+
+        if (existingImages.length + newImages.length > 6) {
+            return res.status(400).json({
+                message: "Maximum 6 images are allowed"
+            });
+        }
 
         const updateData = {
             productName,
@@ -87,38 +113,32 @@ const updateProduct = async (req, res) => {
             sellingPrice,
             category,
             stock,
-            isAvailable
-        }
-        if (req.file) {
-            updateData.image = req.file.filename;
-        }
+            isAvailable,
+            images: [...existingImages, ...newImages]
+        };
 
-        const product = await Product.findByIdAndUpdate(
+        const updatedProduct = await Product.findByIdAndUpdate(
             req.params.id,
             updateData,
             {
                 returnDocument: "after",
                 runValidators: true
             }
-        ).populate("category", "categoryName")
+        ).populate("category", "categoryName");
 
-        if (!product) {
-            return res.status(STATUS_CODE.NOT_FOUND).json({
-                message: "Product not found"
-            })
-        }
         return res.status(STATUS_CODE.OK).json({
             message: "Product updated successfully",
-            data: product
-        })
-
+            data: updatedProduct
+        });
 
     } catch (error) {
         return res.status(STATUS_CODE.INTERNAL_SERVER_ERROR).json({
             message: error.message
-        })
+        });
     }
-}
+};
+
+
 
 const deleteProduct = async (req, res) => {
     try {
@@ -141,5 +161,72 @@ const deleteProduct = async (req, res) => {
     }
 }
 
+const filteredProductsByCategory = async (req, res) => {
+    try {
 
-module.exports = { addProduct, getAllProducts, getProduct, updateProduct, deleteProduct };
+        const { category, search, sort } = req.query;
+
+        if (!category || !mongoose.Types.ObjectId.isValid(category)) {
+            return res.status(STATUS_CODE.BAD_REQUEST).json({
+                success: false,
+                message: "Valid Category Id is required"
+            })
+        }
+
+
+        const filterCategory = {
+            category: new mongoose.Types.ObjectId(category)
+        }
+
+        if (search && search.trim()) {
+            filterCategory.productName = {
+                $regex: search.trim(),
+                $options: "i"
+            }
+        }
+
+
+        let sortOption = {}
+
+        if (sort === "lowToHigh") {
+            sortOption = { sellingPrice: 1 };
+        } else if (sort === "highToLow") {
+            sortOption = { sellingPrice: -1 }
+        } else if (sort === "aToZ") {
+            sortOption = { productName: 1 }
+        } else if (sort === "zToA") {
+            sortOption = { productName: -1 }
+        }
+
+
+        const pipeline = [
+            {
+                $match: filterCategory
+            }
+        ];
+
+        if (Object.keys(sortOption).length > 0) {
+            pipeline.push({
+                $sort: sortOption
+            });
+        }
+
+        const products = await Product.aggregate(pipeline)
+
+
+        return res.status(STATUS_CODE.OK).json({
+            success: true,
+            data: products
+        })
+
+
+    } catch (error) {
+        return res.status(STATUS_CODE.INTERNAL_SERVER_ERROR).json({
+            success: false,
+            message: error.message
+        })
+
+    }
+}
+
+module.exports = { addProduct, getAllProducts, getProduct, updateProduct, deleteProduct, filteredProductsByCategory };
