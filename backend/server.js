@@ -9,7 +9,8 @@ const adminAuthRouter = require("./routes/adminAuthRoutes");
 const adminRouter = require("./routes/adminRoutes");
 const categoryRouter = require("./routes/categoryRoutes");
 const bannerRouter = require("./routes/bannerRoutes");
-const productRouter = require("./routes/productRoutes")
+const productRouter = require("./routes/productRoutes");
+const cartRouter= require("./routes/cartRouter");
 const cors = require("cors");
 const app = express();
 
@@ -27,6 +28,7 @@ app.use("/", adminRouter);
 app.use("/", categoryRouter);
 app.use("/", bannerRouter);
 app.use("/", productRouter);
+app.use("/", cartRouter);
 app.use("/uploads", express.static("uploads"));
 
 

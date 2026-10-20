@@ -1,0 +1,94 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.main-section {
+    width: 90%;
+    max-width: 650px;
+    margin: 40px auto;
+    padding: 35px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.main-section h2 {
+    text-align: center;
+    color: #8b3a50;
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+.main-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.main-section .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.main-section .form-group label {
+    color: #444;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.main-section .form-group input,
+.main-section .form-group select {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 15px;
+    outline: none;
+    background-color: #fff;
+    transition: 0.3s;
+}
+
+.main-section .form-group input:focus,
+.main-section .form-group select:focus {
+    border-color: #8b3a50;
+    box-shadow: 0 0 5px rgba(139, 58, 80, 0.2);
+}
+
+.main-section .form-group input[type="file"] {
+    background-color: #fff7f8;
+    cursor: pointer;
+}
+
+.main-section .form-group p {
+    color: #dc3545;
+    font-size: 13px;
+    margin: 0;
+}
+
+.main-section .form-group select {
+    cursor: pointer;
+}
+
+.main-section button {
+    width: 100%;
+    padding: 13px;
+    background-color: #8b3a50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.main-section button:hover {
+    background-color: #6f2b3e;
+}
+
+.main-section button:disabled {
+    background-color: #b98a97;
+    cursor: not-allowed;
+}
+

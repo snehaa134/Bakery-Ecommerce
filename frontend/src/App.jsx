@@ -24,6 +24,8 @@ import UpdateProduct from "./pages/updateProduct/updateProduct";
 import ManageProducts from "./pages/manageProducts/manageProducts";
 import Products from "./pages/productPage/product";
 import ProductDetails from "./pages/productDetailPage/productDetail";
+import Cart from "./pages/cart/cart";
+import About from "./pages/aboutUs/about";
 
 const App = () => {
   return (
@@ -32,8 +34,12 @@ const App = () => {
         <Route element={<PublicRoute />}>
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
+            <Route path="/products" element={<Products />} />
             <Route path="/products/:id" element={<Products />} />
-            <Route path="/product-details/:id" element={<ProductDetails/>}/>
+            <Route path="/product-details/:id" element={<ProductDetails />} />
+            <Route path="/about-us" element={<About />} />
+            <Route path="/cart" element={<Cart />} />
+
           </Route>
 
           <Route path="/login" element={<Login />} />

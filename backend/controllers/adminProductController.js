@@ -99,6 +99,7 @@ const updateProduct = async (req, res) => {
             existingImages.includes(image)
         );
 
+
         const newImages = req.files ? req.files.map((file) => file.filename) : [];
 
         if (existingImages.length + newImages.length > 6) {
@@ -165,29 +166,29 @@ const filteredProductsByCategory = async (req, res) => {
     try {
 
         const { category, search, sort } = req.query;
+             
+        const filterCategory = {}
+        if (category) {
+            if (!mongoose.Types.ObjectId.isValid(category)) {
+                return res.status(STATUS_CODE.BAD_REQUEST).json({
+                    success: false,
+                    message: "Valid Category Id is required"
+                });
+            }
 
-        if (!category || !mongoose.Types.ObjectId.isValid(category)) {
-            return res.status(STATUS_CODE.BAD_REQUEST).json({
-                success: false,
-                message: "Valid Category Id is required"
-            })
-        }
-
-
-        const filterCategory = {
-            category: new mongoose.Types.ObjectId(category)
+            filterCategory.category = new mongoose.Types.ObjectId(category);
         }
 
         if (search && search.trim()) {
+            const searchWord = search.trim().replace(/s$/i,"")
             filterCategory.productName = {
-                $regex: search.trim(),
+                $regex: searchWord,
                 $options: "i"
             }
         }
 
 
         let sortOption = {}
-
         if (sort === "lowToHigh") {
             sortOption = { sellingPrice: 1 };
         } else if (sort === "highToLow") {

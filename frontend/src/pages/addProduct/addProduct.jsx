@@ -5,6 +5,7 @@ import { useGetAllCategoriesQuery } from "../../servicesApis/adminCategoryServic
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAddProductMutation } from "../../servicesApis/adminProductServices/adminProductServices";
+import "../addProduct/addProduct.css";
 const AddProduct = () => {
     const { data, isLoading: isFetching, isError } = useGetAllCategoriesQuery();
     const categories = data?.data || []

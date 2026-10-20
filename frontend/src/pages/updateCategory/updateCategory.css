@@ -1,0 +1,95 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.main-category {
+    max-width: 650px;
+    margin: 50px auto;
+    padding: 35px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.main-category h2 {
+    text-align: center;
+    color: #8b3a50;
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+.main-category form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.main-category .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.main-category .form-group label {
+    color: #444;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.main-category .form-group input {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 15px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.main-category .form-group input:focus {
+    border-color: #8b3a50;
+    box-shadow: 0 0 5px rgba(139, 58, 80, 0.2);
+}
+
+.main-category .form-group input[type="file"] {
+    background-color: #fff7f8;
+    cursor: pointer;
+}
+
+.main-category .form-group img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    margin: 5px 0;
+}
+
+.main-category .form-group p {
+    color: #dc3545;
+    font-size: 13px;
+    margin: 0;
+}
+
+.main-category button {
+    width: 100%;
+    padding: 13px;
+    background-color: #8b3a50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.main-category button:hover {
+    background-color: #6f2b3e;
+}
+
+.main-category button:disabled {
+    background-color: #b98a97;
+    cursor: not-allowed;
+}
+

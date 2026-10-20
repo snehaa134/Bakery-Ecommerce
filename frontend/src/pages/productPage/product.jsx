@@ -4,20 +4,27 @@ import formatPrice from "../../utils/formatPrice";
 import "../productPage/product.css"
 import { useFilterProductsQuery } from "../../servicesApis/adminProductServices/adminProductServices";
 import { FaSearch } from "react-icons/fa";
+import { useAddToCartMutation } from "../../servicesApis/cartServices/cartServices";
+import { toast } from "react-toastify";
 const Products = () => {
     const { id } = useParams();
-    console.log(id);
     const { data: allCategoriesData, isLoading: loadingAllCategories, isError: categoriesError } = useGetAllCategoriesQuery();
     const categories = allCategoriesData?.data || [];
-    const { data: categoryData, isLoading: loadingCategory, isError: categoryError } = useGetCategoryQuery(id)
-    const category = categoryData?.data || []
+    const { data: categoryData, isLoading: loadingCategory, isError: categoryError } = useGetCategoryQuery(id, { skip: !id })
+    const category = categoryData?.data
+
+    const [addToCart, { isLoading: loadingCart }] = useAddToCartMutation();
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
     const search = searchParams.get("search") || "";
     const sort = searchParams.get("sort") || "";
 
 
-    const { data, isLoading, isError } = useFilterProductsQuery({ category: id, search, sort });
+    const { data, isLoading, isError } = useFilterProductsQuery({
+        category: id || "",
+        search,
+        sort
+    });
     const filteredProducts = data?.data || []
 
 
@@ -61,18 +68,16 @@ const Products = () => {
     }
 
 
-
-
-
-    if (loadingCategory) {
-        return <p>Loading Category</p>
-    }
-    if (!category) {
-        return <p>Category Not found</p>
+    if (id && loadingCategory) {
+        return <p>Loading Category...</p>;
     }
 
-    if (categoryError) {
-        return <p>unable to load category</p>
+    if (id && categoryError) {
+        return <p>Unable to load category</p>;
+    }
+
+    if (id && !category) {
+        return <p>Category Not Found</p>;
     }
     if (isLoading) {
         return <p>Loading Products..</p>
@@ -87,6 +92,16 @@ const Products = () => {
     if (!filteredProducts) {
         return <p>Products not found</p>
     }
+
+
+    const handleAddToCart = async (productId) => {
+        try {
+            const response = await addToCart({ productId, quantity: 1 }).unwrap();
+            toast.success(response.message || "Product added to Cart")
+        } catch (error) {
+            toast.error(error?.data?.message || "Failed to add")
+        }
+    }
     return (
         <>
 
@@ -97,7 +112,7 @@ const Products = () => {
                         categories?.map((category) => (
                             <div key={category._id} className="category">
                                 <input type="radio" name="category" value={category._id} checked={id === category._id} onChange={() => navigate(`/products/${category._id}`)} />
-                                <span>{category.categoryName}</span>
+                                <span>{category.categoryName || "All Products"}</span>
                             </div>
                         ))
                     ) : (
@@ -139,8 +154,8 @@ const Products = () => {
                                     />
                                     <h3>{product.productName}</h3>
                                     <h4>{formatPrice(product.sellingPrice)}</h4>
-                                    <button className="view" onClick={()=>navigate(`/product-details/${product._id}`)}>View Details</button>
-                                    <button className="add">Add to Cart</button>
+                                    <button className="view" onClick={() => navigate(`/product-details/${product._id}`)}>View Details</button>
+                                    <button className="add" onClick={() => handleAddToCart(product._id)} disabled={loadingCart}>{loadingCart ? "Adding" : "Add to Cart"}</button>
                                 </div>
                             ))}
                         </div>
@@ -159,3 +174,6 @@ const Products = () => {
 }
 
 export default Products;
+
+
+

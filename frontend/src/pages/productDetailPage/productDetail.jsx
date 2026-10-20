@@ -1,16 +1,20 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useGetProductQuery } from "../../servicesApis/adminProductServices/adminProductServices";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Thumbs } from "swiper/modules";
+import { toast } from "react-toastify";
 import "swiper/css";
 import formatPrice from "../../utils/formatPrice";
 import { useState } from "react";
 import "../productDetailPage/productDetail.css"
+import { useAddToCartMutation } from "../../servicesApis/cartServices/cartServices";
 
 const ProductDetails = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     const { data, isLoading, isError } = useGetProductQuery(id);
+    const [addToCart, { isLoading: loadingOccur }] = useAddToCartMutation();
     const [quantity, setQuantity] = useState(1);
     const product = data?.data;
 
@@ -26,11 +30,25 @@ const ProductDetails = () => {
         return <p>Unable to Fetch Product Details</p>
     }
 
+ 
+
+    const handleAddToCart = async () => {
+        try {
+            const response = await addToCart({
+                productId: product._id,
+                quantity: quantity
+            }).unwrap();
+
+            toast.success(response?.message);
+            navigate("/cart")
+        } catch (error) {
+                toast.error(error?.data?.message || "failed to Add")
+        }
+    }
 
     return (
         <>
             <div className="productDetails-section">
-                {/* <h2>Product Details</h2> */}
                 <div className="images">
                     <Swiper modules={[Thumbs]} thumbs={{ swiper: thumbsSwiper }} spaceBetween={10} >
                         {product?.images.length > 0 ? (
@@ -69,7 +87,7 @@ const ProductDetails = () => {
                         Total Price: {formatPrice(product?.sellingPrice * quantity)}
                     </h3>
                     <button className="buy-btn">Buy Now</button>
-                    <button className="add-btn">Add to Cart</button>
+                    <button className="add-btn" onClick={handleAddToCart} disabled={loadingOccur}>{loadingOccur ? "adding" : "Add-to-cart"}</button>
                 </div>
             </div>
         </>

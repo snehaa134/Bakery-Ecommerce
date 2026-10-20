@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import { useAddCategoryMutation } from "../../servicesApis/adminCategoryServices/adminCategoryServices";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import "../addCategory/addCategory.css"
 const AddCategory = () => {
     const [addCategory, { isLoading }] = useAddCategoryMutation();
     const navigate = useNavigate();

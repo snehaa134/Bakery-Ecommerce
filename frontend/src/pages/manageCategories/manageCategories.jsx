@@ -83,7 +83,7 @@ const ManageCategories = () => {
                         </tbody>
                     </table>
 
-                    <button onClick={()=>navigate("/manage-banners")}>Manage Banners</button>
+                    {/* <button onClick={()=>navigate("/manage-banners")}>Manage Banners</button> */}
                 </div>
             </div>
         </>

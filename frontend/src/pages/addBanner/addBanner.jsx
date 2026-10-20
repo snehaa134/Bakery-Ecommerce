@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAddBannerMutation } from "../../servicesApis/bannerServices/bannerServices";
+import "../addBanner/addBanner.css";
 const AddBanner = () => {
     const [AddBanner, { isLoading }] = useAddBannerMutation();
     const navigate = useNavigate();

@@ -1,0 +1,104 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.update-product {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+.update-product h2 {
+    text-align: center;
+    color: #8b3a50;
+    margin-bottom: 25px;
+}
+
+.update-product form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.update-product .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.update-product label {
+    font-weight: 600;
+    color: #333;
+}
+
+.update-product input,
+.update-product select {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    outline: none;
+}
+
+.update-product input:focus,
+.update-product select:focus {
+    border-color: #8b3a50;
+}
+
+.update-product .form-group p {
+    color: #d32f2f;
+    font-size: 13px;
+    margin: 0;
+}
+
+.update-product .productImage {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    margin: 5px 10px 5px 0;
+}
+
+.update-product .form-group > div {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.update-product button {
+    padding: 10px 16px;
+    background-color: #8b3a50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.update-product button:hover {
+    background-color: #6f2c3e;
+}
+
+.update-product button:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+}
+
+.update-product .form-group button {
+    width: fit-content;
+}
+
+.update-product form > button {
+    width: 100%;
+    padding: 13px;
+    font-size: 16px;
+    font-weight: 600;
+}

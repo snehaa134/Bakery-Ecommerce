@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import { useAddCategoryMutation, useGetCategoryQuery, useUpdateCategoryMutation } from "../../servicesApis/adminCategoryServices/adminCategoryServices";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import "../updateCategory/updateCategory.css";
 const UpdateCategory = () => {
     const { id } = useParams();
     const { data, isLoading: isFetching } = useGetCategoryQuery(id);

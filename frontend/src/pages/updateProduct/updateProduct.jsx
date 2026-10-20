@@ -4,15 +4,9 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-
-import {
-    useGetProductQuery,
-    useUpdateProductMutation
-} from "../../servicesApis/adminProductServices/adminProductServices";
-
-import {
-    useGetAllCategoriesQuery
-} from "../../servicesApis/adminCategoryServices/adminCategoryServices";
+import { useGetProductQuery, useUpdateProductMutation } from "../../servicesApis/adminProductServices/adminProductServices";
+import { useGetAllCategoriesQuery } from "../../servicesApis/adminCategoryServices/adminCategoryServices";
+import "../updateProduct/updateProduct.css";
 
 const UpdateProduct = () => {
     const { id } = useParams();
@@ -31,7 +25,7 @@ const UpdateProduct = () => {
         }
     }, [product]);
 
-   
+
 
     const formik = useFormik({
         enableReinitialize: true,
@@ -120,12 +114,13 @@ const UpdateProduct = () => {
     }
 
     return (
-        <div className="main-category">
+        <div className="update-product">
             <h2>Update Product</h2>
 
             <form onSubmit={formik.handleSubmit}>
 
                 <div className="form-group">
+                    <label>Product Name:</label>
                     <input
                         type="text"
                         name="productName"
@@ -142,6 +137,7 @@ const UpdateProduct = () => {
                 </div>
 
                 <div className="form-group">
+                    <label>Product Description:</label>
                     <input
                         type="text"
                         name="description"
@@ -158,6 +154,7 @@ const UpdateProduct = () => {
                 </div>
 
                 <div className="form-group">
+                    <label>Product SellingPrice:</label>
                     <input
                         type="number"
                         name="sellingPrice"
@@ -174,6 +171,7 @@ const UpdateProduct = () => {
                 </div>
 
                 <div className="form-group">
+                    <label>Product Stock:</label>
                     <input
                         type="number"
                         name="stock"
@@ -190,6 +188,7 @@ const UpdateProduct = () => {
                 </div>
 
                 <div className="form-group">
+                    <label>Select Product Category</label>
                     <select
                         name="category"
                         value={formik.values.category}

@@ -1,47 +1,122 @@
+
 const User = require("../models/User");
+const Cart = require("../models/Cart");
 const STATUS_CODE = require("../helpers/enum");
 const jwt = require("jsonwebtoken");
 const auth = require("../config/firebaseAdmin");
 const { comparePassword } = require("../helpers/bcrypt");
+
+const mergeGuestCart = async (req, res, userId) => {
+    const guestId = req.cookies?.guestId;
+
+    if (!guestId) {
+        return;
+    }
+
+    const guestCart = await Cart.findOne({
+        guest: guestId
+    }).populate("items.product");
+
+    if (!guestCart) {
+        return;
+    }
+
+    let userCart = await Cart.findOne({
+        user: userId
+    });
+
+    if (!userCart) {
+        userCart = new Cart({
+            user: userId,
+            items: []
+        });
+    }
+
+    guestCart.items.forEach((guestItem) => {
+        const product = guestItem.product;
+
+        if (!product || !product.isAvailable || product.stock < 1) {
+            return;
+        }
+
+        const existingItem = userCart.items.find(
+            (item) =>
+                item.product.toString() === product._id.toString()
+        );
+
+        if (existingItem) {
+            existingItem.quantity = Math.min(
+                existingItem.quantity + guestItem.quantity,
+                product.stock
+            );
+        } else {
+            userCart.items.push({
+                product: product._id,
+                quantity: Math.min(
+                    guestItem.quantity,
+                    product.stock
+                )
+            });
+        }
+    });
+
+    await userCart.save();
+
+    await Cart.findByIdAndDelete(guestCart._id);
+
+    res.clearCookie("guestId", {
+        httpOnly: true,
+        sameSite: "lax",
+        secure: process.env.NODE_ENV === "production",
+        path: "/"
+    });
+};
+
 const login = async (req, res) => {
     try {
         const { email, password } = req.body;
 
         const user = await User.findOne({ email });
+
         if (!user) {
             return res.status(STATUS_CODE.NOT_FOUND).json({
-                message: "user not found"
-            })
-        }
-        const isMatch = await comparePassword(password, user.password);
-        if (!isMatch) {
-            return res.status(STATUS_CODE.UNAUTHORIZED).json({
-                message: "invalid password"
-            })
+                message: "User not found"
+            });
         }
 
-        const token = jwt.sign({
-            id: user._id,
-            email: user.email,
-            role: user.role
-        },
+        const isMatch = await comparePassword(password, user.password);
+
+        if (!isMatch) {
+            return res.status(STATUS_CODE.UNAUTHORIZED).json({
+                message: "Invalid password"
+            });
+        }
+
+        const token = jwt.sign(
+            {
+                id: user._id,
+                email: user.email,
+                role: user.role
+            },
             process.env.JWT_SECRET_KEY,
             {
                 expiresIn: "1d"
             }
-        )
+        );
 
         res.cookie("token", token, {
             httpOnly: true,
             secure: false,
-            maxAge: 24 * 60 * 60 * 1000
-        })
+            maxAge: 24 * 60 * 60 * 1000,
+            sameSite: "lax"
+        });
 
+        await mergeGuestCart(req, res, user._id);
 
         const userResponse = user.toObject();
         delete userResponse.password;
 
-        res.status(STATUS_CODE.OK).json({
+        return res.status(STATUS_CODE.OK).json({
             message: "User login successfully",
             data: {
                 id: userResponse._id,
@@ -49,36 +124,40 @@ const login = async (req, res) => {
                 email: userResponse.email,
                 role: userResponse.role
             }
-        })
+        });
 
     } catch (error) {
         console.log(error);
+
         return res.status(STATUS_CODE.INTERNAL_SERVER_ERROR).json({
             message: error.message
-        })
-
+        });
     }
-}
+};
 
 const logout = (req, res) => {
-    res.clearCookie("token");
-    res.json({
-        message: "user logout successfully"
-    })
-}
+    res.clearCookie("token", {
+        httpOnly: true,
+        secure: false,
+        sameSite: "lax"
+    });
+
+    return res.json({
+        message: "User logout successfully"
+    });
+};
 
 const googleLogin = async (req, res) => {
     try {
         const { idToken } = req.body;
-      
 
         if (!idToken) {
-            res.status(STATUS_CODE.BAD_REQUEST).json({
+            return res.status(STATUS_CODE.BAD_REQUEST).json({
                 message: "Firebase idToken is required"
-            })
+            });
         }
-           
-          const decodedToken = await auth.verifyIdToken(idToken);
+
+        const decodedToken = await auth.verifyIdToken(idToken);
         const { name, email } = decodedToken;
 
         let user = await User.findOne({ email });
@@ -87,42 +166,48 @@ const googleLogin = async (req, res) => {
             user = await User.create({
                 name,
                 email
-            })
+            });
         }
 
-        const token = jwt.sign({
-            id: user._id,
-            email: user.email,
-            role: user.role
-        },
+        const token = jwt.sign(
+            {
+                id: user._id,
+                email: user.email,
+                role: user.role
+            },
             process.env.JWT_SECRET_KEY,
             {
                 expiresIn: "1d"
             }
-        )
+        );
 
         res.cookie("token", token, {
             httpOnly: true,
             secure: false,
-            maxAge: 24 * 60 * 60 * 1000
-        })
+            maxAge: 24 * 60 * 60 * 1000,
+            sameSite: "lax"
+        });
+
+        // Google login ke baad bhi guest cart merge karo
+        await mergeGuestCart(req, res, user._id);
 
         return res.status(STATUS_CODE.OK).json({
-            message: "Google login Successfulyy",
+            message: "Google login successfully",
             data: {
                 id: user._id,
                 name: user.name,
                 email: user.email,
                 role: user.role
             }
-        })
+        });
 
     } catch (error) {
         console.log(error);
+
         return res.status(STATUS_CODE.INTERNAL_SERVER_ERROR).json({
             message: error.message
-        })
-
+        });
     }
-}
-module.exports = { login, logout, googleLogin };
+};
+
+module.exports = { login,logout,googleLogin};
