@@ -41,16 +41,24 @@ const addToCart = async (req, res) => {
         if (cart) {
             const existingItem = cart.items.find((item) => item.product.toString() === productId);
 
+            
+
             if (existingItem) {
-                return res.status(STATUS_CODE.BAD_REQUEST).json({
-                    message: "Product already added in Cart"
+                if (existingItem.quantity + quantity > product.stock) {
+                    return res.status(STATUS_CODE.BAD_REQUEST).json({
+                        message: "Stock limit reached"
+                    })
+                }
+                existingItem.quantity += quantity;
+
+            } else {
+                cart.items.push({
+                    product: productId,
+                    quantity
                 })
             }
 
-            cart.items.push({
-                product: productId,
-                quantity
-            })
+
             await cart.save();
 
             return res.status(STATUS_CODE.OK).json({
@@ -172,4 +180,6 @@ const removeProduct = async (req, res) => {
     }
 }
 module.exports = { addToCart, getCart, updateCartQuantity, removeProduct };
+
+
 

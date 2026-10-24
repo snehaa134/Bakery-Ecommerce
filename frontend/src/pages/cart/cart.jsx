@@ -11,6 +11,8 @@ const Cart = () => {
 
     const items = data?.data?.items || []
 
+ 
+
     if (isLoading) {
         return <p>Loading Cart</p>
     }
@@ -49,7 +51,13 @@ const Cart = () => {
                 <h2>My Cart</h2>
 
                 {items?.length === 0 ? (
-                    <p>Cart is Empty</p>
+                    <>
+                        <p>Cart is Empty</p>
+                        <div className="continue-shopping-btn">
+                            <button onClick={() => navigate("/products")}>Continue Shopping</button>
+                        </div>
+                    </>
+
                 ) : (
                     items?.map((item) => {
                         const product = item.product;
@@ -94,7 +102,7 @@ const Cart = () => {
                 </div>
 
                 <div className="proceed-to-payment-btn">
-                    <button onClick={() => navigate("/payment")}>Proceed to Payment</button>
+                    <button onClick={() => navigate("/checkout")}>Proceed to Checkout</button>
                 </div>
 
 

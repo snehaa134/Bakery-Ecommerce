@@ -13,3 +13,5 @@ const admin = initializeApp({
 
 const auth = getAuth(admin);
 module.exports = auth;
+
+

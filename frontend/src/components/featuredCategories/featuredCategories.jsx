@@ -1,10 +1,10 @@
-import { useGetAllCategoriesQuery } from "../../servicesApis/adminCategoryServices/adminCategoryServices";
+import { useGetActiveCategoriesQuery} from "../../servicesApis/adminCategoryServices/adminCategoryServices";
 import { useNavigate } from "react-router-dom";
 import "../featuredCategories/featuredCategories.css"
 
 const FeaturedCategories = () => {
 
-    const { data, isLoading, isError } = useGetAllCategoriesQuery();
+    const { data, isLoading, isError } = useGetActiveCategoriesQuery();
     const categories = data?.data || []
 
     const navigate = useNavigate();

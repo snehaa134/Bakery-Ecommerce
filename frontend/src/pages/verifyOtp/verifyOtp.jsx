@@ -5,7 +5,7 @@ import { useResendOtpMutation, useVerifyOtpMutation } from "../../servicesApis/a
 import { toast } from "react-toastify";
 import { useContext } from "react";
 import { AuthContext } from "../../authContext/authContext";
-
+import "../verifyOtp/verifyOtp.css";
 const VerifyOtp = () => {
     const [verifyOtp, { isLoading }] = useVerifyOtpMutation();
     const [resendOtp, { isLoading: isResending }] = useResendOtpMutation();

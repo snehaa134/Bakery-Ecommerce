@@ -86,7 +86,6 @@ const ProductDetails = () => {
                     <h3>
                         Total Price: {formatPrice(product?.sellingPrice * quantity)}
                     </h3>
-                    <button className="buy-btn">Buy Now</button>
                     <button className="add-btn" onClick={handleAddToCart} disabled={loadingOccur}>{loadingOccur ? "adding" : "Add-to-cart"}</button>
                 </div>
             </div>

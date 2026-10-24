@@ -7,6 +7,7 @@ export const AuthProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
     const [authInitialized, setAuthInitialized] = useState(false);
+    
 
     const { data, isSuccess, isError, isLoading } =
         useGetCurrentUserQuery();
@@ -38,3 +39,8 @@ export const AuthProvider = ({ children }) => {
         </AuthContext.Provider>
     );
 };
+
+
+
+
+

@@ -59,6 +59,10 @@ const createUser = async (req, res) => {
     }
 }
 
+
+
+
+
 const verifyOtp = async (req, res) => {
     try {
         const { email, otp } = req.body;
@@ -136,6 +140,9 @@ const verifyOtp = async (req, res) => {
     }
 }
 
+
+
+
 const resendOtp = async (req, res) => {
     try {
         const { email } = req.body;
@@ -188,20 +195,76 @@ const resendOtp = async (req, res) => {
 
 
 }
-
-const getCurrentUser = async(req,res)=>{
+const getCurrentUser = async (req, res) => {
     try {
-       return res.status(STATUS_CODE.OK).json({
-        message:"current user fetched successfully",
-        data: req.user
-       })
-        
+        const user = await User.findById(req.user.id)
+            .select("-password -otp -otpExpiresAt");
+
+        if (!user) {
+            return res.status(STATUS_CODE.NOT_FOUND).json({
+                message: "User not found"
+            });
+        }
+
+        return res.status(STATUS_CODE.OK).json({
+            message: "Current user fetched successfully",
+            data: user
+        });
+
     } catch (error) {
         return res.status(STATUS_CODE.INTERNAL_SERVER_ERROR).json({
             message: error.message
-        })
-        
+        });
     }
-}
+};
 
-module.exports = { createUser, verifyOtp, resendOtp ,getCurrentUser}
+
+
+const updateProfile = async (req, res) => {
+    try {
+        const { name } = req.body;
+
+        if (!req.user?.id) {
+            return res.status(STATUS_CODE.UNAUTHORIZED).json({
+                message: "Please login first"
+            });
+        }
+
+        const user = await User.findById(req.user.id);
+
+        if (!user) {
+            return res.status(STATUS_CODE.NOT_FOUND).json({
+                message: "User not found"
+            });
+        }
+
+        if (typeof name === "string" && name.trim()) {
+            user.name = name.trim();
+        }
+
+        if (req.file) {
+            user.profileImage = req.file.filename;
+        }
+
+        await user.save();
+
+        return res.status(STATUS_CODE.OK).json({
+            message: "Profile updated successfully",
+            data: {
+                name: user.name,
+                email: user.email,
+                profileImage: user.profileImage
+            }
+        });
+
+    } catch (error) {
+        console.error("UPDATE PROFILE ERROR:", error);
+
+        return res.status(STATUS_CODE.INTERNAL_SERVER_ERROR).json({
+            message: "Failed to update profile"
+        });
+    }
+};
+
+
+module.exports = { createUser, verifyOtp, resendOtp, getCurrentUser, updateProfile }

@@ -1,0 +1,92 @@
+
+.main-otp {
+    width: 100%;
+    max-width: 420px;
+    margin: 70px auto;
+    padding: 35px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.main-otp h2 {
+    font-size: 28px;
+    color: #d63384;
+    margin-bottom: 10px;
+}
+
+.main-otp form {
+    margin-top: 25px;
+}
+
+.main-otp .form-group {
+    margin-bottom: 20px;
+}
+
+.main-otp input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    font-size: 16px;
+    outline: none;
+    box-sizing: border-box;
+    text-align: center;
+    letter-spacing: 5px;
+}
+
+.main-otp input:focus {
+    border-color: #d63384;
+    box-shadow: 0 0 5px rgba(214, 51, 132, 0.25);
+}
+
+.main-otp .form-group p {
+    color: red;
+    font-size: 13px;
+    text-align: left;
+    margin-top: 6px;
+}
+
+.main-otp button[type="submit"] {
+    width: 100%;
+    padding: 13px;
+    background-color: #d63384;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.main-otp button[type="submit"]:hover {
+    background-color: #b8256c;
+}
+
+.main-otp button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.main-otp form > p {
+    margin: 20px 0 10px;
+    font-size: 14px;
+    color: #555;
+}
+
+.main-otp .resendBtn {
+    background: transparent;
+    border: none;
+    color: #d63384;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.main-otp .resendBtn:hover {
+    text-decoration: underline;
+}
+

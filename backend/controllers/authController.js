@@ -92,6 +92,12 @@ const login = async (req, res) => {
             });
         }
 
+        if (user.role !== "user") {
+            return res.status(STATUS_CODE.FORBIDDEN).json({
+                message: "Please login through the admin login page"
+            });
+        }
+
         const token = jwt.sign(
             {
                 id: user._id,
@@ -188,7 +194,6 @@ const googleLogin = async (req, res) => {
             sameSite: "lax"
         });
 
-        // Google login ke baad bhi guest cart merge karo
         await mergeGuestCart(req, res, user._id);
 
         return res.status(STATUS_CODE.OK).json({
@@ -210,4 +215,4 @@ const googleLogin = async (req, res) => {
     }
 };
 
-module.exports = { login,logout,googleLogin};
+module.exports = { login, logout, googleLogin };

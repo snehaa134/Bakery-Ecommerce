@@ -26,6 +26,10 @@ import Products from "./pages/productPage/product";
 import ProductDetails from "./pages/productDetailPage/productDetail";
 import Cart from "./pages/cart/cart";
 import About from "./pages/aboutUs/about";
+import AdminProfile from "./pages/adminProfile/adminProfile";
+import MyOrders from "./pages/myOrders/myorders";
+import ManageOrders from "./pages/manageOrders/manageOrders";
+import Checkout from "./pages/checkout/checkout";
 
 const App = () => {
   return (
@@ -39,7 +43,6 @@ const App = () => {
             <Route path="/product-details/:id" element={<ProductDetails />} />
             <Route path="/about-us" element={<About />} />
             <Route path="/cart" element={<Cart />} />
-
           </Route>
 
           <Route path="/login" element={<Login />} />
@@ -54,19 +57,25 @@ const App = () => {
 
         <Route element={<ProtectedRoute />}>
           <Route path="/profile" element={<Profile />} />
+          <Route path="/my-orders" element={<MyOrders />} />
+          <Route path="/checkout" element={<Checkout/>}/>
         </Route>
 
         <Route element={<AdminRoute />}>
+          <Route element={<Layout />}>
+            <Route path="/manage-banners" element={<ManageBanners />} />
+            <Route path="/manage-categories" element={<ManageCategories />} />
+            <Route path="/manage-products" element={<ManageProducts />} />
+            <Route path = "/manage-orders" element={<ManageOrders/>}/>
+          </Route>
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
           <Route path="/add-category" element={<AddCategory />} />
           <Route path="/update-category/:id" element={<UpdateCategory />} />
-          <Route path="/manage-categories" element={<ManageCategories />} />
-          <Route path="/manage-banners" element={<ManageBanners />} />
           <Route path="/add-banner" element={<AddBanner />} />
           <Route path="/update-banner/:id" element={<UpdateBanner />} />
           <Route path="/add-product" element={<AddProduct />} />
           <Route path="/update-product/:id" element={<UpdateProduct />} />
-          <Route path="/manage-products" element={<ManageProducts />} />
+          <Route path="admin-profile" element={<AdminProfile />} />
         </Route>
 
       </Routes>

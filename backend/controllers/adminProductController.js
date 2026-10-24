@@ -166,7 +166,7 @@ const filteredProductsByCategory = async (req, res) => {
     try {
 
         const { category, search, sort } = req.query;
-             
+
         const filterCategory = {}
         if (category) {
             if (!mongoose.Types.ObjectId.isValid(category)) {
@@ -180,7 +180,7 @@ const filteredProductsByCategory = async (req, res) => {
         }
 
         if (search && search.trim()) {
-            const searchWord = search.trim().replace(/s$/i,"")
+            const searchWord = search.trim().replace(/s$/i, "")
             filterCategory.productName = {
                 $regex: searchWord,
                 $options: "i"
@@ -231,3 +231,51 @@ const filteredProductsByCategory = async (req, res) => {
 }
 
 module.exports = { addProduct, getAllProducts, getProduct, updateProduct, deleteProduct, filteredProductsByCategory };
+
+
+// {
+//     $group:{
+//         _id:null,
+//         totalStock:{
+//             $sum:"$stock"
+//         }
+//     }
+// }
+
+
+
+// {
+//     $group:{
+//         _id:null,
+//         average:{
+//             $avg:"$stock"
+//         }
+//     }
+// }
+
+// {
+//     $match:{
+//         category:"$cookies"
+//     }
+// }
+
+// {
+//     $sort:{
+//         sellingPrice:-1
+//     }
+// }
+
+// {
+//     $limit : 5
+// }
+// {
+//     $count:"totalProducts"
+// }
+
+// {
+//     $match:{
+//         stock:{
+//             $gte:10
+//         }
+//     }
+// }

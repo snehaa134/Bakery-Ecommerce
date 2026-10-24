@@ -1,10 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
- export const categoryApi = createApi({
+export const categoryApi = createApi({
     reducerPath: "categoryApi",
     baseQuery: fetchBaseQuery({
         baseUrl: "http://localhost:5000",
-        credentials:"include"
+        credentials: "include"
     }),
     tagTypes: ["Category"],
     endpoints: (builder) => ({
@@ -18,10 +18,10 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
             invalidatesTags: ["Category"]
         }),
         updateCategory: builder.mutation({
-            query: ({ id, formData }) => ({
+            query: ({ id, formData,...data }) => ({
                 url: `/update-category/${id}`,
                 method: "PUT",
-                body: formData
+                body: formData || data
             }),
             invalidatesTags: ["Category"]
         }),
@@ -40,10 +40,14 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
         getCategory: builder.query({
             query: (id) => `/get-category/${id}`,
             providesTags: ["Category"]
+        }),
+        getActiveCategories: builder.query({
+            query: () => "/getActiveCategories",
+            providesTags: ["Category"]
         })
 
 
     })
 })
 
-export const { useAddCategoryMutation, useUpdateCategoryMutation, useDeleteCategoryMutation, useGetAllCategoriesQuery, useGetCategoryQuery } = categoryApi;
+export const { useAddCategoryMutation, useUpdateCategoryMutation, useDeleteCategoryMutation, useGetAllCategoriesQuery, useGetCategoryQuery, useGetActiveCategoriesQuery } = categoryApi;

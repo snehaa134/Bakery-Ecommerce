@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useDeleteCategoryMutation, useGetAllCategoriesQuery } from "../../servicesApis/adminCategoryServices/adminCategoryServices";
+import { useDeleteCategoryMutation, useGetAllCategoriesQuery, useUpdateCategoryMutation } from "../../servicesApis/adminCategoryServices/adminCategoryServices";
 import { toast } from "react-toastify";
 import "../manageCategories/manageCategories.css";
 
@@ -8,6 +8,7 @@ const ManageCategories = () => {
 
     const { data, isLoading, isError } = useGetAllCategoriesQuery();
     const [deleteCategory, { isLoading: isDeleting }] = useDeleteCategoryMutation();
+    const [updateCategory, { isLoading: isUpdating }] = useUpdateCategoryMutation();
     const navigate = useNavigate();
     const categories = data?.data || [];
 
@@ -37,7 +38,18 @@ const ManageCategories = () => {
     if (isError) {
         return <p>Something went wrong!</p>
     }
+    const handleStatusChange = async (category) => {
+        try {
+            const response = await updateCategory({
+                id: category._id,
+                isActive: !category.isActive
+            }).unwrap();
+            toast.success(response?.message || "status updated successfully")
 
+        } catch (error) {
+            toast.error(error?.data?.message || "something went wrong")
+        }
+    }
 
     return (
         <>
@@ -53,6 +65,9 @@ const ManageCategories = () => {
                                 <th>S.No</th>
                                 <th>Category Name</th>
                                 <th>image</th>
+                                <th>Category description</th>
+                                <th>Status</th>
+                                <th>Actions</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -66,6 +81,17 @@ const ManageCategories = () => {
                                         <td>
                                             <img src={`http://localhost:5000/uploads/${category.image}`} alt={category.categoryName} width="60" />
                                         </td>
+                                        <td>{category.description}</td>
+                                        <td>
+                                            <span className={category.isActive ? "active" : "inactive"}>
+                                                {category.isActive ? "active" : "inactive"}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <button type="button" disabled={isUpdating} onClick={() => handleStatusChange(category)}>{category.isActive ? "Deactivate" : "Activate"}</button>
+                                        </td>
+
+
                                         <td>
                                             <button type="button" onClick={() => navigate(`/update-category/${category._id}`)}>Edit</button>
                                             <button type="button" disabled={isDeleting} onClick={() => handleDelete(category._id)}>{isDeleting ? "Deleting.." : "Delete"}</button>
@@ -74,7 +100,7 @@ const ManageCategories = () => {
                                 ))
                             ) : (
                                 <tr>
-                                    <td colSpan="4">No Categories Found</td>
+                                    <td colSpan="6">No Categories Found</td>
                                 </tr>
 
                             )}

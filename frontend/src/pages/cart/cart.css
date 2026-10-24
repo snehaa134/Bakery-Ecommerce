@@ -29,6 +29,37 @@
     padding: 40px 0;
 }
 
+
+.continue-shopping-btn {
+    display: flex;
+    margin-left: 470px;
+    align-items: center;
+    margin-top: 22px;
+}
+
+.continue-shopping-btn button {
+    padding: 15px 30px;
+    color: #fff;
+    background: linear-gradient(135deg, #ec407a, #c2185b);
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 5px 14px rgba(194, 24, 91, 0.2);
+    transition: all 0.3s ease;
+}
+
+.continue-shopping-btn button:hover {
+    background: linear-gradient(135deg, #d81b60, #880e4f);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(194, 24, 91, 0.3);
+}
+
+.continue-shopping-btn button:active {
+    transform: scale(0.98);
+}
+
 .cart-items {
     display: flex;
     align-items: center;

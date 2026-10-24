@@ -46,12 +46,28 @@ const getAllCategories = async (req, res) => {
 }
 
 
+const getActiveCategories = async (req, res) => {
+    try {
+        const categories = await Category.find({ isActive: true });
+        return res.status(STATUS_CODE.OK).json({
+            message: "Active Categories fetched successfully",
+            data: categories
+        })
+
+    } catch (error) {
+        return res.status(STATUS_CODE.INTERNAL_SERVER_ERROR).json({
+            message: error.message
+        })
+    }
+}
+
+
 const getCategory = async (req, res) => {
     try {
         const category = await Category.findById(req.params.id);
-        if (!category) {
+        if (!category || !category.isActive) {
             return res.status(STATUS_CODE.NOT_FOUND).json({
-                message: "category not found"
+                message: "category not found or inactive"
             })
         }
         return res.status(STATUS_CODE.OK).json({
@@ -70,11 +86,14 @@ const getCategory = async (req, res) => {
 
 const updateCategory = async (req, res) => {
     try {
-        const { categoryName, description } = req.body;
+        const { categoryName, description,isActive } = req.body;
 
         const updateData = {
             categoryName,
-            description
+            description,
+        }
+        if(isActive !== undefined){
+            updateData.isActive=isActive
         }
         if (req.file) {
             updateData.image = req.file.filename;
@@ -128,4 +147,4 @@ const deleteCategory = async (req, res) => {
 }
 
 
-module.exports = { addCategory, getAllCategories, getCategory, updateCategory, deleteCategory };
+module.exports = { addCategory, getAllCategories, getCategory, getActiveCategories,updateCategory, deleteCategory };

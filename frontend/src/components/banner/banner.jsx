@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { useGetAllBannersQuery } from "../../servicesApis/bannerServices/bannerServices";
 import "../banner/banner.css";
+import { useNavigate } from "react-router-dom";
 
 const Banner = () => {
     const { data, isLoading, isError } = useGetAllBannersQuery();
+    const navigate = useNavigate();
     const banners = data?.data || [];
 
     const [index, setIndex] = useState(0);
@@ -41,11 +43,9 @@ const Banner = () => {
                 <div className="banner-content">
                     <h2>{banner.title}</h2>
                     <p>{banner.description}</p>
-                    <button className="buy-btn" onClick={() => {
-                        document.getElementById("categories")?.scrollIntoView({
-                            behavior: "smooth"
-                        })
-                    }}>Buy Now</button>
+                    <button className="buy-btn" onClick={()=>navigate("/products")}>
+                        Buy Now
+                    </button>
                 </div>
 
                 {banner?.images?.[0] && (

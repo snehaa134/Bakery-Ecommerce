@@ -10,7 +10,8 @@ const adminRouter = require("./routes/adminRoutes");
 const categoryRouter = require("./routes/categoryRoutes");
 const bannerRouter = require("./routes/bannerRoutes");
 const productRouter = require("./routes/productRoutes");
-const cartRouter= require("./routes/cartRouter");
+const cartRouter = require("./routes/cartRouter");
+const orderRouter = require("./routes/orderRoutes");
 const cors = require("cors");
 const app = express();
 
@@ -29,6 +30,7 @@ app.use("/", categoryRouter);
 app.use("/", bannerRouter);
 app.use("/", productRouter);
 app.use("/", cartRouter);
+app.use("/", orderRouter);
 app.use("/uploads", express.static("uploads"));
 
 
@@ -40,3 +42,4 @@ const PORT = process.env.PORT;
 app.listen(PORT, () => {
     console.log(`server running on PORT ${PORT}`)
 })
+
