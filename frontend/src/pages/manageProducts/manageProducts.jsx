@@ -1,16 +1,17 @@
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import formatPrice from "../../utils/formatPrice";
-import { useDeleteProductMutation, useGetAllProductsQuery } from "../../servicesApis/adminProductServices/adminProductServices";
+import { useDeleteProductMutation, useGetAllAdminProductsQuery, useUpdateProductMutation } from "../../servicesApis/adminProductServices/adminProductServices";
 import "../manageProducts/manageProducts.css";
 
 const ManageProducts = () => {
 
-    const { data, isLoading, isError } = useGetAllProductsQuery();
+    const { data, isLoading, isError } = useGetAllAdminProductsQuery();
+    const [updateProduct, { isLoading: isUpdating }] = useUpdateProductMutation();
     const [deleteProduct, { isLoading: isDeleting }] = useDeleteProductMutation();
     const navigate = useNavigate();
     const products = data?.data || [];
-    console.log("products",products)
+    console.log("products", products)
 
     const handleDelete = async (id) => {
         const confirmDelete = window.confirm(
@@ -30,6 +31,21 @@ const ManageProducts = () => {
         }
 
     }
+
+    const handleStatusChange = async (product) => {
+        try {
+            const response = await updateProduct({
+                id: product._id,
+                isAvailable: !product.isAvailable
+            }).unwrap();
+            toast.success(response?.message || "status updated successfully")
+
+        } catch (error) {
+            toast.error(error?.data?.message || "something went wrong")
+        }
+    }
+
+
 
     if (isLoading) {
         return <p>Loading Products..</p>
@@ -57,6 +73,8 @@ const ManageProducts = () => {
                                 <th>Product Category</th>
                                 <th>Selling Price</th>
                                 <th>Stock</th>
+                                <th>Availability</th>
+                                <th>Actions</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -73,6 +91,14 @@ const ManageProducts = () => {
                                         <td>{product?.category?.categoryName}</td>
                                         <td>{formatPrice(product?.sellingPrice)}</td>
                                         <td>{product?.stock}</td>
+                                        <td>
+                                            <span className={product.isAvailable ? "Available" : "Unavailable"}>
+                                                {product.isAvailable ? "Available" : "Unavailable"}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <button type="button" disabled={isUpdating} onClick={() => handleStatusChange(product)}>{product.isAvailable ? "Unavailable " : "Available"}</button>
+                                        </td>
 
                                         <td className="product-actions">
                                             <button type="button" onClick={() => navigate(`/update-product/${product._id}`)}>Edit</button>

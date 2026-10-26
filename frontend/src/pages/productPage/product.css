@@ -163,12 +163,13 @@
 .products-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 25px
+    gap: 25px;
 }
 
 .product-card {
     min-width: 0;
     overflow: hidden;
+    cursor: pointer;
     background: #ffffff;
     border: 1px solid #f2e3e9;
     border-radius: 10px;

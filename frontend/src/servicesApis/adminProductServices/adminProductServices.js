@@ -18,10 +18,10 @@ export const productApi = createApi({
             invalidatesTags: ["Product"]
         }),
         updateProduct: builder.mutation({
-            query: ({ id, formData }) => ({
+            query: ({ id, formData,...data }) => ({
                 url: `/update-product/${id}`,
                 method: "PUT",
-                body: formData
+                body: formData || data
             }),
             invalidatesTags: ["Product"]
         }),
@@ -45,6 +45,10 @@ export const productApi = createApi({
             }),
             providesTags: ["Product"]
         }),
+         getAllAdminProducts: builder.query({
+            query: () => "/getAdminProducts",
+            providesTags: ["Product"]
+        }),
 
         getAllProducts: builder.query({
             query: () => "/get-products",
@@ -59,4 +63,4 @@ export const productApi = createApi({
     })
 })
 
-export const { useAddProductMutation, useUpdateProductMutation, useDeleteProductMutation, useGetAllProductsQuery, useGetProductQuery ,useFilterProductsQuery} = productApi;
+export const { useAddProductMutation, useUpdateProductMutation, useDeleteProductMutation, useGetAllProductsQuery, useGetProductQuery ,useFilterProductsQuery,useGetAllAdminProductsQuery} = productApi;

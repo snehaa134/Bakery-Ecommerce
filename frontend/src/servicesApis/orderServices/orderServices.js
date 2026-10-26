@@ -28,6 +28,12 @@ export const orderServices = createApi({
             providesTags: ["Orders"],
         }),
 
+        // Get one specific order for the receipt
+        getOrderById: builder.query({
+            query: (orderId) => `/get-order/${orderId}`,
+            providesTags: ["Orders"],
+        }),
+
         // Admin: Get all orders
         getOrders: builder.query({
             query: () => "/get-orders",
@@ -49,6 +55,7 @@ export const orderServices = createApi({
 export const {
     useCreateOrderMutation,
     useGetMyOrdersQuery,
+    useGetOrderByIdQuery,
     useGetOrdersQuery,
     useUpdateOrderStatusMutation,
 } = orderServices;

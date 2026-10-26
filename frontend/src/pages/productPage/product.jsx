@@ -1,5 +1,5 @@
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-import { useGetAllCategoriesQuery, useGetCategoryQuery } from "../../servicesApis/adminCategoryServices/adminCategoryServices";
+import { useGetActiveCategoriesQuery, useGetCategoryQuery } from "../../servicesApis/adminCategoryServices/adminCategoryServices";
 import formatPrice from "../../utils/formatPrice";
 import "../productPage/product.css"
 import { useFilterProductsQuery } from "../../servicesApis/adminProductServices/adminProductServices";
@@ -8,7 +8,7 @@ import { useAddToCartMutation } from "../../servicesApis/cartServices/cartServic
 import { toast } from "react-toastify";
 const Products = () => {
     const { id } = useParams();
-    const { data: allCategoriesData, isLoading: loadingAllCategories, isError: categoriesError } = useGetAllCategoriesQuery();
+    const { data: allCategoriesData, isLoading: loadingAllCategories, isError: categoriesError } = useGetActiveCategoriesQuery();
     const categories = allCategoriesData?.data || [];
     const { data: categoryData, isLoading: loadingCategory, isError: categoryError } = useGetCategoryQuery(id, { skip: !id })
     const category = categoryData?.data

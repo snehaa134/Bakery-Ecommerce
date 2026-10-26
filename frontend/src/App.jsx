@@ -27,9 +27,10 @@ import ProductDetails from "./pages/productDetailPage/productDetail";
 import Cart from "./pages/cart/cart";
 import About from "./pages/aboutUs/about";
 import AdminProfile from "./pages/adminProfile/adminProfile";
-import MyOrders from "./pages/myOrders/myorders";
 import ManageOrders from "./pages/manageOrders/manageOrders";
 import Checkout from "./pages/checkout/checkout";
+import OrderReceipt from "./pages/receipt/receipt";
+import MyOrders from "./pages/myOrders/myOrders";
 
 const App = () => {
   return (
@@ -57,8 +58,10 @@ const App = () => {
 
         <Route element={<ProtectedRoute />}>
           <Route path="/profile" element={<Profile />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/order-receipt/:id" element={<OrderReceipt />} />
           <Route path="/my-orders" element={<MyOrders />} />
-          <Route path="/checkout" element={<Checkout/>}/>
+
         </Route>
 
         <Route element={<AdminRoute />}>
@@ -66,7 +69,7 @@ const App = () => {
             <Route path="/manage-banners" element={<ManageBanners />} />
             <Route path="/manage-categories" element={<ManageCategories />} />
             <Route path="/manage-products" element={<ManageProducts />} />
-            <Route path = "/manage-orders" element={<ManageOrders/>}/>
+            <Route path="/manage-orders" element={<ManageOrders />} />
           </Route>
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
           <Route path="/add-category" element={<AddCategory />} />

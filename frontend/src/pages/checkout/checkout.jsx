@@ -1,5 +1,4 @@
 
-
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useGetCartQuery } from "../../servicesApis/cartServices/cartServices";
@@ -11,20 +10,22 @@ import { useCreateOrderMutation } from "../../servicesApis/orderServices/orderSe
 
 const Checkout = () => {
     const { data, isLoading, isError } = useGetCartQuery();
-    const [createOrder, { isLoading: isPlacingOrder }] = useCreateOrderMutation();
+
+    const [createOrder, { isLoading: isPlacingOrder }] =
+        useCreateOrderMutation();
+
+    const navigate = useNavigate();
 
     const items = data?.data?.items || [];
 
     const subTotal = items.reduce((total, item) => {
-        return total + item.product.sellingPrice * item.quantity
+        return total + item.product.sellingPrice * item.quantity;
     }, 0);
 
     const cgst = subTotal * 2.5 / 100;
     const sgst = subTotal * 2.5 / 100;
     const totalGst = cgst + sgst;
     const totalAmount = subTotal + totalGst;
-
-    const navigate = useNavigate();
 
     const formik = useFormik({
         initialValues: {
@@ -47,7 +48,10 @@ const Checkout = () => {
                 .required("Email is required"),
 
             phone: Yup.string()
-                .matches(/^[6-9]\d{9}$/, "Enter a valid 10-digit Phone number")
+                .matches(
+                    /^[6-9]\d{9}$/,
+                    "Enter a valid 10-digit Phone number"
+                )
                 .required("Phone number is required"),
 
             address: Yup.string()
@@ -63,7 +67,10 @@ const Checkout = () => {
                 .required("State is required"),
 
             postalCode: Yup.string()
-                .matches(/^\d{6}$/, "Enter a valid 6-digit PIN code")
+                .matches(
+                    /^\d{6}$/,
+                    "Enter a valid 6-digit PIN code"
+                )
                 .required("PIN code is required")
         }),
 
@@ -80,12 +87,24 @@ const Checkout = () => {
                     paymentMethod: "COD"
                 }).unwrap();
 
-                toast.success(response?.message || "Order placed successfully!");
+                const orderId = response?.data?._id;
 
-                navigate("/my-orders");
+                if (!orderId) {
+                    toast.error(
+                        "Order ID was not returned. Please check My Orders."
+                    );
+                    return;
+                }
+
+                toast.success(
+                    response?.message || "Order placed successfully!"
+                );
+
+                navigate(`/order-receipt/${orderId}`);
             } catch (error) {
                 toast.error(
-                    error?.data?.message || "Failed to place order. Please try again."
+                    error?.data?.message ||
+                    "Failed to place order. Please try again."
                 );
             }
         }
@@ -103,6 +122,7 @@ const Checkout = () => {
         return (
             <div className="empty-checkout">
                 <h2>Your Cart is Empty</h2>
+
                 <button onClick={() => navigate("/products")}>
                     Continue Shopping
                 </button>
@@ -117,9 +137,9 @@ const Checkout = () => {
 
                 <form onSubmit={formik.handleSubmit}>
                     <div className="left-side">
-
                         <div className="form-group">
                             <label>Full Name:</label>
+
                             <input
                                 type="text"
                                 name="fullName"
@@ -127,13 +147,16 @@ const Checkout = () => {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                             />
-                            {formik.touched.fullName && formik.errors.fullName && (
-                                <p>{formik.errors.fullName}</p>
-                            )}
+
+                            {formik.touched.fullName &&
+                                formik.errors.fullName && (
+                                    <p>{formik.errors.fullName}</p>
+                                )}
                         </div>
 
                         <div className="form-group">
                             <label>Email:</label>
+
                             <input
                                 type="email"
                                 name="email"
@@ -141,13 +164,16 @@ const Checkout = () => {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                             />
-                            {formik.touched.email && formik.errors.email && (
-                                <p>{formik.errors.email}</p>
-                            )}
+
+                            {formik.touched.email &&
+                                formik.errors.email && (
+                                    <p>{formik.errors.email}</p>
+                                )}
                         </div>
 
                         <div className="form-group">
                             <label>Phone no:</label>
+
                             <input
                                 type="tel"
                                 name="phone"
@@ -156,13 +182,16 @@ const Checkout = () => {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                             />
-                            {formik.touched.phone && formik.errors.phone && (
-                                <p>{formik.errors.phone}</p>
-                            )}
+
+                            {formik.touched.phone &&
+                                formik.errors.phone && (
+                                    <p>{formik.errors.phone}</p>
+                                )}
                         </div>
 
                         <div className="form-group">
                             <label>Address:</label>
+
                             <input
                                 type="text"
                                 name="address"
@@ -170,13 +199,16 @@ const Checkout = () => {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                             />
-                            {formik.touched.address && formik.errors.address && (
-                                <p>{formik.errors.address}</p>
-                            )}
+
+                            {formik.touched.address &&
+                                formik.errors.address && (
+                                    <p>{formik.errors.address}</p>
+                                )}
                         </div>
 
                         <div className="form-group">
                             <label>City:</label>
+
                             <input
                                 type="text"
                                 name="city"
@@ -184,13 +216,16 @@ const Checkout = () => {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                             />
-                            {formik.touched.city && formik.errors.city && (
-                                <p>{formik.errors.city}</p>
-                            )}
+
+                            {formik.touched.city &&
+                                formik.errors.city && (
+                                    <p>{formik.errors.city}</p>
+                                )}
                         </div>
 
                         <div className="form-group">
                             <label>State:</label>
+
                             <input
                                 type="text"
                                 name="state"
@@ -198,13 +233,16 @@ const Checkout = () => {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                             />
-                            {formik.touched.state && formik.errors.state && (
-                                <p>{formik.errors.state}</p>
-                            )}
+
+                            {formik.touched.state &&
+                                formik.errors.state && (
+                                    <p>{formik.errors.state}</p>
+                                )}
                         </div>
 
                         <div className="form-group">
                             <label>PIN Code:</label>
+
                             <input
                                 type="text"
                                 name="postalCode"
@@ -213,9 +251,11 @@ const Checkout = () => {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                             />
-                            {formik.touched.postalCode && formik.errors.postalCode && (
-                                <p>{formik.errors.postalCode}</p>
-                            )}
+
+                            {formik.touched.postalCode &&
+                                formik.errors.postalCode && (
+                                    <p>{formik.errors.postalCode}</p>
+                                )}
                         </div>
 
                         <div className="payment-option">
@@ -225,6 +265,7 @@ const Checkout = () => {
                                 checked
                                 readOnly
                             />
+
                             <label>
                                 <strong>Cash on delivery (COD)</strong>
                                 <span>Pay when your order arrives</span>
@@ -234,11 +275,14 @@ const Checkout = () => {
                         <button
                             type="submit"
                             className="place-order-btn"
-                            disabled={formik.isSubmitting || isPlacingOrder}
+                            disabled={
+                                formik.isSubmitting || isPlacingOrder
+                            }
                         >
-                            {isPlacingOrder ? "Placing Order..." : "Place Order"}
+                            {isPlacingOrder
+                                ? "Placing Order..."
+                                : "Place Order"}
                         </button>
-
                     </div>
                 </form>
 
@@ -253,13 +297,17 @@ const Checkout = () => {
                                     key={item.product._id}
                                 >
                                     <div className="checkout-product-info">
-                                        <h4>{item.product.productName}</h4>
+                                        <h4>
+                                            {item.product.productName}
+                                        </h4>
+
                                         <p>Qty: {item.quantity}</p>
                                     </div>
 
                                     <strong>
                                         {formatPrice(
-                                            item.product.sellingPrice * item.quantity
+                                            item.product.sellingPrice *
+                                            item.quantity
                                         )}
                                     </strong>
                                 </div>

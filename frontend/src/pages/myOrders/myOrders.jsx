@@ -1,10 +1,12 @@
 
+import { Link } from "react-router-dom";
 import { useGetMyOrdersQuery } from "../../servicesApis/orderServices/orderServices";
 import formatPrice from "../../utils/formatPrice";
 import "./myOrders.css";
 
 const MyOrders = () => {
-    const { data, isLoading, isError, refetch } = useGetMyOrdersQuery();
+    const { data, isLoading, isError, refetch } =
+        useGetMyOrdersQuery();
 
     const orders = data?.data || [];
 
@@ -42,14 +44,20 @@ const MyOrders = () => {
             {orders.length === 0 ? (
                 <div className="empty-orders">
                     <div className="empty-orders-icon">♡</div>
+
                     <h2>No orders yet!</h2>
+
                     <p>
                         Your delicious Bakery Bliss orders
                         will appear here.
                     </p>
-                    <a href="/shop" className="shop-orders-btn">
+
+                    <Link
+                        to="/shop"
+                        className="shop-orders-btn"
+                    >
                         Explore Products
-                    </a>
+                    </Link>
                 </div>
             ) : (
                 <div className="orders-list">
@@ -63,6 +71,7 @@ const MyOrders = () => {
                                     <span className="order-label">
                                         ORDER ID
                                     </span>
+
                                     <h3>
                                         #{order._id.slice(-8).toUpperCase()}
                                     </h3>
@@ -73,7 +82,7 @@ const MyOrders = () => {
                                         ).toLocaleDateString("en-IN", {
                                             day: "2-digit",
                                             month: "short",
-                                            year: "numeric"
+                                            year: "numeric",
                                         })}
                                     </p>
                                 </div>
@@ -81,7 +90,10 @@ const MyOrders = () => {
                                 <span
                                     className={`order-status status-${order.orderStatus?.toLowerCase()}`}
                                 >
-                                    {order.orderStatus?.replaceAll("_", " ")}
+                                    {order.orderStatus?.replaceAll(
+                                        "_",
+                                        " "
+                                    )}
                                 </span>
                             </div>
 
@@ -89,7 +101,10 @@ const MyOrders = () => {
                                 {order.items?.map((item, index) => (
                                     <div
                                         className="order-product"
-                                        key={`${item.product || item.productName}-${index}`}
+                                        key={`${
+                                            item.product ||
+                                            item.productName
+                                        }-${index}`}
                                     >
                                         <div className="order-product-icon">
                                             ♡
@@ -98,7 +113,8 @@ const MyOrders = () => {
                                         <div className="order-product-info">
                                             <h4>
                                                 {item.productName ||
-                                                    item.product?.productName ||
+                                                    item.product
+                                                        ?.productName ||
                                                     "Bakery product"}
                                             </h4>
 
@@ -121,9 +137,11 @@ const MyOrders = () => {
                             <div className="order-card-footer">
                                 <div className="order-payment">
                                     <span>Payment</span>
+
                                     <strong>
                                         Cash on Delivery
                                     </strong>
+
                                     <small>
                                         {order.paymentStatus}
                                     </small>
@@ -131,10 +149,22 @@ const MyOrders = () => {
 
                                 <div className="order-total">
                                     <span>Total Amount</span>
+
                                     <h3>
                                         {formatPrice(order.totalAmount)}
                                     </h3>
                                 </div>
+                            </div>
+
+                            {/* View Receipt Button */}
+                            <div className="order-receipt-actions">
+                                <Link
+                                    to={`/order-receipt/${order._id}`}
+                                    className="order-receipt-btn"
+                                >
+                                    View Receipt
+                                    <span> →</span>
+                                </Link>
                             </div>
                         </article>
                     ))}

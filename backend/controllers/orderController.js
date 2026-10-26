@@ -434,9 +434,62 @@ const updateOrderStatus = async (req, res) => {
 };
 
 
+const getOrderById = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        if (!/^[0-9a-fA-F]{24}$/.test(id)) {
+            return res.status(STATUS_CODE.BAD_REQUEST).json({
+                success: false,
+                message: "Invalid order ID",
+            });
+        }
+
+        if (!req.user && !req.cartGuestId) {
+            return res.status(STATUS_CODE.UNAUTHORIZED).json({
+                success: false,
+                message: "Unable to identify the customer",
+            });
+        }
+
+        const identityFilter = req.user
+            ? { user: req.user.id }
+            : { guest: req.cartGuestId };
+
+        const order = await Order.findOne({
+            _id: id,
+            ...identityFilter,
+        }).lean();
+
+        if (!order) {
+            return res.status(STATUS_CODE.NOT_FOUND).json({
+                success: false,
+                message: "Order not found",
+            });
+        }
+
+        return res.status(STATUS_CODE.OK).json({
+            success: true,
+            message: "Order fetched successfully",
+            data: order,
+        });
+    } catch (error) {
+        console.error("GET ORDER BY ID ERROR:", error);
+
+        return res.status(
+            STATUS_CODE.INTERNAL_SERVER_ERROR
+        ).json({
+            success: false,
+            message: "Failed to fetch order",
+        });
+    }
+};
+
+
 module.exports = {
     createOrder,
     getMyOrders,
     getAllOrders,
-    updateOrderStatus
+    updateOrderStatus,
+    getOrderById
 };

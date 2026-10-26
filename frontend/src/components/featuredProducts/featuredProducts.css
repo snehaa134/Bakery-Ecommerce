@@ -1,0 +1,82 @@
+
+.featured-section {
+    padding: 55px 30px 70px;
+    background: #fff8fb;
+    text-align: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
+}
+
+.featured-section h2 {
+    font-size: 38px;
+    color: #7a294b;
+    margin-bottom: 10px;
+}
+
+.featured-subtitle {
+    color: #956579;
+    font-size: 17px;
+    margin-bottom: 35px;
+}
+
+.featured-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.featured-card {
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid #f3d6e2;
+    box-shadow: 0 5px 18px rgba(122, 41, 75, 0.09);
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.featured-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 12px 25px rgba(122, 41, 75, 0.16);
+}
+
+.featured-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+.featured-info {
+    padding: 18px 12px 22px;
+}
+
+.featured-info h3 {
+    font-size: 20px;
+    color: #7a294b;
+    margin-bottom: 10px;
+}
+
+.featured-price {
+    font-size: 19px;
+    font-weight: 700;
+    color: #c04475;
+    margin-bottom: 15px;
+}
+
+.featured-info button {
+    background: #8f3158;
+    color: white;
+    border: none;
+    padding: 11px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.3s ease;
+}
+
+.featured-info button:hover {
+    background: #c04475;
+}
+

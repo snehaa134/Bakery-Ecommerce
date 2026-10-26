@@ -1,4 +1,4 @@
-
+const Category = require("../models/Category");
 const Product = require("../models/Product");
 const STATUS_CODE = require("../helpers/enum");
 const { default: mongoose } = require("mongoose");
@@ -37,8 +37,15 @@ const addProduct = async (req, res) => {
 
 const getAllProducts = async (req, res) => {
     try {
+        const activeCategories = await Category.find({
+            isActive: true
+        })
+        const activeCategoriesIds = activeCategories.map((category) => category._id)
 
-        const product = await Product.find().populate("category", "categoryName");
+        const product = await Product.find({
+            category: { $in: activeCategoriesIds },
+            isAvailable: true
+        }).populate("category", "categoryName isActive");
 
         return res.status(STATUS_CODE.OK).json({
             message: "Products fetched successfully",
@@ -52,13 +59,39 @@ const getAllProducts = async (req, res) => {
     }
 }
 
+const getAllAdminProducts = async (req, res) => {
+    try {
+        const product = await Product.find().populate("category", "categoryName isActive");
+        return res.status(STATUS_CODE.OK).json({
+            message: "All products fetched successfully",
+            data: product
+        });
+    } catch (error) {
+        return res.status(STATUS_CODE.INTERNAL_SERVER_ERROR).json({
+            message: error.message
+        });
+    }
+}
+
 
 const getProduct = async (req, res) => {
     try {
-        const product = await Product.findById(req.params.id).populate("category", "categoryName");
+        const product = await Product.findById(req.params.id).populate("category", "categoryName isActive");
         if (!product) {
             return res.status(STATUS_CODE.NOT_FOUND).json({
                 message: "Product not found"
+            })
+        }
+
+        if (!product.isAvailable) {
+            return res.status(STATUS_CODE.NOT_FOUND).json({
+                message: "Product is not available"
+            })
+        }
+
+        if (!product.category || !product.category.isActive) {
+            return res.status(STATUS_CODE.NOT_FOUND).json({
+                message: "Product category is inactive"
             })
         }
         return res.status(STATUS_CODE.OK).json({
@@ -76,12 +109,15 @@ const getProduct = async (req, res) => {
 }
 
 
+
+
 const updateProduct = async (req, res) => {
     try {
         const { productName, description, category, isAvailable } = req.body;
 
-        const sellingPrice = Number(req.body.sellingPrice);
-        const stock = Number(req.body.stock);
+
+        const sellingPrice = req.body.sellingprice !== undefined ? Number(req.body.sellingprice) : undefined
+        const stock = req.body.stock !== undefined ? Number(req.body.stock) : undefined;
         const product = await Product.findById(req.params.id);
         if (!product) {
             return res.status(STATUS_CODE.NOT_FOUND).json({
@@ -108,15 +144,34 @@ const updateProduct = async (req, res) => {
             });
         }
 
-        const updateData = {
-            productName,
-            description,
-            sellingPrice,
-            category,
-            stock,
-            isAvailable,
-            images: [...existingImages, ...newImages]
-        };
+        const updateData = {};
+
+        if (productName !== undefined) {
+            updateData.productName = productName;
+        }
+
+        if (description !== undefined) {
+            updateData.description = description;
+        }
+
+        if (category !== undefined) {
+            updateData.category = category;
+        }
+
+        if (sellingPrice !== undefined) {
+            updateData.sellingPrice = sellingPrice;
+        }
+
+        if (stock !== undefined) {
+            updateData.stock = stock;
+        }
+
+        updateData.images = [...existingImages, ...newImages];
+
+        if (isAvailable !== undefined) {
+            updateData.isAvailable =
+                isAvailable === true || isAvailable === "true";
+        }
 
         const updatedProduct = await Product.findByIdAndUpdate(
             req.params.id,
@@ -131,6 +186,8 @@ const updateProduct = async (req, res) => {
             message: "Product updated successfully",
             data: updatedProduct
         });
+
+
 
     } catch (error) {
         return res.status(STATUS_CODE.INTERNAL_SERVER_ERROR).json({
@@ -167,7 +224,16 @@ const filteredProductsByCategory = async (req, res) => {
 
         const { category, search, sort } = req.query;
 
-        const filterCategory = {}
+        const activeCategories = await Category.find({
+            isActive: true
+        })
+
+        const activeCategoriesIds = activeCategories.map((category) => category._id)
+
+        const filterCategory = {
+            category: { $in: activeCategoriesIds },
+            isAvailable: true
+        }
         if (category) {
             if (!mongoose.Types.ObjectId.isValid(category)) {
                 return res.status(STATUS_CODE.BAD_REQUEST).json({
@@ -176,7 +242,9 @@ const filteredProductsByCategory = async (req, res) => {
                 });
             }
 
-            filterCategory.category = new mongoose.Types.ObjectId(category);
+            filterCategory.category = {
+                $in: activeCategoriesIds.filter((id) => id.toString() === category)
+            }
         }
 
         if (search && search.trim()) {
@@ -230,7 +298,7 @@ const filteredProductsByCategory = async (req, res) => {
     }
 }
 
-module.exports = { addProduct, getAllProducts, getProduct, updateProduct, deleteProduct, filteredProductsByCategory };
+module.exports = { addProduct, getAllProducts, getProduct, updateProduct, deleteProduct, filteredProductsByCategory, getAllAdminProducts };
 
 
 // {
