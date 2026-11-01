@@ -21,13 +21,13 @@ const FeaturedCategories = () => {
     }
     return (
         <>
-            <div className="main-categories-section" id="categories">
+            <div className="featured-categories-section" id="categories">
 
                 <h2>Shop By Category</h2>
 
                 {categories?.length > 0 && (
-                    <div className="categories-grid">
-                        {categories?.slice(0, 6).map((category) => (
+                    <div className="categories-gridd">
+                        {categories?.slice(0, 5).map((category) => (
                             <div className="category-card" key={category._id} onClick={() => navigate(`/products/${category._id}`)}>
                                 <img src={`http://localhost:5000/uploads/${category.image}`} alt={category.categoryName} />
                                 <h3>{category.categoryName}</h3>

@@ -12,6 +12,7 @@ const bannerRouter = require("./routes/bannerRoutes");
 const productRouter = require("./routes/productRoutes");
 const cartRouter = require("./routes/cartRouter");
 const orderRouter = require("./routes/orderRoutes");
+const themeRouter = require("./routes/festiveThemeRouter")
 const cors = require("cors");
 const app = express();
 
@@ -31,6 +32,7 @@ app.use("/", bannerRouter);
 app.use("/", productRouter);
 app.use("/", cartRouter);
 app.use("/", orderRouter);
+app.use("/", themeRouter);
 app.use("/uploads", express.static("uploads"));
 
 

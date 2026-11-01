@@ -8,7 +8,7 @@ const FeaturedProducts = () => {
     const { data, isLoading, isError } = useGetAllProductsQuery();
     const navigate = useNavigate();
 
-    const products = (data?.data || []).slice(0, 4);
+    const products = (data?.data || []).slice(0, 8);
 
     if (isLoading) {
         return <p>Loading products...</p>;

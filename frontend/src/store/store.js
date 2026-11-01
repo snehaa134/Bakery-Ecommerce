@@ -7,6 +7,7 @@ import { userApi } from "../servicesApis/userServices/userServices";
 import { productApi } from "../servicesApis/adminProductServices/adminProductServices";
 import { cartApi } from "../servicesApis/cartServices/cartServices";
 import { orderServices } from "../servicesApis/orderServices/orderServices";
+import { festiveThemeServices } from "../servicesApis/festiveThemeServices/festiveThemeService";
 export const Store = configureStore({
     reducer: {
         [authApi.reducerPath]: authApi.reducer,
@@ -16,9 +17,10 @@ export const Store = configureStore({
         [userApi.reducerPath]:userApi.reducer,
         [productApi.reducerPath]:productApi.reducer,
         [cartApi.reducerPath]:cartApi.reducer,
-        [orderServices.reducerPath]:orderServices.reducer
+        [orderServices.reducerPath]:orderServices.reducer,
+        [festiveThemeServices.reducerPath]:festiveThemeServices.reducer
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(authApi.middleware, adminAuthApi.middleware, categoryApi.middleware, bannerApi.middleware,userApi.middleware,productApi.middleware,cartApi.middleware,orderServices.middleware)
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(authApi.middleware, adminAuthApi.middleware, categoryApi.middleware, bannerApi.middleware,userApi.middleware,productApi.middleware,cartApi.middleware,orderServices.middleware,festiveThemeServices.middleware)
 })
 export default Store;
 

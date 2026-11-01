@@ -8,7 +8,6 @@
     background: #fff8fb;
 }
 
-/* Profile Card */
 .profile-card {
     width: 100%;
     max-width: 460px;
@@ -27,7 +26,7 @@
     margin: 0 0 28px;
 }
 
-/* Profile Image */
+
 .profile-image-section {
     display: flex;
     flex-direction: column;
@@ -79,7 +78,7 @@
     color: #ffffff;
 }
 
-/* Input Fields */
+
 .profile-field {
     display: flex;
     flex-direction: column;
@@ -117,7 +116,6 @@
     cursor: not-allowed;
 }
 
-/* Buttons */
 .profile-update-btn,
 .profile-logout-btn {
     width: 100%;
@@ -159,3 +157,83 @@
     border-color: #c13d75;
 }
 
+
+@media (max-width: 768px) {
+    .profile-container {
+        min-height: 85vh;
+        padding: 30px 20px;
+    }
+
+    .profile-card {
+        max-width: 420px;
+        padding: 30px 30px;
+    }
+
+    .profile-card h2 {
+        font-size: 25px;
+        margin-bottom: 24px;
+    }
+
+    .profile-image,
+    .profile-placeholder {
+        width: 105px;
+        height: 105px;
+    }
+
+    .profile-placeholder {
+        font-size: 38px;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-container {
+        min-height: 85vh;
+        padding: 25px 15px;
+    }
+
+    .profile-card {
+        max-width: 100%;
+        padding: 25px 20px;
+        border-radius: 14px;
+    }
+
+    .profile-card h2 {
+        font-size: 23px;
+        margin-bottom: 22px;
+    }
+
+    .profile-image,
+    .profile-placeholder {
+        width: 95px;
+        height: 95px;
+    }
+
+    .profile-placeholder {
+        font-size: 34px;
+    }
+
+    .upload-label {
+        padding: 8px 17px;
+        font-size: 13px;
+    }
+
+    .profile-field {
+        gap: 7px;
+        margin-bottom: 17px;
+    }
+
+    .profile-field label {
+        font-size: 13px;
+    }
+
+    .profile-field input {
+        padding: 11px 12px;
+        font-size: 14px;
+    }
+
+    .profile-update-btn,
+    .profile-logout-btn {
+        padding: 12px;
+        font-size: 14px;
+    }
+}

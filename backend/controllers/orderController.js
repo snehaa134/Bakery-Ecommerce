@@ -25,7 +25,7 @@ const createOrder = async (req, res) => {
             postalCode
         } = req.body;
 
-        // Validate shipping details
+       
         const details = [
             fullName,
             email,
@@ -35,6 +35,7 @@ const createOrder = async (req, res) => {
             state,
             postalCode
         ];
+
 
         if (
             details.some(
@@ -48,6 +49,7 @@ const createOrder = async (req, res) => {
                 message: "Please fill all details"
             });
         }
+        
 
         const cleanEmail = email.trim().toLowerCase();
 
@@ -57,6 +59,7 @@ const createOrder = async (req, res) => {
                 message: "Please enter a valid email address"
             });
         }
+
 
         if (!/^[6-9]\d{9}$/.test(phone.trim())) {
             return res.status(STATUS_CODE.BAD_REQUEST).json({
@@ -132,6 +135,8 @@ const createOrder = async (req, res) => {
                 });
             }
 
+    
+
             orderItems.push({
                 product: product._id,
                 productName: product.productName,
@@ -152,7 +157,7 @@ const createOrder = async (req, res) => {
         );
 
         const totalGst = Number(
-            (cgst + sgst).toFixed(2)
+            (cgst + sgst).toFixed(2)  
         );
 
         const totalAmount = Number(
@@ -175,7 +180,7 @@ const createOrder = async (req, res) => {
                 address: address.trim(),
                 city: city.trim(),
                 state: state.trim(),
-                pincode: postalCode.trim()
+                postalCode: postalCode.trim()
             }
         });
 
@@ -194,6 +199,8 @@ const createOrder = async (req, res) => {
                 }
             );
 
+
+         
             if (result.modifiedCount !== 1) {
                 const error = new Error(
                     "Stock changed. Please try again."
@@ -270,6 +277,8 @@ const createOrder = async (req, res) => {
             }
         }
 
+      
+
         if (error.statusCode) {
             return res.status(error.statusCode).json({
                 success: false,
@@ -294,6 +303,7 @@ const createOrder = async (req, res) => {
             items: order.items,
             totalAmount: order.totalAmount
         });
+
     } catch (emailError) {
         console.error(
             "Order confirmation email failed:",

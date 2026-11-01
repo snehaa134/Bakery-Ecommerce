@@ -8,9 +8,8 @@
 .about-page {
     width: 100%;
     font-family: Arial, sans-serif;
-    color: #333;
+    color: var(--primary-color);
 }
-
 
 .about-hero {
     min-height: 450px;
@@ -24,15 +23,16 @@
 
 .about-hero-content {
     max-width: 600px;
-    color: white;
+    color: var(--secondary-color);
 }
 
 .about-subtitle {
-    color: #ffd6df;
+    color: var(--secondary-color);
     font-size: 14px;
     font-weight: bold;
     letter-spacing: 3px;
     margin-bottom: 18px;
+    opacity: 0.85;
 }
 
 .about-hero-content h1 {
@@ -48,9 +48,9 @@
 }
 
 .about-page button {
-    background-color: #8b3a50;
-    color: white;
-    border: 2px solid #8b3a50;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border: 2px solid var(--primary-color);
     padding: 12px 25px;
     border-radius: 5px;
     font-size: 15px;
@@ -59,8 +59,9 @@
 }
 
 .about-page button:hover {
-    background-color: #6f2b3e;
-    border-color: #6f2b3e;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border-color: var(--secondary-color);
     transform: translateY(-2px);
 }
 
@@ -89,7 +90,7 @@
 }
 
 .about-label {
-    color: #8b3a50;
+    color: var(--primary-color);
     font-size: 14px;
     font-weight: bold;
     letter-spacing: 2px;
@@ -100,14 +101,15 @@
 .about-section-heading h2 {
     font-size: 32px;
     line-height: 1.4;
-    color: #8b3a50;
+    color: var(--primary-color);
     margin-bottom: 20px;
 }
 
 .about-story-content > p:not(.about-label) {
     font-size: 16px;
     line-height: 1.8;
-    color: #666;
+    color: var(--primary-color);
+    opacity: 0.8;
     margin-bottom: 15px;
 }
 
@@ -115,9 +117,8 @@
     margin-top: 10px;
 }
 
-
 .about-features {
-    background-color: #fff7f8;
+    background-color: var(--secondary-color);
     padding: 65px 8%;
 }
 
@@ -131,7 +132,8 @@
 }
 
 .about-section-heading > p:last-child {
-    color: #666;
+    color: var(--primary-color);
+    opacity: 0.8;
     font-size: 16px;
 }
 
@@ -142,41 +144,41 @@
 }
 
 .about-feature-card {
-    background-color: white;
+    background-color: var(--secondary-color);
     padding: 35px 25px;
     text-align: center;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(139, 58, 80, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     transition: 0.3s;
 }
 
 .about-feature-card:hover {
     transform: translateY(-7px);
-    box-shadow: 0 8px 22px rgba(139, 58, 80, 0.17);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.14);
 }
 
 .feature-icon {
     font-size: 42px;
-    color: #8b3a50;
+    color: var(--primary-color);
     margin-bottom: 20px;
 }
 
 .about-feature-card h3 {
     font-size: 21px;
-    color: #8b3a50;
+    color: var(--primary-color);
     margin-bottom: 15px;
 }
 
 .about-feature-card p {
     font-size: 15px;
     line-height: 1.7;
-    color: #666;
+    color: var(--primary-color);
+    opacity: 0.8;
 }
 
-
 .about-cta {
-    background-color: #8b3a50;
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
     text-align: center;
     padding: 55px 20px;
 }
@@ -185,7 +187,8 @@
     font-size: 13px;
     font-weight: bold;
     letter-spacing: 3px;
-    color: #ffd6df;
+    color: var(--secondary-color);
+    opacity: 0.85;
     margin-bottom: 15px;
 }
 
@@ -195,12 +198,185 @@
 }
 
 .about-cta button {
-    background-color: white;
-    color: #8b3a50;
-    border-color: white;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border-color: var(--secondary-color);
 }
 
 .about-cta button:hover {
-    background-color: #ffe8ed;
-    border-color: #ffe8ed;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border-color: var(--secondary-color);
+    opacity: 0.85;
 }
+
+
+
+
+
+
+@media (max-width: 768px) {
+
+    .about-hero {
+        min-height: 370px;
+        padding: 45px 5%;
+        background-position: center;
+    }
+
+    .about-hero-content {
+        max-width: 100%;
+    }
+
+    .about-hero-content h1 {
+        font-size: 34px;
+    }
+
+    .about-hero-content > p:not(.about-subtitle) {
+        font-size: 15px;
+    }
+
+    .about-subtitle {
+        font-size: 12px;
+        letter-spacing: 2px;
+    }
+
+    .about-story {
+        flex-direction: column;
+        gap: 30px;
+        padding: 45px 5%;
+    }
+
+    .about-story-image,
+    .about-story-content {
+        width: 100%;
+    }
+
+    .about-story-image img {
+        height: 320px;
+    }
+
+    .about-story-content h2,
+    .about-section-heading h2 {
+        font-size: 28px;
+    }
+
+    .about-story-content > p:not(.about-label) {
+        font-size: 15px;
+    }
+
+    .about-features {
+        padding: 45px 5%;
+    }
+
+    .about-section-heading {
+        margin-bottom: 30px;
+    }
+
+    .about-feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+    }
+
+    .about-feature-card {
+        padding: 28px 18px;
+    }
+
+    .about-cta {
+        padding: 45px 15px;
+    }
+
+    .about-cta h2 {
+        font-size: 29px;
+    }
+}
+
+
+@media (max-width: 480px) {
+
+    .about-hero {
+        min-height: 330px;
+        padding: 35px 6%;
+    }
+
+    .about-hero-content h1 {
+        font-size: 28px;
+        line-height: 1.35;
+    }
+
+    .about-hero-content > p:not(.about-subtitle) {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .about-page button {
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+
+    .about-story {
+        padding: 35px 6%;
+        gap: 25px;
+    }
+
+    .about-story-image img {
+        height: 250px;
+    }
+
+    .about-label {
+        font-size: 12px;
+    }
+
+    .about-story-content h2,
+    .about-section-heading h2 {
+        font-size: 24px;
+    }
+
+    .about-story-content > p:not(.about-label) {
+        font-size: 14px;
+        line-height: 1.7;
+    }
+
+    .about-features {
+        padding: 40px 6%;
+    }
+
+    .about-section-heading > p:last-child {
+        font-size: 14px;
+    }
+
+    .about-feature-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .about-feature-card {
+        padding: 28px 20px;
+    }
+
+    .feature-icon {
+        font-size: 36px;
+    }
+
+    .about-feature-card h3 {
+        font-size: 19px;
+    }
+
+    .about-feature-card p {
+        font-size: 14px;
+    }
+
+    .about-cta {
+        padding: 40px 15px;
+    }
+
+    .about-cta > p {
+        font-size: 11px;
+        letter-spacing: 2px;
+    }
+
+    .about-cta h2 {
+        font-size: 24px;
+    }
+}
+
+

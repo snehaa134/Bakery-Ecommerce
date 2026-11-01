@@ -1,0 +1,86 @@
+.festive-decoration {
+    position: relative;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    overflow: hidden;
+    background: linear-gradient(120deg,
+            #800f4b,
+            #a11509,
+            #f2c668,
+            #b11778,
+            #cc3887);
+    border-bottom: 1px solid #e8c77f;
+}
+
+.floating-diya {
+    position: relative;
+    z-index: 1;
+    width: 38px;
+    height: 38px;
+    object-fit: contain;
+    animation: diyaFloat 3s ease-in-out infinite alternate,
+        diyaGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes diyaFloat {
+    from {
+        transform: translateY(3px);
+    }
+
+    to {
+        transform: translateY(-4px);
+    }
+}
+
+.sparkles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.sparkle {
+    position: absolute;
+    color: #d99a28;
+    opacity: 0;
+    animation: sparkleTwinkle 2.5s ease-in-out infinite;
+}
+
+@keyframes sparkleTwinkle {
+
+    0%,
+    100% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scale(1.2);
+        text-shadow: 0 0 8px gold;
+    }
+}
+
+@keyframes diyaGlow {
+    from {
+        filter: drop-shadow(0 0 3px orange);
+    }
+
+    to {
+        filter: drop-shadow(0 0 10px gold);
+    }
+}
+
+@media (max-width: 480px) {
+    .festive-decoration {
+        height: 40px;
+    }
+
+    .floating-diya {
+        width: 30px;
+        height: 30px;
+    }
+}

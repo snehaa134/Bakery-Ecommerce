@@ -14,7 +14,6 @@ const addCategory = async (req, res) => {
             image
 
         });
-
         return res.status(STATUS_CODE.CREATED).json({
             message: "category created successfully ",
             data: category

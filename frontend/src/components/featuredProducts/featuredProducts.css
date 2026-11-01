@@ -1,19 +1,18 @@
-
 .featured-section {
     padding: 55px 30px 70px;
-    background: #fff8fb;
+    background: white;
     text-align: center;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
 }
 
 .featured-section h2 {
     font-size: 38px;
-    color: #7a294b;
+    color: var(--primary-color);
     margin-bottom: 10px;
 }
 
 .featured-subtitle {
-    color: #956579;
+    color: var(--primary-color);
     font-size: 17px;
     margin-bottom: 35px;
 }
@@ -27,10 +26,9 @@
 }
 
 .featured-card {
-    background: white;
+    background: var(--secondary-color);
     border-radius: 18px;
     overflow: hidden;
-    border: 1px solid #f3d6e2;
     box-shadow: 0 5px 18px rgba(122, 41, 75, 0.09);
     cursor: pointer;
     transition: 0.3s ease;
@@ -54,21 +52,21 @@
 
 .featured-info h3 {
     font-size: 20px;
-    color: #7a294b;
+    color: var(--primary-color);
     margin-bottom: 10px;
 }
 
 .featured-price {
     font-size: 19px;
     font-weight: 700;
-    color: #c04475;
+    color: var(--primary-color);
     margin-bottom: 15px;
 }
 
 .featured-info button {
-    background: #8f3158;
-    color: white;
-    border: none;
+    background: var(--primary-color);
+    color: var(--secondary-color);
+    border: 1px solid var(--primary-color);
     padding: 11px 20px;
     border-radius: 25px;
     cursor: pointer;
@@ -77,6 +75,77 @@
 }
 
 .featured-info button:hover {
-    background: #c04475;
+    background: var(--secondary-color);
+    color: var(--primary-color);
 }
 
+@media (max-width: 768px) {
+    .featured-section {
+        padding: 45px 20px 55px;
+    }
+
+    .featured-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
+    }
+
+    .featured-card img {
+        height: 200px;
+    }
+
+    .featured-section h2 {
+        font-size: 30px;
+    }
+
+    .featured-subtitle {
+        font-size: 16px;
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .featured-section {
+        padding: 35px 14px 45px;
+    }
+
+    .featured-section h2 {
+        font-size: 26px;
+    }
+
+    .featured-subtitle {
+        font-size: 15px;
+        margin-bottom: 25px;
+    }
+
+    .featured-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .featured-card {
+        border-radius: 14px;
+    }
+
+    .featured-card img {
+        height: 145px;
+    }
+
+    .featured-info {
+        padding: 14px 8px 18px;
+    }
+
+    .featured-info h3 {
+        font-size: 17px;
+        margin-bottom: 8px;
+    }
+
+    .featured-price {
+        font-size: 17px;
+        margin-bottom: 12px;
+    }
+
+    .featured-info button {
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+}

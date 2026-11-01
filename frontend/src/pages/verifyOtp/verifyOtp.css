@@ -90,3 +90,66 @@
     text-decoration: underline;
 }
 
+@media (max-width: 768px) {
+
+    .main-otp {
+        width: 90%;
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 30px;
+    }
+
+    .main-otp h2 {
+        font-size: 25px;
+    }
+
+    .main-otp input {
+        padding: 12px;
+        font-size: 15px;
+    }
+
+    .main-otp button[type="submit"] {
+        padding: 12px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .main-otp {
+        width: 92%;
+        margin: 35px auto;
+        padding: 25px 18px;
+    }
+
+    .main-otp h2 {
+        font-size: 22px;
+    }
+
+    .main-otp form {
+        margin-top: 20px;
+    }
+
+    .main-otp input {
+        padding: 11px;
+        font-size: 14px;
+        letter-spacing: 4px;
+    }
+
+    .main-otp .form-group {
+        margin-bottom: 16px;
+    }
+
+    .main-otp button[type="submit"] {
+        padding: 11px;
+        font-size: 14px;
+    }
+
+    .main-otp form > p {
+        font-size: 13px;
+    }
+
+    .main-otp .resendBtn {
+        font-size: 14px;
+    }
+}

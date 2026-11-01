@@ -1,0 +1,302 @@
+
+.add-festive-page {
+    padding: 30px;
+    margin-left: 255px;
+    width: calc(100% - 255px);
+    min-height: 100vh;
+    box-sizing: border-box;
+    background: #fff8fb;
+}
+
+.festive-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.festive-heading h2 {
+    color: #7a294b;
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.festive-heading p {
+    color: #777;
+    font-size: 15px;
+}
+
+.festive-back-btn {
+    background: #7a294b;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 11px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: 0.3s ease;
+}
+
+.festive-back-btn:hover {
+    background: #e91e63;
+    transform: translateY(-2px);
+}
+
+.festive-form {
+    width: 100%;
+    max-width: 1100px;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(122, 41, 75, 0.08);
+    box-sizing: border-box;
+}
+
+.festive-form-section {
+    margin-bottom: 30px;
+}
+
+.festive-form-section > h3 {
+    color: #7a294b;
+    font-size: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f0dce5;
+}
+
+.festive-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.festive-field {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.festive-field label {
+    color: #71304c;
+    font-weight: 600;
+    margin-bottom: 9px;
+    font-size: 14px;
+}
+
+.festive-field input,
+.festive-field select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 14px;
+    border: 1px solid #ead2dc;
+    border-radius: 8px;
+    outline: none;
+    font-size: 14px;
+    background: #fff;
+    color: #444;
+}
+
+.festive-field input:focus,
+.festive-field select:focus {
+    border-color: #e91e63;
+    box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.08);
+}
+
+.festive-field input[readonly] {
+    background: #fff4f8;
+    cursor: not-allowed;
+}
+
+.festive-field small {
+    color: #dc3545;
+    font-size: 12px;
+    margin-top: 6px;
+}
+
+.festive-field input[readonly] + small {
+    color: #888;
+}
+
+.festive-color-input {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border: 1px solid #ead2dc;
+    padding: 7px 12px;
+    border-radius: 8px;
+}
+
+.festive-color-input input[type="color"] {
+    width: 55px;
+    height: 40px;
+    padding: 3px;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+}
+
+.festive-color-input span {
+    font-size: 14px;
+    color: #555;
+    font-weight: 600;
+}
+
+.festive-preview {
+    margin-top: 30px;
+}
+
+.festive-preview > h3 {
+    color: #7a294b;
+    font-size: 19px;
+    margin-bottom: 15px;
+}
+
+.festive-preview-card {
+    padding: 35px 25px;
+    border: 2px solid;
+    border-radius: 14px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.festive-preview-card h3 {
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+
+.festive-preview-card button {
+    color: white;
+    border: none;
+    border-radius: 7px;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.festive-preview-card button:hover {
+    transform: translateY(-3px);
+}
+
+.festive-submit-area {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.festive-submit-area button {
+    border: none;
+    border-radius: 8px;
+    padding: 12px 25px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.festive-cancel-btn {
+    background: #f1e5eb;
+    color: #71304c;
+}
+
+.festive-cancel-btn:hover {
+    background: #e8d3de;
+}
+
+.festive-submit-btn {
+    background: #e91e63;
+    color: white;
+}
+
+.festive-submit-btn:hover {
+    background: #c2185b;
+}
+
+.festive-submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+    .add-festive-page {
+        padding: 20px 15px;
+    }
+
+    .festive-form {
+        padding: 22px 18px;
+    }
+
+    .festive-heading h2 {
+        font-size: 25px;
+    }
+
+    .festive-form-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .festive-submit-area {
+        justify-content: flex-end;
+    }
+}
+
+@media (max-width: 480px) {
+    .add-festive-page {
+        padding: 15px 10px;
+    }
+
+    .festive-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .festive-heading h2 {
+        font-size: 22px;
+    }
+
+    .festive-heading p {
+        font-size: 13px;
+    }
+
+    .festive-back-btn {
+        width: 100%;
+    }
+
+    .festive-form {
+        padding: 18px 13px;
+    }
+
+    .festive-form-section > h3 {
+        font-size: 17px;
+    }
+
+    .festive-field input,
+    .festive-field select {
+        font-size: 13px;
+        padding: 11px;
+    }
+
+    .festive-submit-area {
+        flex-direction: column;
+    }
+
+    .festive-submit-area button {
+        width: 100%;
+    }
+
+    .festive-preview-card {
+        padding: 25px 15px;
+    }
+
+    .festive-preview-card h3 {
+        font-size: 21px;
+    }
+}

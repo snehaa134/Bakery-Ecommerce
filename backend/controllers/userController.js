@@ -253,7 +253,8 @@ const updateProfile = async (req, res) => {
             data: {
                 name: user.name,
                 email: user.email,
-                profileImage: user.profileImage
+                profileImage: user.profileImage,
+                role:user.role
             }
         });
 

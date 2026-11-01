@@ -124,3 +124,97 @@ form .google-button {
 .main-page form > p a:hover {
     text-decoration: underline;
 }
+
+@media (max-width: 768px) {
+
+    .main-page {
+        padding: 35px 20px;
+    }
+
+    .main-page form {
+        width: 420px;
+        padding: 27px;
+    }
+
+    .main-page form h2 {
+        font-size: 27px;
+    }
+
+    .form_group label {
+        font-size: 18px;
+    }
+
+    .form_group input {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .form_group input::placeholder {
+        font-size: 15px;
+    }
+
+    .main-page form .submit-button,
+    form .google-button {
+        font-size: 17px;
+        padding: 10px;
+    }
+
+    .main-page form > p {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .main-page {
+        padding: 25px 15px;
+        min-height: 100vh;
+    }
+
+    .main-page form {
+        width: 100%;
+        padding: 22px 18px;
+        border-radius: 15px;
+    }
+
+    .main-page form h2 {
+        font-size: 24px;
+        padding: 15px 10px;
+    }
+
+    .form_group {
+        margin-bottom: 13px;
+    }
+
+    .form_group label {
+        font-size: 16px;
+    }
+
+    .form_group input {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .form_group input::placeholder {
+        font-size: 14px;
+    }
+
+    .form_group p {
+        font-size: 12px;
+    }
+
+    .main-page form .submit-button,
+    form .google-button {
+        font-size: 15px;
+        padding: 11px;
+    }
+
+    .main-page form > p {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    .main-page form > p a {
+        margin-left: 3px;
+    }
+}

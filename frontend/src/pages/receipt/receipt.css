@@ -259,3 +259,249 @@
     background: #b94e78;
     color: #fff;
 }
+
+
+
+@media (max-width: 768px) {
+
+    .receipt-page {
+        padding: 30px 15px 45px;
+    }
+
+    .receipt-paper {
+        padding: 30px 28px;
+    }
+
+    .receipt-header h1 {
+        font-size: 30px;
+    }
+
+    .receipt-order-details {
+        gap: 20px;
+    }
+
+    .receipt-success {
+        padding: 15px;
+    }
+
+    .receipt-table {
+        font-size: 12px;
+    }
+
+    .receipt-table th {
+        padding: 11px 7px;
+    }
+
+    .receipt-table td {
+        padding: 13px 7px;
+    }
+
+    .receipt-totals {
+        width: min(100%, 320px);
+    }
+}
+
+
+
+@media (max-width: 480px) {
+
+    .receipt-page {
+        padding: 20px 10px 35px;
+    }
+
+    .receipt-actions {
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 18px;
+    }
+
+    .receipt-actions button {
+        width: 100%;
+        padding: 12px;
+    }
+
+    .receipt-paper {
+        padding: 22px 15px;
+        border-radius: 10px;
+    }
+
+    .receipt-brand-icon {
+        width: 46px;
+        height: 46px;
+        font-size: 27px;
+    }
+
+    .receipt-header {
+        padding-bottom: 20px;
+    }
+
+    .receipt-header h1 {
+        font-size: 26px;
+    }
+
+    .receipt-header p {
+        font-size: 12px;
+    }
+
+    .receipt-badge {
+        font-size: 10px;
+        padding: 6px 12px;
+    }
+
+    .receipt-success {
+        gap: 10px;
+        padding: 13px;
+        margin-bottom: 22px;
+    }
+
+    .receipt-success > span {
+        width: 32px;
+        height: 32px;
+        font-size: 17px;
+    }
+
+    .receipt-success h2 {
+        font-size: 14px;
+    }
+
+    .receipt-success p {
+        font-size: 11px;
+    }
+
+    .receipt-order-details {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding-bottom: 22px;
+    }
+
+    .receipt-order-details span {
+        font-size: 11px;
+    }
+
+    .receipt-order-details strong {
+        font-size: 13px;
+    }
+
+    .receipt-section-title {
+        font-size: 17px;
+        margin-bottom: 14px;
+    }
+
+    .receipt-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .receipt-table {
+        min-width: 480px;
+        font-size: 12px;
+    }
+
+    .receipt-table th {
+        padding: 11px 8px;
+    }
+
+    .receipt-table td {
+        padding: 12px 8px;
+    }
+
+    .receipt-totals {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .receipt-totals > div {
+        font-size: 12px;
+        padding: 9px 0;
+    }
+
+    .receipt-grand-total {
+        font-size: 15px !important;
+    }
+
+    .receipt-payment-note {
+        font-size: 11px;
+    }
+
+    .receipt-footer {
+        margin-top: 28px;
+        padding-top: 20px;
+    }
+
+    .receipt-footer h3 {
+        font-size: 18px;
+    }
+
+    .receipt-footer p {
+        font-size: 12px;
+    }
+
+    .receipt-footer small {
+        font-size: 10px;
+    }
+
+    .receipt-message {
+        padding: 20px 12px;
+    }
+}
+
+
+
+
+@media print {
+
+    @page {
+        size: A4;
+        margin: 12mm;
+    }
+
+    body {
+        background: white !important;
+    }
+
+    .receipt-page {
+        min-height: auto;
+        padding: 0;
+        background: white !important;
+        color: #000;
+    }
+
+    .receipt-actions,
+    .navbar,
+    .footer {
+        display: none !important;
+    }
+
+    .receipt-paper {
+        max-width: 100%;
+        margin: 0;
+        padding: 15px;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        background: white !important;
+    }
+
+    .receipt-table-wrap {
+        overflow: visible;
+    }
+
+    .receipt-table {
+        min-width: 100%;
+    }
+
+    .receipt-success,
+    .receipt-table th,
+    .receipt-brand-icon {
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+
+    .receipt-success,
+    .receipt-order-details,
+    .receipt-table tr,
+    .receipt-totals,
+    .receipt-footer {
+        break-inside: avoid;
+    }
+}

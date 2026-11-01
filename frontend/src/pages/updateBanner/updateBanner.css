@@ -102,3 +102,89 @@
     font-size: 16px;
     font-weight: 600;
 }
+@media (max-width: 768px) {
+
+    .update-product {
+        width: 90%;
+        max-width: 650px;
+        margin: 30px auto;
+        padding: 25px;
+    }
+
+    .update-product h2 {
+        font-size: 25px;
+    }
+
+    .update-product form {
+        gap: 15px;
+    }
+
+    .update-product input,
+    .update-product select {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .update-product .productImage {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .update-product {
+        width: 94%;
+        margin: 20px auto;
+        padding: 20px 15px;
+        border-radius: 10px;
+    }
+
+    .update-product h2 {
+        font-size: 21px;
+        margin-bottom: 20px;
+    }
+
+    .update-product form {
+        gap: 14px;
+    }
+
+    .update-product .form-group {
+        gap: 7px;
+    }
+
+    .update-product label {
+        font-size: 14px;
+    }
+
+    .update-product input,
+    .update-product select {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .update-product .productImage {
+        width: 65px;
+        height: 65px;
+        margin: 5px 5px 5px 0;
+    }
+
+    .update-product .form-group > div {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .update-product button {
+        padding: 9px 13px;
+        font-size: 13px;
+    }
+
+    .update-product form > button {
+        padding: 12px;
+        font-size: 15px;
+    }
+
+    .update-product .form-group p {
+        font-size: 12px;
+    }
+}

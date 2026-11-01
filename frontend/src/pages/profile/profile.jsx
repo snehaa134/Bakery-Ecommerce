@@ -32,6 +32,8 @@ const Profile = () => {
         }
     }, [user]);
 
+
+    
     const handleImageChange = (e) => {
         const file = e.target.files[0];
 
@@ -76,7 +78,6 @@ const Profile = () => {
     const handleLogout = async () => {
         try {
             await logout().unwrap();
-
             setIsLoggedIn(false);
             setUser(null);
             navigate("/");
@@ -126,7 +127,6 @@ const Profile = () => {
                         required
                     />
                 </div>
-
                 <div className="profile-field">
                     <label>Email</label>
                     <input

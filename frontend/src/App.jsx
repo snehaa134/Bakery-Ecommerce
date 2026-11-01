@@ -31,60 +31,68 @@ import ManageOrders from "./pages/manageOrders/manageOrders";
 import Checkout from "./pages/checkout/checkout";
 import OrderReceipt from "./pages/receipt/receipt";
 import MyOrders from "./pages/myOrders/myOrders";
+import ManageFestiveThemes from "./pages/manageFestiveTheme/manageThemes";
+import EditFestiveTheme from "./pages/updateFestiveTheme/updateFestiveTheme";
+import AddFestiveTheme from "./pages/addFestiveTheme/addFestiveTheme";
+import { ThemeProvider } from "./festiveThemeContext/festiveThemeContext";
 
 const App = () => {
   return (
-    <>
-      <Routes>
-        <Route element={<PublicRoute />}>
-          <Route element={<Layout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/products/:id" element={<Products />} />
-            <Route path="/product-details/:id" element={<ProductDetails />} />
-            <Route path="/about-us" element={<About />} />
-            <Route path="/cart" element={<Cart />} />
+    <ThemeProvider>
+      <>
+        <Routes>
+          <Route element={<PublicRoute />}>
+            <Route element={<Layout />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/products/:id" element={<Products />} />
+              <Route path="/product-details/:id" element={<ProductDetails />} />
+              <Route path="/about-us" element={<About />} />
+              <Route path="/cart" element={<Cart />} />
+            </Route>
+
+            <Route path="/login" element={<Login />} />
+            <Route path="/signUp" element={<SignUp />} />
+            <Route path="/admin-SignUp" element={<AdminSignUp />} />
+            <Route path="/admin-Login" element={<AdminLogin />} />
+            <Route path="/verify-otp" element={<VerifyOtp />} />
+
+
+
           </Route>
 
-          <Route path="/login" element={<Login />} />
-          <Route path="/signUp" element={<SignUp />} />
-          <Route path="/admin-SignUp" element={<AdminSignUp />} />
-          <Route path="/admin-Login" element={<AdminLogin />} />
-          <Route path="/verify-otp" element={<VerifyOtp />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/order-receipt/:id" element={<OrderReceipt />} />
+            <Route path="/my-orders" element={<MyOrders />} />
 
-
-
-        </Route>
-
-        <Route element={<ProtectedRoute />}>
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/order-receipt/:id" element={<OrderReceipt />} />
-          <Route path="/my-orders" element={<MyOrders />} />
-
-        </Route>
-
-        <Route element={<AdminRoute />}>
-          <Route element={<Layout />}>
-            <Route path="/manage-banners" element={<ManageBanners />} />
-            <Route path="/manage-categories" element={<ManageCategories />} />
-            <Route path="/manage-products" element={<ManageProducts />} />
-            <Route path="/manage-orders" element={<ManageOrders />} />
           </Route>
-          <Route path="/admin-dashboard" element={<AdminDashboard />} />
-          <Route path="/add-category" element={<AddCategory />} />
-          <Route path="/update-category/:id" element={<UpdateCategory />} />
-          <Route path="/add-banner" element={<AddBanner />} />
-          <Route path="/update-banner/:id" element={<UpdateBanner />} />
-          <Route path="/add-product" element={<AddProduct />} />
-          <Route path="/update-product/:id" element={<UpdateProduct />} />
-          <Route path="admin-profile" element={<AdminProfile />} />
-        </Route>
 
-      </Routes>
-      <ToastContainer />
+          <Route element={<AdminRoute />}>
+            <Route element={<Layout />}>
+              <Route path="/manage-banners" element={<ManageBanners />} />
+              <Route path="/manage-categories" element={<ManageCategories />} />
+              <Route path="/manage-products" element={<ManageProducts />} />
+              <Route path="/manage-orders" element={<ManageOrders />} />
+              <Route path="/manage-festive-themes" element={<ManageFestiveThemes />} />
+              <Route path="/admin-dashboard" element={<AdminDashboard />} />
+              <Route path="/add-category" element={<AddCategory />} />
+              <Route path="/update-category/:id" element={<UpdateCategory />} />
+              <Route path="/add-banner" element={<AddBanner />} />
+              <Route path="/update-banner/:id" element={<UpdateBanner />} />
+              <Route path="/add-product" element={<AddProduct />} />
+              <Route path="/update-product/:id" element={<UpdateProduct />} />
+              <Route path="/add-festive-theme" element={<AddFestiveTheme />} />
+              <Route path="/edit-festive-theme/:id" element={<EditFestiveTheme />} />
+            </Route>
+            <Route path="admin-profile" element={<AdminProfile/>}/>
+          </Route>
 
-    </>
+        </Routes>
+        <ToastContainer />
+      </>
+    </ThemeProvider>
   )
 }
 export default App;

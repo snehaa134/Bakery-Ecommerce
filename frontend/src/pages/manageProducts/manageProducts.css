@@ -1,6 +1,7 @@
-
 .manage-products {
     padding: 40px 7%;
+    margin-left: 220px;
+    width: calc(100% - 220px);
     background-color: #fff0f5;
     min-height: 80vh;
     text-align: center;
@@ -12,7 +13,7 @@
     font-size: 28px;
 }
 
-.manage-products > button {
+.manage-products>button {
     display: block;
     margin-bottom: 25px;
     padding: 11px 20px;
@@ -25,7 +26,7 @@
     transition: 0.3s;
 }
 
-.manage-products > button:hover {
+.manage-products>button:hover {
     background-color: #c6537a;
 }
 
@@ -45,8 +46,8 @@
 }
 
 .manage-products table th {
-    background-color: #f4c2d2;
-    color: #5c3028;
+    background-color: #0c0c0c;
+    color: white;
     padding: 15px 12px;
     font-weight: 600;
     border: 1px solid #f0d5df;
@@ -106,14 +107,14 @@
 }
 
 
-/* Actions column */
+
 .manage-products .product-actions {
     min-width: 180px;
     text-align: center;
     white-space: nowrap;
 }
 
-/* Both buttons */
+
 .manage-products .product-actions button {
     display: inline-block !important;
     visibility: visible !important;
@@ -128,7 +129,7 @@
     cursor: pointer;
 }
 
-/* Edit */
+
 .manage-products .product-actions .edit-btn {
     background-color: #d96c91;
 }
@@ -137,7 +138,7 @@
     background-color: #c6537a;
 }
 
-/* Delete */
+
 .manage-products .product-actions .delete-btn {
     background-color: #b85c70;
 }
@@ -151,3 +152,87 @@
     cursor: not-allowed;
 }
 
+
+@media (max-width: 768px) {
+    .manage-products {
+        padding: 20px 15px;
+    }
+
+    .manage-products h2 {
+        font-size: 23px;
+        margin-bottom: 20px;
+    }
+
+    .manage-products > button {
+        padding: 9px 15px;
+        font-size: 13px;
+    }
+
+    .manage-products table {
+        min-width: 750px;
+    }
+
+    .manage-products table th,
+    .manage-products table td {
+        padding: 10px 8px;
+        font-size: 12px;
+    }
+
+    .manage-products table img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .manage-products table td button {
+        padding: 7px 10px;
+        font-size: 11px;
+    }
+
+    .manage-products .product-actions {
+        min-width: 150px;
+    }
+
+    .manage-products .product-actions button {
+        padding: 7px 9px;
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 480px) {
+    .manage-products {
+        padding: 15px 10px;
+    }
+
+    .manage-products h2 {
+        font-size: 20px;
+    }
+
+    .manage-products > button {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+
+    .manage-products table {
+        min-width: 700px;
+    }
+
+    .manage-products table th,
+    .manage-products table td {
+        padding: 8px 6px;
+        font-size: 11px;
+    }
+
+    .manage-products table img {
+        width: 42px;
+        height: 42px;
+    }
+
+    .manage-products .product-actions {
+        min-width: 135px;
+    }
+
+    .manage-products .product-actions button {
+        padding: 6px 8px;
+        font-size: 10px;
+    }
+}

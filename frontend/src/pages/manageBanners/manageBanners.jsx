@@ -42,7 +42,7 @@ const ManageBanners = () => {
 
     return (
         <>
-            <div className="manage-categories">
+            <div className="manage-banners">
                 <h2>Manage Banners</h2>
 
                 <button type="button" onClick={() => navigate("/add-banner")}>+ Add Banner</button>

@@ -1,90 +1,196 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 .main-banner {
     width: 100%;
     min-height: 450px;
-    padding: 50px 8%;
+    padding: 45px 8%;
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    gap: 40px;
+    gap: 35px;
     position: relative;
     overflow: hidden;
-    background: rgb(247, 247, 244)
+    background: linear-gradient(135deg, var(--secondary-color), #f9f7f6);
 }
-
 
 .banner-content {
     flex: 1;
+    min-width: 0;
     max-width: 500px;
 }
 
 .banner-content h2 {
-    font-size: 50px;
-    font-weight: bold;
-    color: #6b293e;
-    margin-bottom: 20px;
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--primary-color);
+    margin-bottom: 18px;
     line-height: 1.2;
 }
 
 .banner-content p {
-    font-size: 18px;
+    font-size: 17px;
     line-height: 1.8;
-    color: #754b57;
-    margin-bottom: 25px;
+    color: var(--primary-color);
+    margin-bottom: 22px;
 }
 
-.buy-btn {
-    padding: 11px 24px;
+.buy-btnn {
+    display: inline-block;
+    padding: 12px 26px;
     font-size: 15px;
     font-weight: 600;
-    border: 1px solid #8b3a50;
+    border: 1px solid var(--primary-color);
     border-radius: 25px;
-    background-color: #9e5f6f;
-    color: white;
+    color: var(--primary-color);
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
-.buy-btn:hover {
-    background-color: #fff;
-    color: #8b3a50;
+.buy-btnn:hover {
+    background: var(--primary-color);
+    color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(107, 41, 62, 0.15);
 }
-
-
-.banner-img {
-    width: 60%;
-    height: 520px;
-    object-fit: cover;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(91, 39, 56, 0.15);
-}
-
 
 .banner-buttons {
-    position: absolute;
-    bottom: 55px;
-    left: 8%;
     display: flex;
-    gap: 12px;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap;
 }
 
 .banner-buttons button {
-    padding: 11px 24px;
-    font-size: 15px;
+    padding: 10px 22px;
+    font-size: 14px;
     font-weight: 600;
-    border: 1px solid #8b3a50;
+    border: 1px solid var(--primary-color);
     border-radius: 25px;
-    background-color: #8b3a50;
+    background: var(--primary-color);
     color: white;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .banner-buttons button:hover {
-    background-color: #fff;
-    color: #8b3a50;
+    background: var(--secondary-color);
+    color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.banner-img {
+    display: block;
+    width: 52%;
+    height: 420px;
+    flex-shrink: 0;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(91, 39, 56, 0.15);
+    transition: transform 0.4s ease;
+}
+
+.banner-img:hover {
+    transform: scale(1.02);
+}
+
+@media (max-width: 780px) {
+    .main-banner {
+        min-height: auto;
+        padding: 35px 4%;
+        gap: 18px;
+    }
+
+    .banner-content {
+        flex: 1;
+    }
+
+    .banner-content h2 {
+        font-size: 30px;
+        margin-bottom: 12px;
+    }
+
+    .banner-content p {
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 16px;
+    }
+
+    .buy-btnn {
+        padding: 9px 17px;
+        font-size: 13px;
+    }
+
+    .banner-buttons {
+        margin-top: 12px;
+        gap: 8px;
+    }
+
+    .banner-buttons button {
+        padding: 8px 14px;
+        font-size: 12px;
+    }
+
+    .banner-img {
+        width: 48%;
+        height: 330px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-banner {
+        min-height: 0;
+        padding: 24px 12px;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .banner-content {
+        flex: 1;
+        min-width: 0;
+        max-width: none;
+    }
+
+    .banner-content h2 {
+        font-size: 21px;
+        line-height: 1.25;
+        margin-bottom: 10px;
+        overflow-wrap: anywhere;
+    }
+
+    .banner-content p {
+        font-size: 12px;
+        line-height: 1.5;
+        margin-bottom: 12px;
+    }
+
+    .buy-btnn {
+        padding: 8px 12px;
+        font-size: 11px;
+    }
+
+    .banner-buttons {
+        margin-top: 10px;
+        gap: 6px;
+    }
+
+    .banner-buttons button {
+        padding: 7px 10px;
+        font-size: 10px;
+    }
+
+    .banner-img {
+        width: 48%;
+        height: 280px;
+        flex-shrink: 0;
+        border-radius: 12px;
+    }
 }

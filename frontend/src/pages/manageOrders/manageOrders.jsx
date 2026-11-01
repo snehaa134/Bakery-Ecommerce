@@ -81,7 +81,7 @@ const ManageOrders = () => {
             ) : (
                 <div className="orders-table-wrapper">
                     <table className="orders-table">
-                        <thead>
+                        <thead >
                             <tr>
                                 <th>Order ID</th>
                                 <th>Customer Details</th>

@@ -1,27 +1,27 @@
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-.main-categories-section {
+
+.featured-categories-section {
     padding: 55px 30px 80px;
-    background: linear-gradient(135deg, #fce4ec, #f8d7e5, #fff0f5);
+    background: linear-gradient(135deg, var(--secondary-color), #f5cfdf, #fff0f5);
     text-align: center;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
 }
 
-.main-categories-section h2 {
+.featured-categories-section h2 {
     padding: 10px 0 40px;
     font-size: 40px;
     font-weight: 700;
-    color: #7a294b;
+    color: var(--primary-color);
     text-align: center;
     letter-spacing: 1px;
 }
 
-.categories-grid {
+.categories-gridd {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 30px;
@@ -33,8 +33,7 @@
     min-width: 0;
     text-align: center;
     overflow: hidden;
-    background: #fff;
-    border: 1px solid #f3c5d7;
+    background: var(--secondary-color);
     border-radius: 20px;
     box-shadow: 0 6px 20px rgba(122, 41, 75, 0.10);
     cursor: pointer;
@@ -49,7 +48,7 @@
 .category-card img {
     display: block;
     width: 100%;
-    height: 280px;
+    height: 230px;
     object-fit: cover;
     transition: transform 0.5s ease;
 }
@@ -63,11 +62,52 @@
     padding: 20px 10px;
     font-size: 22px;
     font-weight: 600;
-    color: #8f3158;
+    color: var(--primary-color);
     overflow-wrap: anywhere;
     transition: color 0.3s ease;
 }
 
 .category-card:hover h3 {
-    color: #d63384;
+    color: var(--primary-color);
+}
+
+@media(max-width:768px) {
+    .featured-categories-section {
+        padding: 50px 25px;
+    }
+
+    .featured-categories-section h2 {
+        font-size: 32px;
+        padding-bottom: 30px;
+    }
+
+    .categories-gridd {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
+    }
+
+    .category-card img {
+        height: 200px;
+    }
+}
+
+@media(max-width:480px) {
+    .featured-categories-section {
+        padding: 30px 15px;
+    }
+
+    .featured-categories-section h2 {
+        font-size: 25px;
+        padding-bottom: 30px;
+    }
+
+    .categories-gridd {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .category-card img {
+        height: 150px;
+        object-fit: cover;
+    }
 }

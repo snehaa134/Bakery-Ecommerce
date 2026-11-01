@@ -1,6 +1,8 @@
 
 .manage-categories {
     min-height: 100vh;
+    margin-left: 255px;
+    width: calc(100% - 255px);
     padding: 30px 24px 60px;
     background-color: #fff8f6;
     box-sizing: border-box;
@@ -134,4 +136,86 @@
     font-size: 18px;
     color: #8b3652;
 }
+
+@media (max-width: 992px) {
+    .manage-categories {
+        margin-left: 200px;
+        width: calc(100% - 200px);
+        padding: 25px 18px 45px;
+    }
+
+    .manage-categories h2 {
+        font-size: 25px;
+    }
+
+    .manage-categories .table {
+        overflow-x: auto;
+    }
+
+    .manage-categories table {
+        min-width: 750px;
+    }
+}
+
+@media (max-width: 768px) {
+    .manage-categories {
+        margin-left: 180px;
+        width: calc(100% - 180px);
+        padding: 20px 12px 35px;
+    }
+
+    .manage-categories h2 {
+        font-size: 23px;
+        margin-bottom: 20px;
+    }
+
+    .manage-categories th,
+    .manage-categories td {
+        padding: 11px 9px;
+        font-size: 14px;
+    }
+
+    .manage-categories td img {
+        width: 55px;
+        height: 55px;
+    }
+
+    .manage-categories td button {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .manage-categories {
+        margin-left: 150px;
+        width: calc(100% - 150px);
+        padding: 18px 10px 30px;
+    }
+
+    .manage-categories h2 {
+        font-size: 20px;
+    }
+
+    .manage-categories > button {
+        padding: 10px 13px;
+        font-size: 13px;
+    }
+
+    .manage-categories table {
+        min-width: 700px;
+    }
+
+    .manage-categories th,
+    .manage-categories td {
+        padding: 9px 7px;
+        font-size: 13px;
+    }
+
+    .manage-categories td img {
+        width: 45px;
+        height: 45px;
+    }
+}
+
 

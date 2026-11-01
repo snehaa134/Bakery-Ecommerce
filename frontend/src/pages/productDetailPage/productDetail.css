@@ -1,4 +1,3 @@
-
 * {
     margin: 0;
     padding: 0;
@@ -12,12 +11,10 @@
     max-width: 1200px;
     margin: 50px auto;
     padding: 30px;
-    background-color: #fff8fb;
     border-radius: 15px;
     font-family: Arial, sans-serif;
     align-items: start;
 }
-
 
 .images {
     width: 100%;
@@ -27,8 +24,7 @@
 .images .swiper:first-child {
     width: 100%;
     border-radius: 12px;
-    background-color: white;
-    border: 1px solid #f3d5e2;
+    background-color: var(--secondary-color);
 }
 
 .images .swiper:first-child img {
@@ -39,7 +35,6 @@
     padding: 15px;
 }
 
-
 .images .swiper + .swiper {
     margin-top: 15px;
 }
@@ -48,14 +43,13 @@
     width: 100%;
     height: 85px;
     object-fit: cover;
-    border: 2px solid #f3d5e2;
     border-radius: 8px;
     cursor: pointer;
     padding: 3px;
 }
 
 .images .swiper + .swiper .swiper-slide-thumb-active img {
-    border-color: #e75480;
+    border-color: var(--primary-color);
 }
 
 .content {
@@ -67,26 +61,27 @@
 }
 
 .content h2 {
-    color: #8f3155;
+    color: var(--primary-color);
     font-size: 30px;
     margin: 0;
 }
 
 .content h3 {
-    color: #d6336c;
+    color: var(--primary-color);
     font-size: 23px;
     margin: 0;
 }
 
 .content p {
-    color: #66545c;
+    color: var(--primary-color);
+    opacity: 0.8;
     font-size: 16px;
     line-height: 1.7;
     margin: 0;
 }
 
 .content h4 {
-    color: #8f3155;
+    color: var(--primary-color);
     font-size: 16px;
     margin: 0;
 }
@@ -98,8 +93,8 @@
 }
 
 .quantity button {
-    background-color: #e75480;
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
     border: none;
     width: 35px;
     height: 35px;
@@ -109,16 +104,18 @@
 }
 
 .quantity button:hover {
-    background-color: #c93666;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
 }
 
 .quantity button:disabled {
-    background-color: #e8b8ca;
+    background-color: var(--primary-color);
+    opacity: 0.4;
     cursor: not-allowed;
 }
 
 .quantity span {
-    color: #131213;
+    color: var(--primary-color);
     font-size: 18px;
     font-weight: bold;
     min-width: 20px;
@@ -133,9 +130,9 @@
 }
 
 .buy-btn {
-    background-color: #e75480;
-    color: white;
-    border: 2px solid #e75480;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border: 2px solid var(--primary-color);
     padding: 12px 25px;
     border-radius: 8px;
     font-size: 16px;
@@ -144,16 +141,14 @@
 }
 
 .buy-btn:hover {
-    background-color: #c93666;
-    border-color: #c93666;
-    color: rgb(125, 122, 117);
+    background-color: var(--secondary-color);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
 }
 
-
 .add-btn {
-    background-color: black;
-    color: white;
-    border: 2px solid black;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
     padding: 12px 23px;
     border-radius: 8px;
     font-size: 16px;
@@ -162,7 +157,81 @@
 }
 
 .add-btn:hover {
-    background-color: #333;
-    border-color: #333;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
 }
 
+@media (max-width: 768px) {
+    .productDetails-section {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        margin: 25px 18px;
+        padding: 20px;
+    }
+
+    .images .swiper:first-child img {
+        height: 350px;
+    }
+
+    .content {
+        padding: 15px 5px;
+        gap: 15px;
+    }
+
+    .content h2 {
+        font-size: 26px;
+    }
+
+    .content h3 {
+        font-size: 21px;
+    }
+}
+
+@media (max-width: 480px) {
+    .productDetails-section {
+        margin: 15px 12px;
+        padding: 15px;
+        gap: 20px;
+    }
+
+    .images .swiper:first-child img {
+        height: 270px;
+        padding: 10px;
+    }
+
+    .images .swiper + .swiper img {
+        height: 65px;
+    }
+
+    .content {
+        gap: 13px;
+    }
+
+    .content h2 {
+        font-size: 23px;
+    }
+
+    .content h3 {
+        font-size: 19px;
+    }
+
+    .content p {
+        font-size: 14px;
+    }
+
+    .quantity {
+        gap: 12px;
+    }
+
+    .action-buttons {
+        width: 100%;
+        gap: 10px;
+    }
+
+    .buy-btn,
+    .add-btn {
+        flex: 1;
+        padding: 11px 12px;
+        font-size: 14px;
+    }
+}

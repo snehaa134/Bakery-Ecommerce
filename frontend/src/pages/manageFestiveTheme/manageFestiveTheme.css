@@ -1,0 +1,480 @@
+.manage-festive-container {
+    width: 100%;
+    margin-left: 255px;
+    width: calc(100%-255px);
+    min-height: 100vh;
+    padding: 35px;
+    background: linear-gradient(135deg, #fff8fb, #fff0f5);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.manage-festive-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.manage-festive-header h2 {
+    font-size: 30px;
+    color: #7a294b;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.manage-festive-header p {
+    color: #94717f;
+    font-size: 15px;
+}
+
+.add-festive-btn {
+    padding: 13px 22px;
+    background: linear-gradient(135deg, #d63384, #9c245e);
+    color: #fff;
+    border: none;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(214, 51, 132, 0.18);
+}
+
+.add-festive-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(214, 51, 132, 0.3);
+}
+
+.festive-count-card {
+    width: 220px;
+    padding: 22px;
+    margin-bottom: 28px;
+    background: #fff;
+    border: 1px solid #f4d6e3;
+    border-radius: 14px;
+    box-shadow: 0 5px 18px rgba(122, 41, 75, 0.07);
+    transition: 0.3s ease;
+}
+
+.festive-count-card:hover {
+    transform: translateY(-4px);
+}
+
+.festive-count-card h3 {
+    font-size: 32px;
+    color: #c02670;
+    margin-bottom: 5px;
+}
+
+.festive-count-card p {
+    font-size: 13px;
+    color: #94717f;
+}
+
+.festive-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    background: #fff;
+    border-radius: 14px;
+    border: 1px solid #f3dce6;
+    box-shadow: 0 6px 22px rgba(122, 41, 75, 0.07);
+}
+
+.festive-table {
+    width: 100%;
+    min-width: 1050px;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.festive-table thead {
+    background: linear-gradient(135deg, #7a294b, #a83268);
+}
+
+.festive-table th {
+    padding: 18px 16px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.festive-table tbody tr {
+    border-bottom: 1px solid #f6e5ed;
+    transition: background 0.25s ease;
+}
+
+.festive-table tbody tr:hover {
+    background: #fff6fa;
+}
+
+.festive-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.festive-table td {
+    padding: 18px 16px;
+    color: #604452;
+    font-size: 13px;
+    vertical-align: middle;
+}
+
+.festive-table td strong {
+    display: block;
+    color: #7a294b;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.festive-table td small {
+    display: block;
+    color: #a78b98;
+    font-size: 11px;
+}
+
+.festive-date-info {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    white-space: nowrap;
+}
+
+.festive-date-info span {
+    color: #765c69;
+    font-size: 12px;
+}
+
+.festive-color-preview {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.festive-color-preview span {
+    width: 29px;
+    height: 29px;
+    display: inline-block;
+    border-radius: 50%;
+    border: 2px solid #f0dce5;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.festive-color-preview span:hover {
+    transform: scale(1.2);
+}
+
+.activation-badge {
+    display: inline-block;
+    padding: 7px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.activation-badge.manual {
+    background: #fff0d9;
+    color: #a45c00;
+}
+
+.activation-badge.automatic {
+    background: #e3f7ec;
+    color: #218653;
+}
+
+.theme-status-btn {
+    min-width: 90px;
+    padding: 8px 13px;
+    border: none;
+    border-radius: 7px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.theme-status-btn.enabled {
+    background: #e3f7ec;
+    color: #218653;
+}
+
+.theme-status-btn.disabled {
+    background: #ffe5e9;
+    color: #c62845;
+}
+
+.theme-status-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+}
+
+.theme-status-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.festive-toggle {
+    position: relative;
+    display: inline-block;
+    width: 48px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.festive-toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.festive-slider {
+    position: absolute;
+    inset: 0;
+    background: #d6c5cd;
+    border-radius: 30px;
+    transition: 0.3s ease;
+}
+
+.festive-slider::before {
+    content: "";
+    position: absolute;
+    width: 19px;
+    height: 19px;
+    left: 3px;
+    top: 3px;
+    background: #fff;
+    border-radius: 50%;
+    transition: 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.festive-toggle input:checked+.festive-slider {
+    background: #d63384;
+}
+
+.festive-toggle input:checked+.festive-slider::before {
+    transform: translateX(23px);
+}
+
+.festive-toggle input:focus-visible+.festive-slider {
+    outline: 3px solid #f3a7ca;
+    outline-offset: 3px;
+}
+
+.automatic-label {
+    color: #967d89;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.festive-table td:nth-child(7) {
+    color: #a83268;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.festive-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.edit-theme-btn,
+.delete-theme-btn {
+    padding: 8px 13px;
+    border: none;
+    border-radius: 7px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.edit-theme-btn {
+    background: #fce4ef;
+    color: #a83268;
+}
+
+.edit-theme-btn:hover {
+    background: #d63384;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.delete-theme-btn {
+    background: #ffe7e9;
+    color: #c62845;
+}
+
+.delete-theme-btn:hover:not(:disabled) {
+    background: #c62845;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.delete-theme-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.no-festive-data {
+    text-align: center !important;
+    padding: 45px 20px !important;
+    color: #a83268 !important;
+    font-size: 14px !important;
+    font-weight: 600;
+}
+
+.festive-loading {
+    min-height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #a83268;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.festive-error-message {
+    padding: 35px;
+    text-align: center;
+    color: #c62845;
+    font-weight: 600;
+}
+
+
+
+@media (max-width: 768px) {
+    .manage-festive-container {
+        padding: 18px 12px;
+    }
+
+    .manage-festive-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .manage-festive-header h2 {
+        font-size: 23px;
+    }
+
+    .manage-festive-header p {
+        font-size: 13px;
+    }
+
+    .add-festive-btn {
+        padding: 10px 15px;
+        font-size: 12px;
+    }
+
+    .festive-count-card {
+        width: 170px;
+        padding: 16px;
+        margin-bottom: 20px;
+    }
+
+    .festive-count-card h3 {
+        font-size: 25px;
+    }
+
+    .festive-table {
+        min-width: 900px;
+    }
+
+    .festive-table th {
+        padding: 13px 10px;
+        font-size: 12px;
+    }
+
+    .festive-table td {
+        padding: 13px 10px;
+        font-size: 12px;
+    }
+
+    .festive-table td strong {
+        font-size: 13px;
+    }
+
+    .festive-actions {
+        gap: 5px;
+    }
+
+    .edit-theme-btn,
+    .delete-theme-btn {
+        padding: 7px 10px;
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .manage-festive-container {
+        padding: 15px 10px;
+    }
+
+    .manage-festive-header h2 {
+        font-size: 20px;
+    }
+
+    .manage-festive-header p {
+        font-size: 12px;
+    }
+
+    .add-festive-btn {
+        padding: 9px 13px;
+        font-size: 11px;
+    }
+
+    .festive-count-card {
+        width: 150px;
+        padding: 14px;
+    }
+
+    .festive-count-card h3 {
+        font-size: 22px;
+    }
+
+    .festive-count-card p {
+        font-size: 11px;
+    }
+
+    .festive-table {
+        min-width: 850px;
+    }
+
+    .festive-table th,
+    .festive-table td {
+        padding: 10px 8px;
+        font-size: 11px;
+    }
+
+    .festive-color-preview {
+        gap: 5px;
+    }
+
+    .festive-color-preview span {
+        width: 23px;
+        height: 23px;
+    }
+
+    .festive-toggle {
+        width: 42px;
+        height: 23px;
+    }
+
+    .festive-slider::before {
+        width: 17px;
+        height: 17px;
+    }
+
+    .festive-toggle input:checked + .festive-slider::before {
+        transform: translateX(19px);
+    }
+
+    .festive-loading,
+    .festive-error-message {
+        font-size: 14px;
+        padding: 20px;
+    }
+}
