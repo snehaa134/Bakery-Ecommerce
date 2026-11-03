@@ -5,8 +5,9 @@ import * as Yup from "yup";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import {useGetFestiveThemeByIdQuery,useUpdateFestiveThemeMutation} from "../../servicesApis/festiveThemeServices/festiveThemeService";
+import { useGetFestiveThemeByIdQuery, useUpdateFestiveThemeMutation } from "../../servicesApis/festiveThemeServices/festiveThemeService";
 import "../updateFestiveTheme/updateFestiveTheme.css";
+
 const EditFestiveTheme = () => {
     const navigate = useNavigate();
     const { id } = useParams();
@@ -57,12 +58,25 @@ const EditFestiveTheme = () => {
                 .matches(/^#[0-9A-Fa-f]{6}$/, "Enter a valid color")
                 .required("Secondary color is required"),
 
-            festivalDate: Yup.date()
-                .required("Festival date is required"),
+            // Dates required only in manual mode
+            festivalDate: Yup.date().when("activationMode", {
+                is: "manual",
+                then: (schema) =>
+                    schema.required("Festival date is required"),
+                otherwise: (schema) => schema.notRequired()
+            }),
 
-            endDate: Yup.date()
-                .required("End date is required")
-                .min(Yup.ref("festivalDate"), "End date cannot be before festival date"),
+            endDate: Yup.date().when("activationMode", {
+                is: "manual",
+                then: (schema) =>
+                    schema
+                        .required("End date is required")
+                        .min(
+                            Yup.ref("festivalDate"),
+                            "End date cannot be before festival date"
+                        ),
+                otherwise: (schema) => schema.notRequired()
+            }),
 
             activationMode: Yup.string()
                 .oneOf(["automatic", "manual"])
@@ -94,6 +108,12 @@ const EditFestiveTheme = () => {
                         .replace(/[^a-z0-9]+/g, "-")
                         .replace(/^-|-$/g, "")
                 };
+
+                // Automatic mode mein dates backend fetch karega
+                if (values.activationMode === "automatic") {
+                    delete themeData.festivalDate;
+                    delete themeData.endDate;
+                }
 
                 const response = await updateFestiveTheme({
                     id,
@@ -179,42 +199,62 @@ const EditFestiveTheme = () => {
                     </div>
                 </div>
 
-                <div className="form-row">
-                    <div className="form-group">
-                        <label>Festival Date</label>
-                        <input
-                            type="date"
-                            name="festivalDate"
-                            value={formik.values.festivalDate}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                        />
-                        {formik.touched.festivalDate && formik.errors.festivalDate && (
-                            <span className="error-text">{formik.errors.festivalDate}</span>
-                        )}
-                    </div>
+                {/* Dates show only in manual mode */}
+                {formik.values.activationMode === "manual" && (
+                    <div className="form-row">
+                        <div className="form-group">
+                            <label>Festival Date</label>
+                            <input
+                                type="date"
+                                name="festivalDate"
+                                value={formik.values.festivalDate}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                            />
+                            {formik.touched.festivalDate && formik.errors.festivalDate && (
+                                <span className="error-text">{formik.errors.festivalDate}</span>
+                            )}
+                        </div>
 
-                    <div className="form-group">
-                        <label>End Date</label>
-                        <input
-                            type="date"
-                            name="endDate"
-                            value={formik.values.endDate}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                        />
-                        {formik.touched.endDate && formik.errors.endDate && (
-                            <span className="error-text">{formik.errors.endDate}</span>
-                        )}
+                        <div className="form-group">
+                            <label>End Date</label>
+                            <input
+                                type="date"
+                                name="endDate"
+                                min={formik.values.festivalDate || undefined}
+                                value={formik.values.endDate}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                            />
+                            {formik.touched.endDate && formik.errors.endDate && (
+                                <span className="error-text">{formik.errors.endDate}</span>
+                            )}
+                        </div>
                     </div>
-                </div>
+                )}
+
+                {formik.values.activationMode === "automatic" && (
+                    <div className="form-group">
+                        <label>Festival Dates</label>
+                        <small>
+                            Festival dates will be fetched automatically from Google Calendar.
+                        </small>
+                    </div>
+                )}
 
                 <div className="form-group">
                     <label>Activation Mode</label>
                     <select
                         name="activationMode"
                         value={formik.values.activationMode}
-                        onChange={formik.handleChange}
+                        onChange={(e) => {
+                            formik.handleChange(e);
+
+                            if (e.target.value === "automatic") {
+                                formik.setFieldValue("festivalDate", "");
+                                formik.setFieldValue("endDate", "");
+                            }
+                        }}
                     >
                         <option value="automatic">Automatic</option>
                         <option value="manual">Manual</option>
@@ -276,10 +316,15 @@ const EditFestiveTheme = () => {
                         onChange={formik.handleChange}
                     >
                         <option value="none">None</option>
-                        <option value="fade">Fade</option>
-                        <option value="slide">Slide</option>
-                        <option value="zoom">Zoom</option>
+                        <option value="diya-glow">Diya Glow</option>
                         <option value="sparkle">Sparkle</option>
+                        <option value="fade">Fade</option>
+                        <option value="snowfall">Snowfall</option>
+                        <option value="twinkle">Twinkle</option>
+                        <option value="slide">Slide</option>
+                        <option value="confetti">Confetti</option>
+                        <option value="gold-glow">Gold Glow</option>
+                        <option value="zoom">Zoom</option>
                     </select>
                 </div>
 

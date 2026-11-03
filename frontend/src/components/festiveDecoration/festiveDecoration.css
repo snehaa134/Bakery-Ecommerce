@@ -1,86 +1,210 @@
+
 .festive-decoration {
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+    height: 50px;
     overflow: hidden;
-    background: linear-gradient(120deg,
-            #800f4b,
-            #a11509,
-            #f2c668,
-            #b11778,
-            #cc3887);
-    border-bottom: 1px solid #e8c77f;
+    pointer-events: none;
+    z-index: 3;
 }
 
-.floating-diya {
-    position: relative;
-    z-index: 1;
-    width: 38px;
-    height: 38px;
-    object-fit: contain;
-    animation: diyaFloat 3s ease-in-out infinite alternate,
-        diyaGlow 2s ease-in-out infinite alternate;
+.festive-decoration.diya-glow {
+    background: linear-gradient(
+        90deg,
+        #b60764,
+        #77232a,
+        #ffb347,
+        #cd4a71,
+        #7b2d0b
+    );
+    border-bottom: 1px solid #ffd700;
 }
 
-@keyframes diyaFloat {
-    from {
-        transform: translateY(3px);
-    }
-
-    to {
-        transform: translateY(-4px);
-    }
+.festive-decoration.snowfall {
+    background: linear-gradient(
+        90deg,
+        #09203f,
+        #285b83,
+        #5da9d6,
+        #285b83,
+        #09203f
+    );
+    border-bottom: 1px solid #bdeaff;
 }
 
-.sparkles {
+.festive-decoration.confetti {
+    background: linear-gradient(
+        90deg,
+        #3d087b,
+        #8e24aa,
+        #e040fb,
+        #8e24aa,
+        #3d087b
+    );
+    border-bottom: 1px solid #ffd700;
+}
+
+.festive-decoration.twinkle {
+    background: linear-gradient(
+        90deg,
+        #141e30,
+        #243b55,
+        #3a6073,
+        #243b55,
+        #141e30
+    );
+    border-bottom: 1px solid #ffd700;
+}
+
+.diwali-sparkles {
     position: absolute;
     inset: 0;
-    pointer-events: none;
-    z-index: 0;
+    width: 100%;
+    height: 100%;
 }
 
-.sparkle {
+.diya-item {
     position: absolute;
-    color: #d99a28;
-    opacity: 0;
-    animation: sparkleTwinkle 2.5s ease-in-out infinite;
+    top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: diyaGlow 2s ease-in-out infinite;
 }
 
-@keyframes sparkleTwinkle {
+.diya-item img {
+    width: 35px;
+    height: 40px;
+    object-fit: contain;
+}
 
-    0%,
-    100% {
-        opacity: 0;
-        transform: scale(0.5);
-    }
+.sparkle-item {
+    position: absolute;
+    display: flex;
+    color: #fff176;
+    font-size: 11px;
+    animation: sparkleTwinkle 1.5s ease-in-out infinite;
+}
 
-    50% {
-        opacity: 0.8;
-        transform: scale(1.2);
-        text-shadow: 0 0 8px gold;
-    }
+.diya-glow .sparkle-item {
+    color: #ffd700;
+}
+
+.twinkle .sparkle-item {
+    color: #fff176;
 }
 
 @keyframes diyaGlow {
-    from {
+    0%, 100% {
+        opacity: 0.6;
+        transform: translateY(0) scale(0.9);
         filter: drop-shadow(0 0 3px orange);
     }
 
-    to {
-        filter: drop-shadow(0 0 10px gold);
+    50% {
+        opacity: 1;
+        transform: translateY(-2px) scale(1.15);
+        filter: drop-shadow(0 0 8px gold);
     }
 }
 
-@media (max-width: 480px) {
-    .festive-decoration {
-        height: 40px;
+@keyframes sparkleTwinkle {
+    0%, 100% {
+        opacity: 0.2;
+        transform: scale(0.5) rotate(0deg);
     }
 
-    .floating-diya {
-        width: 30px;
-        height: 30px;
+    50% {
+        opacity: 1;
+        transform: scale(1.4) rotate(45deg);
+        filter: drop-shadow(0 0 5px gold);
+    }
+}
+
+.christmas-snow {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.christmas-snow span {
+    position: absolute;
+    top: -15px;
+    color: #ffffff;
+    font-size: 14px;
+    animation: snowFall linear infinite;
+}
+
+@keyframes snowFall {
+    0% {
+        transform: translateY(-15px) rotate(0deg);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(40px) rotate(180deg);
+        opacity: 0;
+    }
+}
+
+.newyear-confetti {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.newyear-confetti span {
+    position: absolute;
+    top: 5px;
+    width: 5px;
+    height: 5px;
+    background: #ffd700;
+    border-radius: 50%;
+    animation: confettiGlow 2s ease-in-out infinite;
+}
+
+@keyframes confettiGlow {
+    0%, 100% {
+        opacity: 0.2;
+        transform: translateY(0) scale(0.5);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateY(5px) scale(1.3);
+    }
+}
+
+@media (max-width: 768px) {
+    .festive-decoration {
+        height: 22px;
+    }
+
+    .diya-item img {
+        width: 16px;
+        height: 16px;
+    }
+
+    .sparkle-item {
+        font-size: 9px;
+    }
+
+    .christmas-snow span {
+        font-size: 11px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .festive-decoration span,
+    .festive-decoration svg {
+        animation: none;
     }
 }

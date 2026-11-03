@@ -6,6 +6,7 @@ import { useContext, useState } from "react";
 import { GiCupcake } from "react-icons/gi";
 import { AuthContext } from "../../authContext/authContext";
 import { useGetCartQuery } from "../../servicesApis/cartServices/cartServices";
+import FestiveDecorations from "../festiveDecoration/festiveDecoration";
 
 const Navbar = () => {
     const { user, isLoggedIn } = useContext(AuthContext);
@@ -14,6 +15,7 @@ const Navbar = () => {
     const { data } = useGetCartQuery();
 
     const items = data?.data?.items || [];
+
     const cartCount = items.reduce(
         (total, item) => total + item.quantity,
         0
@@ -53,52 +55,61 @@ const Navbar = () => {
     }
 
     return (
-        <div className="main_navbar">
-            <div className="left">
-                <div className="image">
-                    <Link to="/" className="navbar-logo">
-                        <h2>
-                            <GiCupcake />
-                            Bakery Bliss
-                        </h2>
-                    </Link>
+        <div className="navbar-wrapper">
+
+            <FestiveDecorations />
+
+            <div className="main_navbar">
+
+                <div className="left">
+                    <div className="image">
+                        <Link to="/" className="navbar-logo">
+                            <h2>
+                                <GiCupcake />
+                                Bakery Bliss
+                            </h2>
+                        </Link>
+                    </div>
                 </div>
-            </div>
 
-            <div className="center">
-                <Link to="/">Home</Link>
-                <Link to="/products">Shop</Link>
-                <Link to="/about-us">About Us</Link>
-            </div>
+                <div className="center">
+                    <Link to="/">Home</Link>
+                    <Link to="/products">Shop</Link>
+                    <Link to="/about-us">About Us</Link>
+                </div>
 
-            <div className="right">
-                <form className="search" onSubmit={handleSearch}>
-                    <input
-                        type="text"
-                        placeholder="Search Products"
-                        value={search}
-                        onChange={(e) => setSearch(e.target.value)}
-                    />
+                <div className="right">
+                    <form className="search" onSubmit={handleSearch}>
+                        <input
+                            type="text"
+                            placeholder="Search Products"
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                        />
 
-                    <button type="submit">
-                        <FaSearch />
-                    </button>
-                </form>
+                        <button type="submit">
+                            <FaSearch />
+                        </button>
+                    </form>
 
-                <Link to="/cart" className="cart-icon">
-                    <FaCartPlus />
-                    {cartCount > 0 && (
-                        <span className="cart-count">{cartCount}</span>
+                    <Link to="/cart" className="cart-icon">
+                        <FaCartPlus />
+                        {cartCount > 0 && (
+                            <span className="cart-count">
+                                {cartCount}
+                            </span>
+                        )}
+                    </Link>
+
+                    {isLoggedIn ? (
+                        <Link to="/profile">Profile</Link>
+                    ) : (
+                        <button onClick={() => navigate("/login")}>
+                            Login
+                        </button>
                     )}
-                </Link>
+                </div>
 
-                {isLoggedIn ? (
-                    <Link to="/profile">Profile</Link>
-                ) : (
-                    <button onClick={() => navigate("/login")}>
-                        Login
-                    </button>
-                )}
             </div>
         </div>
     );

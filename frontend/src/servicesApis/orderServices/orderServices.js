@@ -12,7 +12,6 @@ export const orderServices = createApi({
     tagTypes: ["Orders"],
 
     endpoints: (builder) => ({
-        // Create order
         createOrder: builder.mutation({
             query: (orderData) => ({
                 url: "/create-order",
@@ -22,25 +21,38 @@ export const orderServices = createApi({
             invalidatesTags: ["Orders"],
         }),
 
-        // Get logged-in user's orders
+        createRazorpayOrder: builder.mutation({
+            query: (orderData) => ({
+                url: "/create-razorpay-order",
+                method: "POST",
+                body: orderData,
+            }),
+        }),
+
+        verifyRazorpayPayment: builder.mutation({
+            query: (paymentData) => ({
+                url: "/verify-razorpay-payment",
+                method: "POST",
+                body: paymentData,
+            }),
+            invalidatesTags: ["Orders"],
+        }),
+
         getMyOrders: builder.query({
             query: () => "/my-orders",
             providesTags: ["Orders"],
         }),
 
-        // Get one specific order for the receipt
         getOrderById: builder.query({
             query: (orderId) => `/get-order/${orderId}`,
             providesTags: ["Orders"],
         }),
 
-        // Admin: Get all orders
         getOrders: builder.query({
             query: () => "/get-orders",
             providesTags: ["Orders"],
         }),
 
-        // Admin: Update order status
         updateOrderStatus: builder.mutation({
             query: ({ id, status }) => ({
                 url: `/update-order-status/${id}`,
@@ -54,6 +66,8 @@ export const orderServices = createApi({
 
 export const {
     useCreateOrderMutation,
+    useCreateRazorpayOrderMutation,
+    useVerifyRazorpayPaymentMutation,
     useGetMyOrdersQuery,
     useGetOrderByIdQuery,
     useGetOrdersQuery,

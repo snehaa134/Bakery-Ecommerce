@@ -1,21 +1,20 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useAddFestiveThemeMutation} from "../../servicesApis/festiveThemeServices/festiveThemeService";
+import { useAddFestiveThemeMutation } from "../../servicesApis/festiveThemeServices/festiveThemeService";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "../addFestiveTheme/addFestiveTheme.css";
 
 const AddFestiveTheme = () => {
-
     const navigate = useNavigate();
+    const [showPreview, setShowPreview] = useState(false);
 
     const [addFestiveTheme, { isLoading }] =
         useAddFestiveThemeMutation();
 
     const formik = useFormik({
-
         initialValues: {
             festivalName: "",
             primaryColor: "#E91E63",
@@ -31,34 +30,36 @@ const AddFestiveTheme = () => {
         },
 
         validationSchema: Yup.object({
-
             festivalName: Yup.string()
                 .trim()
                 .required("Festival name is required"),
 
             primaryColor: Yup.string()
-                .matches(
-                    /^#[0-9A-Fa-f]{6}$/,
-                    "Enter a valid hex color"
-                )
+                .matches(/^#[0-9A-Fa-f]{6}$/, "Enter a valid hex color")
                 .required("Primary color is required"),
 
             secondaryColor: Yup.string()
-                .matches(
-                    /^#[0-9A-Fa-f]{6}$/,
-                    "Enter a valid hex color"
-                )
+                .matches(/^#[0-9A-Fa-f]{6}$/, "Enter a valid hex color")
                 .required("Secondary color is required"),
 
-            festivalDate: Yup.date()
-                .required("Festival date is required"),
+            festivalDate: Yup.date().when("activationMode", {
+                is: "manual",
+                then: (schema) =>
+                    schema.required("Festival date is required"),
+                otherwise: (schema) => schema.notRequired()
+            }),
 
-            endDate: Yup.date()
-                .required("End date is required")
-                .min(
-                    Yup.ref("festivalDate"),
-                    "End date cannot be before festival date"
-                ),
+            endDate: Yup.date().when("activationMode", {
+                is: "manual",
+                then: (schema) =>
+                    schema
+                        .required("End date is required")
+                        .min(
+                            Yup.ref("festivalDate"),
+                            "End date cannot be before festival date"
+                        ),
+                otherwise: (schema) => schema.notRequired()
+            }),
 
             activationMode: Yup.string()
                 .oneOf(["automatic", "manual"])
@@ -90,50 +91,52 @@ const AddFestiveTheme = () => {
                     "zoom"
                 ])
                 .required("Animation type is required")
-
         }),
 
         onSubmit: async (values, { resetForm }) => {
-
             try {
-
                 const slug = values.festivalName
                     .toLowerCase()
                     .trim()
                     .replace(/\s+/g, "-");
 
-                const response = await addFestiveTheme({
+                const payload = {
                     ...values,
                     slug,
                     isManuallyActive: false
-                }).unwrap();
+                };
+
+                if (values.activationMode === "automatic") {
+                    delete payload.festivalDate;
+                    delete payload.endDate;
+                }
+
+                const response = await addFestiveTheme(payload).unwrap();
 
                 toast.success(
-                    response.message ||
-                    "Festive theme added successfully"
+                    response.message || "Festive theme added successfully"
                 );
 
                 resetForm();
-
                 navigate("/manage-festive-themes");
 
             } catch (error) {
-
                 toast.error(
-                    error?.data?.message ||
-                    "Unable to add festive theme"
+                    error?.data?.message || "Unable to add festive theme"
                 );
-
             }
         }
     });
 
     const handleColorChange = (e) => {
-
         const { name, value } = e.target;
-
         formik.setFieldValue(name, value);
     };
+
+    const festivalSlug = formik.values.festivalName
+        .toLowerCase()
+        .trim()
+        .replace(/\s+/g, "-");
 
     return (
         <div className="add-festive-page">
@@ -149,9 +152,7 @@ const AddFestiveTheme = () => {
                 <button
                     type="button"
                     className="festive-back-btn"
-                    onClick={() =>
-                        navigate("/manage-festive-themes")
-                    }
+                    onClick={() => navigate("/manage-festive-themes")}
                 >
                     Back to Themes
                 </button>
@@ -163,7 +164,6 @@ const AddFestiveTheme = () => {
             >
 
                 <div className="festive-form-section">
-
                     <h3>Festival Information</h3>
 
                     <div className="festive-form-grid">
@@ -193,10 +193,7 @@ const AddFestiveTheme = () => {
 
                             <input
                                 type="text"
-                                value={formik.values.festivalName
-                                    .toLowerCase()
-                                    .trim()
-                                    .replace(/\s+/g, "-")}
+                                value={festivalSlug}
                                 placeholder="diwali"
                                 readOnly
                             />
@@ -206,50 +203,64 @@ const AddFestiveTheme = () => {
                             </small>
                         </div>
 
-                        <div className="festive-field">
-                            <label>Festival Date</label>
+                        {formik.values.activationMode === "manual" && (
+                            <>
+                                <div className="festive-field">
+                                    <label>Festival Date</label>
 
-                            <input
-                                type="date"
-                                name="festivalDate"
-                                value={formik.values.festivalDate}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                            />
+                                    <input
+                                        type="date"
+                                        name="festivalDate"
+                                        value={formik.values.festivalDate}
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                    />
 
-                            {formik.touched.festivalDate &&
-                                formik.errors.festivalDate && (
-                                    <small>
-                                        {formik.errors.festivalDate}
-                                    </small>
-                                )}
-                        </div>
+                                    {formik.touched.festivalDate &&
+                                        formik.errors.festivalDate && (
+                                            <small>
+                                                {formik.errors.festivalDate}
+                                            </small>
+                                        )}
+                                </div>
 
-                        <div className="festive-field">
-                            <label>End Date</label>
+                                <div className="festive-field">
+                                    <label>End Date</label>
 
-                            <input
-                                type="date"
-                                name="endDate"
-                                min={formik.values.festivalDate || undefined}
-                                value={formik.values.endDate}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                            />
+                                    <input
+                                        type="date"
+                                        name="endDate"
+                                        min={formik.values.festivalDate || undefined}
+                                        value={formik.values.endDate}
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                    />
 
-                            {formik.touched.endDate &&
-                                formik.errors.endDate && (
-                                    <small>
-                                        {formik.errors.endDate}
-                                    </small>
-                                )}
-                        </div>
+                                    {formik.touched.endDate &&
+                                        formik.errors.endDate && (
+                                            <small>
+                                                {formik.errors.endDate}
+                                            </small>
+                                        )}
+                                </div>
+                            </>
+                        )}
+
+                        {formik.values.activationMode === "automatic" && (
+                            <div className="festive-field">
+                                <label>Festival Dates</label>
+
+                                <small>
+                                    Festival dates will be fetched automatically
+                                    from Google Calendar.
+                                </small>
+                            </div>
+                        )}
 
                     </div>
                 </div>
 
                 <div className="festive-form-section">
-
                     <h3>Theme Colors</h3>
 
                     <div className="festive-form-grid">
@@ -258,7 +269,6 @@ const AddFestiveTheme = () => {
                             <label>Primary Color</label>
 
                             <div className="festive-color-input">
-
                                 <input
                                     type="color"
                                     name="primaryColor"
@@ -269,7 +279,6 @@ const AddFestiveTheme = () => {
                                 <span>
                                     {formik.values.primaryColor}
                                 </span>
-
                             </div>
 
                             {formik.touched.primaryColor &&
@@ -284,7 +293,6 @@ const AddFestiveTheme = () => {
                             <label>Secondary Color</label>
 
                             <div className="festive-color-input">
-
                                 <input
                                     type="color"
                                     name="secondaryColor"
@@ -295,7 +303,6 @@ const AddFestiveTheme = () => {
                                 <span>
                                     {formik.values.secondaryColor}
                                 </span>
-
                             </div>
 
                             {formik.touched.secondaryColor &&
@@ -310,7 +317,6 @@ const AddFestiveTheme = () => {
                 </div>
 
                 <div className="festive-form-section">
-
                     <h3>Activation Settings</h3>
 
                     <div className="festive-form-grid">
@@ -321,15 +327,17 @@ const AddFestiveTheme = () => {
                             <select
                                 name="activationMode"
                                 value={formik.values.activationMode}
-                                onChange={formik.handleChange}
-                            >
-                                <option value="automatic">
-                                    Automatic
-                                </option>
+                                onChange={(e) => {
+                                    formik.handleChange(e);
 
-                                <option value="manual">
-                                    Manual
-                                </option>
+                                    if (e.target.value === "automatic") {
+                                        formik.setFieldValue("festivalDate", "");
+                                        formik.setFieldValue("endDate", "");
+                                    }
+                                }}
+                            >
+                                <option value="automatic">Automatic</option>
+                                <option value="manual">Manual</option>
                             </select>
                         </div>
 
@@ -430,45 +438,45 @@ const AddFestiveTheme = () => {
                                 <option value="gold-glow">Gold Glow</option>
                                 <option value="zoom">Zoom</option>
                             </select>
+
+                            {formik.touched.animationType &&
+                                formik.errors.animationType && (
+                                    <small>
+                                        {formik.errors.animationType}
+                                    </small>
+                                )}
                         </div>
 
                     </div>
                 </div>
 
                 <div className="festive-preview">
-
                     <h3>Theme Color Preview</h3>
 
                     <div
                         className="festive-preview-card"
                         style={{
-                            backgroundColor:
-                                formik.values.secondaryColor,
-
-                            borderColor:
-                                formik.values.primaryColor
+                            backgroundColor: formik.values.secondaryColor,
+                            borderColor: formik.values.primaryColor
                         }}
                     >
-
                         <h3
                             style={{
                                 color: formik.values.primaryColor
                             }}
                         >
-                            {formik.values.festivalName ||
-                                "Your Festival"}
+                            {formik.values.festivalName || "Your Festival"}
                         </h3>
 
                         <button
                             type="button"
                             style={{
-                                backgroundColor:
-                                    formik.values.primaryColor
+                                backgroundColor: formik.values.primaryColor
                             }}
+                            onClick={() => setShowPreview(true)}
                         >
-                            Explore Collection
+                           Preview Theam
                         </button>
-
                     </div>
                 </div>
 
@@ -477,9 +485,7 @@ const AddFestiveTheme = () => {
                     <button
                         type="button"
                         className="festive-cancel-btn"
-                        onClick={() =>
-                            navigate("/admin/manage-festive-themes")
-                        }
+                        onClick={() => navigate("/manage-festive-themes")}
                     >
                         Cancel
                     </button>
@@ -489,14 +495,111 @@ const AddFestiveTheme = () => {
                         className="festive-submit-btn"
                         disabled={isLoading}
                     >
-                        {isLoading
-                            ? "Creating..."
-                            : "Create Festive Theme"}
+                        {isLoading ? "Creating..." : "Create Festive Theme"}
                     </button>
 
                 </div>
 
             </form>
+
+            {showPreview && (
+                <div
+                    className="festive-preview-overlay"
+                    onClick={() => setShowPreview(false)}
+                >
+                    <div
+                        className="festive-preview-modal"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <button
+                            type="button"
+                            className="festive-preview-close"
+                            onClick={() => setShowPreview(false)}
+                            aria-label="Close preview"
+                        >
+                            &times;
+                        </button>
+
+                        <p className="festive-preview-label">
+                            BAKERY BLISS FESTIVE PREVIEW
+                        </p>
+
+                        <div
+                            className="festive-preview-live"
+                            style={{
+                                backgroundColor: formik.values.secondaryColor,
+                                borderColor: formik.values.primaryColor
+                            }}
+                        >
+                            <span
+                                className="festive-preview-dot"
+                                style={{
+                                    backgroundColor: formik.values.primaryColor
+                                }}
+                            />
+
+                            <h2 style={{ color: formik.values.primaryColor }}>
+                                {formik.values.festivalName || "Your Festival"}
+                            </h2>
+
+                            <p style={{ color: formik.values.primaryColor }}>
+                                Celebrate the season with Bakery Bliss
+                            </p>
+
+                            {/* <button
+                                type="button"
+                                style={{
+                                    backgroundColor: formik.values.primaryColor
+                                }}
+                            >
+                                Explore Collection
+                            </button> */}
+                        </div>
+
+                        <div className="festive-preview-swatch-row">
+                            <div>
+                                <span
+                                    style={{
+                                        backgroundColor: formik.values.primaryColor
+                                    }}
+                                />
+
+                                <small>Primary</small>
+                                <strong>{formik.values.primaryColor}</strong>
+                            </div>
+
+                            <div>
+                                <span
+                                    style={{
+                                        backgroundColor: formik.values.secondaryColor
+                                    }}
+                                />
+
+                                <small>Secondary</small>
+                                <strong>{formik.values.secondaryColor}</strong>
+                            </div>
+                        </div>
+
+                        <p className="festive-preview-animation">
+                            Animation: <strong>{formik.values.animationType}</strong>
+                        </p>
+
+                        <p className="festive-preview-note">
+                            This is only a preview. Your theme will be saved
+                            when you click Create Festive Theme.
+                        </p>
+
+                        <button
+                            type="button"
+                            className="festive-preview-done"
+                            onClick={() => setShowPreview(false)}
+                        >
+                            Back to Form
+                        </button>
+                    </div>
+                </div>
+            )}
+
         </div>
     );
 };

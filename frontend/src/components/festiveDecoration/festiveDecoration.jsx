@@ -1,49 +1,100 @@
+
 import { useTheme } from "../../festiveThemeContext/festiveThemeContext";
-import diya from "../../assets/images/diya.png";
 import "../festiveDecoration/festiveDecoration.css";
+import { FaMagic, FaSnowflake, FaStar } from "react-icons/fa";
+import diya from "../../assets/images/diya.png";
 
 const FestiveDecorations = () => {
     const { activeTheme } = useTheme();
 
-    if (!activeTheme || activeTheme.animationType !== "diya-glow") {
+    if (!activeTheme || activeTheme.animationType === "none") {
         return null;
     }
 
-    const sparkles = Array.from({ length: 22 }, (_, index) => ({
-        id: index,
-        left: `${(index * 37 + 13) % 100}%`,
-        top: `${(index * 53 + 17) % 100}%`,
-        delay: `${(index % 7) * 0.4}s`,
-        size: `${9 + (index % 3) * 3}px`,
-    }));
+    const animationType = activeTheme.animationType;
 
     return (
-        <div className="festive-decoration">
+        <div className={`festive-decoration ${animationType}`}>
 
-            <div className="sparkles">
-                {sparkles.map((sparkle) => (
-                    <span
-                        key={sparkle.id}
-                        className="sparkle"
-                        style={{
-                            left: sparkle.left,
-                            top: sparkle.top,
-                            animationDelay: sparkle.delay,
-                            fontSize: sparkle.size,
-                        }}
-                    >
-                        ✦
-                    </span>
-                ))}
-            </div>
-            {[1, 2, 3,4,5].map((item) => (
-                <img
-                    key={item}
-                    src={diya}
-                    alt="Diya"
-                    className={`floating-diya diya-${item}`}
-                />
-            ))} 
+            {animationType === "diya-glow" && (
+                <div className="diwali-sparkles">
+                    {Array.from({ length: 5 }, (_, i) => (
+                        <span
+                            key={`diya-${i}`}
+                            className="diya-item"
+                            style={{
+                                left: `${10 + i * 20}%`,
+                                animationDelay: `${i * 0.4}s`
+                            }}
+                        >
+                            <img src={diya} alt="Diya" />
+                        </span>
+                    ))}
+
+                    {Array.from({ length: 25 }, (_, i) => (
+                        <span
+                            key={`sparkle-${i}`}
+                            className="sparkle-item"
+                            style={{
+                                left: `${(i * 17) % 100}%`,
+                                top: `${2 + (i % 3) * 6}px`,
+                                animationDelay: `${i * 0.15}s`
+                            }}
+                        >
+                           <FaStar/>
+                        </span>
+                    ))}
+                </div>
+            )}
+
+            {animationType === "snowfall" && (
+                <div className="christmas-snow">
+                    {Array.from({ length: 15 }, (_, i) => (
+                        <span
+                            key={i}
+                            style={{
+                                left: `${i * 7}%`,
+                                animationDelay: `${i * 0.5}s`,
+                                animationDuration: `${4 + (i % 4)}s`
+                            }}
+                        >
+                            <FaSnowflake />
+                        </span>
+                    ))}
+                </div>
+            )}
+
+            {animationType === "confetti" && (
+                <div className="newyear-confetti">
+                    {Array.from({ length: 15 }, (_, i) => (
+                        <span
+                            key={i}
+                            style={{
+                                left: `${i * 7}%`,
+                                animationDelay: `${i * 0.4}s`
+                            }}
+                        />
+                    ))}
+                </div>
+            )}
+
+            {animationType === "twinkle" && (
+                <div className="diwali-sparkles">
+                    {Array.from({ length: 25 }, (_, i) => (
+                        <span
+                            key={i}
+                            className="sparkle-item"
+                            style={{
+                                left: `${(i * 17) % 100}%`,
+                                top: `${2 + (i % 3) * 6}px`,
+                                animationDelay: `${i * 0.15}s`
+                            }}
+                        >
+                            <FaStar />
+                        </span>
+                    ))}
+                </div>
+            )}
 
         </div>
     );

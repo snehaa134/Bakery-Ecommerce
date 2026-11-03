@@ -178,9 +178,9 @@ const OrderReceipt = () => {
                         <span>Payment Method</span>
 
                         <strong>
-                            {order.paymentMethod === "COD"
-                                ? "Cash on Delivery"
-                                : order.paymentMethod || "Cash on Delivery"}
+                            {order.paymentMethod === "RAZORPAY"
+                                ? "Razorpay"
+                                : "Cash on Delivery"}
                         </strong>
                     </div>
 
@@ -191,6 +191,17 @@ const OrderReceipt = () => {
                             {order.paymentStatus || "PENDING"}
                         </strong>
                     </div>
+
+                    {order.paymentMethod === "RAZORPAY" &&
+                        order.razorpayPaymentId && (
+                            <div>
+                                <span>Payment ID</span>
+
+                                <strong>
+                                    {order.razorpayPaymentId}
+                                </strong>
+                            </div>
+                        )}
 
                 </div>
 
@@ -309,7 +320,11 @@ const OrderReceipt = () => {
                     </div>
 
                     <p className="receipt-payment-note">
-                        Payment due on delivery (COD).
+                        {order.paymentMethod === "RAZORPAY"
+                            ? order.paymentStatus === "PAID"
+                                ? "Payment successfully completed through Razorpay."
+                                : `Payment Status: ${order.paymentStatus}`
+                            : "Pay the total amount in cash upon delivery."}
                     </p>
 
                 </div>
@@ -330,7 +345,7 @@ const OrderReceipt = () => {
 
                     <button
                         className="receipt-print-btn"
-                      onClick={()=>window.print()}
+                        onClick={() => window.print()}
                     >
                         Print Receipt
                     </button>

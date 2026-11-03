@@ -1,4 +1,5 @@
 
+import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useGetCartQuery } from "../../servicesApis/cartServices/cartServices";
@@ -6,13 +7,43 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import formatPrice from "../../utils/formatPrice";
 import "../checkout/checkout.css";
-import { useCreateOrderMutation } from "../../servicesApis/orderServices/orderServices";
+import {
+    useCreateOrderMutation,
+    useCreateRazorpayOrderMutation,
+    useVerifyRazorpayPaymentMutation
+} from "../../servicesApis/orderServices/orderServices";
+
+const loadRazorpayScript = () => {
+    return new Promise((resolve) => {
+        if (window.Razorpay) {
+            resolve(true);
+            return;
+        }
+
+        const script = document.createElement("script");
+        script.src = "https://checkout.razorpay.com/v1/checkout.js";
+
+        script.onload = () => resolve(true);
+        script.onerror = () => resolve(false);
+
+        document.body.appendChild(script);
+    });
+};
+
+
 
 const Checkout = () => {
     const { data, isLoading, isError } = useGetCartQuery();
 
     const [createOrder, { isLoading: isPlacingOrder }] =
         useCreateOrderMutation();
+
+    const [createRazorpayOrder] = useCreateRazorpayOrderMutation();
+
+    const [verifyRazorpayPayment] = useVerifyRazorpayPaymentMutation();
+
+    const [paymentMethod, setPaymentMethod] = useState("COD");
+    const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 
     const navigate = useNavigate();
 
@@ -81,31 +112,137 @@ const Checkout = () => {
                 return;
             }
 
-            try {
-                const response = await createOrder({
-                    ...values,
-                    paymentMethod: "COD"
-                }).unwrap();
+            if (paymentMethod === "COD") {
+                try {
+                    const response = await createOrder({
+                        ...values,
+                        paymentMethod: "COD"
+                    }).unwrap();
 
-                const orderId = response?.data?._id;
+                    const orderId = response?.data?._id;
 
-                if (!orderId) {
-                    toast.error(
-                        "Order ID was not returned. Please check My Orders."
+                    if (!orderId) {
+                        toast.error(
+                            "Order ID was not returned. Please check My Orders."
+                        );
+                        return;
+                    }
+
+                    toast.success(
+                        response?.message || "Order placed successfully!"
                     );
+
+                    navigate(`/order-receipt/${orderId}`);
+                } catch (error) {
+                    toast.error(
+                        error?.data?.message ||
+                        "Failed to place order. Please try again."
+                    );
+                }
+
+                return;
+            }
+
+
+
+            setIsProcessingPayment(true);
+
+            try {
+                const isScriptLoaded = await loadRazorpayScript();
+
+                if (!isScriptLoaded) {
+                    toast.error("Razorpay SDK failed to load. Please try again.");
                     return;
                 }
 
-                toast.success(
-                    response?.message || "Order placed successfully!"
-                );
+                const response = await createRazorpayOrder(values).unwrap();
 
-                navigate(`/order-receipt/${orderId}`);
+                const razorpayData = response?.data;
+
+                if (!razorpayData?.razorpayOrderId || !razorpayData?.key) {
+                    toast.error("Unable to create Razorpay order.");
+                    return;
+                }
+
+                const options = {
+                    key: razorpayData.key,
+                    amount: razorpayData.amount,
+                    currency: razorpayData.currency,
+                    name: "Bakery Bliss",
+                    description: "Bakery Bliss Order Payment",
+                    order_id: razorpayData.razorpayOrderId,
+
+                    prefill: {
+                        name: values.fullName,
+                        email: values.email,
+                        contact: values.phone
+                    },
+
+                    theme: {
+                        color: "#e66759"
+                    },
+
+                    handler: async (paymentResponse) => {
+                        try {
+                            const verifyResponse = await verifyRazorpayPayment({
+                                ...paymentResponse,
+                                shippingAddress: values
+                            }).unwrap();
+
+                            const orderId = verifyResponse?.data?._id;
+
+                            if (!orderId) {
+                                toast.error(
+                                    "Payment received, but order confirmation is pending. Please contact support."
+                                );
+                                return;
+                            }
+
+                            toast.success("Payment successful! Order placed.");
+
+                            navigate(`/order-receipt/${orderId}`);
+                        } catch (error) {
+                            toast.error(
+                                error?.data?.message ||
+                                "Payment verification failed. Please contact support if money was deducted."
+                            );
+                        } finally {
+                            setIsProcessingPayment(false);
+                        }
+                    },
+
+
+
+                    modal: {
+                        ondismiss: () => {
+                            setIsProcessingPayment(false);
+                            toast.info("Payment was cancelled.");
+                        }
+                    }
+                };
+
+                const razorpay = new window.Razorpay(options);
+
+                razorpay.on("payment.failed", (paymentResponse) => {
+                    setIsProcessingPayment(false);
+
+                    toast.error(
+                        paymentResponse?.error?.description ||
+                        "Payment failed. Please try again."
+                    );
+                });
+
+                razorpay.open();
+
+
+
             } catch (error) {
                 toast.error(
                     error?.data?.message ||
-                    "Failed to place order. Please try again."
+                    "Unable to start payment. Please try again."
                 );
+
+                setIsProcessingPayment(false);
             }
         }
     });
@@ -262,8 +399,9 @@ const Checkout = () => {
                             <input
                                 type="radio"
                                 name="paymentMethod"
-                                checked
-                                readOnly
+                                value="COD"
+                                checked={paymentMethod === "COD"}
+                                onChange={() => setPaymentMethod("COD")}
                             />
 
                             <label>
@@ -272,16 +410,35 @@ const Checkout = () => {
                             </label>
                         </div>
 
+                        <div className="payment-option">
+                            <input
+                                type="radio"
+                                name="paymentMethod"
+                                value="RAZORPAY"
+                                checked={paymentMethod === "RAZORPAY"}
+                                onChange={() => setPaymentMethod("RAZORPAY")}
+                            />
+
+                            <label>
+                                <strong>Pay Online (Razorpay)</strong>
+                                <span>Pay securely using UPI, Card or Net Banking</span>
+                            </label>
+                        </div>
+
                         <button
                             type="submit"
                             className="place-order-btn"
                             disabled={
-                                formik.isSubmitting || isPlacingOrder
+                                formik.isSubmitting ||
+                                isPlacingOrder ||
+                                isProcessingPayment
                             }
                         >
-                            {isPlacingOrder
-                                ? "Placing Order..."
-                                : "Place Order"}
+                            {isPlacingOrder || isProcessingPayment
+                                ? "Processing..."
+                                : paymentMethod === "COD"
+                                    ? "Place Order"
+                                    : "Pay Now"}
                         </button>
                     </div>
                 </form>
@@ -342,7 +499,9 @@ const Checkout = () => {
                         </div>
 
                         <p className="message">
-                            Pay the total amount in cash upon delivery.
+                            {paymentMethod === "COD"
+                                ? "Pay the total amount in cash upon delivery."
+                                : "Complete your payment securely using Razorpay."}
                         </p>
 
                         <button

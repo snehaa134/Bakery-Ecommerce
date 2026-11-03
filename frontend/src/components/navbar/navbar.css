@@ -15,6 +15,15 @@
     z-index: 1000;
 }
 
+.navbar-wrapper {
+    position: relative;
+    padding-top: 50px;
+}
+
+.main_navbar {
+    position: relative;
+    z-index: 2;
+}
 .main_navbar .navbar-logo {
     text-decoration: none;
 }
@@ -203,7 +212,6 @@
     box-shadow: 0 7px 17px rgba(122, 41, 75, 0.30);
 }
 
-/* Admin Sidebar - unchanged */
 .admin-sidebar {
     width: 255px;
     height: 100vh;
@@ -263,89 +271,123 @@
     color: white;
 }
 
-@media (max-width: 1100px) {
+   @media (max-width: 768px) {
     .main_navbar {
-        padding: 13px 2%;
-        gap: 10px;
-    }
-
-    .main_navbar .navbar-logo h2 {
-        font-size: 24px;
-    }
-
-    .main_navbar .center {
-        gap: 3px;
-    }
-
-    .main_navbar .center a {
+        flex-wrap: nowrap;
+        justify-content: space-between;
         padding: 10px 12px;
-        font-size: 15px;
-    }
-
-    .main_navbar .right {
-        gap: 12px;
-    }
-
-    .main_navbar .search input {
-        width: 120px;
-    }
-}
-
-@media (max-width: 768px) {
-    .main_navbar {
-        flex-wrap: wrap;
-        justify-content: center;
-        padding: 13px 15px;
-        gap: 12px;
+        gap: 8px;
     }
 
     .main_navbar .left {
-        width: 100%;
-        justify-content: center;
+        width: auto;
+        flex-shrink: 0;
+    }
+
+    .main_navbar .navbar-logo h2 {
+        font-size: 19px;
+        gap: 5px;
+    }
+
+    .main_navbar .navbar-logo svg {
+        font-size: 25px;
     }
 
     .main_navbar .center {
-        justify-content: center;
-        width: 100%;
+        width: auto;
+        flex-wrap: nowrap;
+        gap: 2px;
+    }
+
+    .main_navbar .center a {
+        font-size: 13px;
+        padding: 8px 6px;
+        white-space: nowrap;
     }
 
     .main_navbar .right {
-        justify-content: center;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
+        gap: 8px;
+        flex-shrink: 0;
+    }
+
+    .main_navbar .search input {
+        width: 90px;
+        padding: 0 8px;
+    }
+
+    .main_navbar .search:focus-within input {
+        width: 100px;
+    }
+
+    .main_navbar .right > button {
+        padding: 8px 12px;
+        font-size: 12px;
+        white-space: nowrap;
+    }
+
+    .main_navbar .cart-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 21px;
     }
 }
 
 @media (max-width: 480px) {
     .main_navbar {
-        gap: 10px;
+        padding: 9px 7px;
+        gap: 4px;
     }
 
     .main_navbar .navbar-logo h2 {
-        font-size: 23px;
+        font-size: 15px;
+        gap: 3px;
     }
 
     .main_navbar .navbar-logo svg {
-        font-size: 30px;
+        font-size: 20px;
     }
 
     .main_navbar .center {
-        gap: 2px;
+        gap: 0;
     }
 
     .main_navbar .center a {
-        font-size: 14px;
-        padding: 9px 11px;
+        font-size: 10px;
+        padding: 7px 3px;
     }
 
     .main_navbar .right {
-        gap: 12px;
+        gap: 5px;
+    }
+
+    .main_navbar .search {
+        height: 32px;
     }
 
     .main_navbar .search input {
-        width: 125px;
+        width: 55px;
+        font-size: 10px;
+        padding: 0 5px;
+    }
+
+    .main_navbar .search button {
+        width: 30px;
+        font-size: 12px;
+    }
+
+    .main_navbar .cart-icon {
+        width: 29px;
+        height: 29px;
+        font-size: 17px;
     }
 
     .main_navbar .right > button {
-        padding: 9px 18px;
+        padding: 7px 8px;
+        font-size: 10px;
+    }
+
+    .main_navbar .right > a:not(.cart-icon) {
+        font-size: 11px;
     }
 }

@@ -1,4 +1,3 @@
-
 .add-festive-page {
     padding: 30px;
     margin-left: 255px;
@@ -225,9 +224,145 @@
     cursor: not-allowed;
 }
 
+/* Preview Popup */
+
+.festive-preview-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.festive-preview-modal {
+    position: relative;
+    background: #fff;
+    width: 100%;
+    max-width: 520px;
+    padding: 30px;
+    border-radius: 16px;
+    text-align: center;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.festive-preview-close {
+    position: absolute;
+    top: 10px;
+    right: 16px;
+    border: none;
+    background: transparent;
+    color: #71304c;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.festive-preview-label {
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #777;
+    margin: 0 25px 20px;
+}
+
+.festive-preview-live {
+    border: 2px solid;
+    border-radius: 14px;
+    padding: 35px 20px;
+}
+
+.festive-preview-live h2 {
+    font-size: 30px;
+    margin: 15px 0 8px;
+}
+
+.festive-preview-live p {
+    margin-bottom: 22px;
+}
+
+.festive-preview-dot {
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+.festive-preview-swatch-row {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 25px 0;
+    flex-wrap: wrap;
+}
+
+.festive-preview-swatch-row div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.festive-preview-swatch-row span {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+}
+
+.festive-preview-swatch-row small {
+    color: #777;
+}
+
+.festive-preview-swatch-row strong {
+    color: #71304c;
+    font-size: 13px;
+}
+
+.festive-preview-live button {
+    border: none;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.festive-preview-animation {
+    margin: 20px 0 10px;
+    color: #555;
+}
+
+.festive-preview-note {
+    font-size: 13px;
+    color: #777;
+    line-height: 1.5;
+}
+
+.festive-preview-done {
+    margin-top: 15px;
+    padding: 11px 25px;
+    border: none;
+    border-radius: 6px;
+    background: #e91e63;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.festive-preview-done:hover {
+    background: #c2185b;
+}
+
+/* Responsive Design */
+
 @media (max-width: 768px) {
     .add-festive-page {
         padding: 20px 15px;
+        margin-left: 0;
+        width: 100%;
     }
 
     .festive-form {
@@ -298,5 +433,21 @@
 
     .festive-preview-card h3 {
         font-size: 21px;
+    }
+
+    .festive-preview-modal {
+        padding: 25px 16px;
+    }
+
+    .festive-preview-live {
+        padding: 28px 12px;
+    }
+
+    .festive-preview-live h2 {
+        font-size: 24px;
+    }
+
+    .festive-preview-done {
+        width: 100%;
     }
 }

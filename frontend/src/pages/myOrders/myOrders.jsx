@@ -139,7 +139,9 @@ const MyOrders = () => {
                                     <span>Payment</span>
 
                                     <strong>
-                                        Cash on Delivery
+                                        {order.paymentMethod === "RAZORPAY"
+                                            ? "Razorpay"
+                                            : "Cash on Delivery"}
                                     </strong>
 
                                     <small>
@@ -156,7 +158,6 @@ const MyOrders = () => {
                                 </div>
                             </div>
 
-                            {/* View Receipt Button */}
                             <div className="order-receipt-actions">
                                 <Link
                                     to={`/order-receipt/${order._id}`}
