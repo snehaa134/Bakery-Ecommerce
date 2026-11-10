@@ -19,7 +19,10 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: [
+        "http://localhost:5173",
+        "https://bakery-ecommerce-gg91.vercel.app"
+    ],
     credentials: true
 }))
 
@@ -39,7 +42,7 @@ app.use("/uploads", express.static("uploads"));
 connectDb();
 
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
     console.log(`server running on PORT ${PORT}`)
