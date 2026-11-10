@@ -49,6 +49,7 @@ const AddFestiveTheme = () => {
                 otherwise: (schema) => schema.notRequired()
             }),
 
+
             endDate: Yup.date().when("activationMode", {
                 is: "manual",
                 then: (schema) =>
@@ -300,6 +301,9 @@ const AddFestiveTheme = () => {
                                     onChange={handleColorChange}
                                 />
 
+
+
+
                                 <span>
                                     {formik.values.secondaryColor}
                                 </span>
@@ -475,7 +479,7 @@ const AddFestiveTheme = () => {
                             }}
                             onClick={() => setShowPreview(true)}
                         >
-                           Preview Theam
+                            Preview Theam
                         </button>
                     </div>
                 </div>
@@ -503,12 +507,8 @@ const AddFestiveTheme = () => {
             </form>
 
             {showPreview && (
-                <div
-                    className="festive-preview-overlay"
-                    onClick={() => setShowPreview(false)}
-                >
-                    <div
-                        className="festive-preview-modal"
+                <div className="festive-preview-overlay" onClick={() => setShowPreview(false)} >
+                    <div className="festive-preview-modal"
                         onClick={(e) => e.stopPropagation()}
                     >
                         <button
@@ -545,6 +545,8 @@ const AddFestiveTheme = () => {
                             <p style={{ color: formik.values.primaryColor }}>
                                 Celebrate the season with Bakery Bliss
                             </p>
+
+
 
                             {/* <button
                                 type="button"

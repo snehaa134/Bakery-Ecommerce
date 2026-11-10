@@ -224,7 +224,7 @@
     cursor: not-allowed;
 }
 
-/* Preview Popup */
+
 
 .festive-preview-overlay {
     position: fixed;
@@ -356,45 +356,22 @@
     background: #c2185b;
 }
 
-/* Responsive Design */
+
 
 @media (max-width: 768px) {
     .add-festive-page {
-        padding: 20px 15px;
-        margin-left: 0;
-        width: 100%;
-    }
-
-    .festive-form {
-        padding: 22px 18px;
-    }
-
-    .festive-heading h2 {
-        font-size: 25px;
-    }
-
-    .festive-form-grid {
-        grid-template-columns: 1fr;
-        gap: 18px;
-    }
-
-    .festive-submit-area {
-        justify-content: flex-end;
-    }
-}
-
-@media (max-width: 480px) {
-    .add-festive-page {
-        padding: 15px 10px;
+        width: calc(100% - 255px);
+        margin-left: 255px;
+        padding: 80px 12px;
     }
 
     .festive-heading {
-        align-items: flex-start;
-        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 20px;
     }
 
     .festive-heading h2 {
-        font-size: 22px;
+        font-size: 23px;
     }
 
     .festive-heading p {
@@ -402,52 +379,215 @@
     }
 
     .festive-back-btn {
-        width: 100%;
+        padding: 9px 14px;
+        font-size: 12px;
     }
 
     .festive-form {
-        padding: 18px 13px;
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 20px 14px;
+    }
+
+    .festive-form-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .festive-form-section {
+        margin-bottom: 22px;
     }
 
     .festive-form-section > h3 {
         font-size: 17px;
     }
 
+    .festive-field label {
+        font-size: 13px;
+    }
+
     .festive-field input,
     .festive-field select {
+        padding: 10px;
         font-size: 13px;
-        padding: 11px;
+    }
+
+    .festive-submit-area {
+        gap: 10px;
+    }
+
+    .festive-submit-area button {
+        padding: 10px 15px;
+        font-size: 12px;
+    }
+
+    .festive-preview-card {
+        padding: 25px 12px;
+    }
+
+    .festive-preview-card h3 {
+        font-size: 20px;
+    }
+
+    .festive-preview-modal {
+        padding: 22px 14px;
+    }
+
+    .festive-preview-live h2 {
+        font-size: 23px;
+    }
+}
+
+
+
+@media (max-width: 480px) {
+    .add-festive-page {
+        width: calc(100% - 150px);
+        margin-left: 150px;
+        padding: 40px 7px;
+    }
+
+    .festive-heading {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+
+    .festive-heading h2 {
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+
+    .festive-heading p {
+        font-size: 11px;
+        line-height: 1.4;
+    }
+
+    .festive-back-btn {
+        width: 100%;
+        padding: 9px 5px;
+        font-size: 11px;
+    }
+
+    .festive-form {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 14px 8px;
+        border-radius: 10px;
+    }
+
+    .festive-form-section {
+        margin-bottom: 18px;
+    }
+
+    .festive-form-section > h3 {
+        font-size: 15px;
+        margin-bottom: 14px;
+    }
+
+    .festive-form-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .festive-field label {
+        font-size: 11px;
+        margin-bottom: 6px;
+    }
+
+    .festive-field input,
+    .festive-field select {
+        width: 100%;
+        padding: 9px 6px;
+        font-size: 11px;
+    }
+
+    .festive-field small {
+        font-size: 10px;
+    }
+
+    .festive-color-input {
+        gap: 5px;
+        padding: 5px;
+    }
+
+    .festive-color-input input[type="color"] {
+        width: 35px;
+        height: 32px;
+    }
+
+    .festive-color-input span {
+        font-size: 10px;
+    }
+
+    .festive-preview {
+        margin-top: 18px;
+    }
+
+    .festive-preview > h3 {
+        font-size: 15px;
+    }
+
+    .festive-preview-card {
+        padding: 18px 7px;
+    }
+
+    .festive-preview-card h3 {
+        font-size: 16px;
+    }
+
+    .festive-preview-card button {
+        padding: 9px 12px;
+        font-size: 11px;
     }
 
     .festive-submit-area {
         flex-direction: column;
+        gap: 9px;
+        margin-top: 18px;
     }
 
     .festive-submit-area button {
         width: 100%;
+        padding: 10px 5px;
+        font-size: 12px;
     }
 
-    .festive-preview-card {
-        padding: 25px 15px;
-    }
-
-    .festive-preview-card h3 {
-        font-size: 21px;
+    .festive-preview-overlay {
+        padding: 8px;
     }
 
     .festive-preview-modal {
-        padding: 25px 16px;
+        padding: 22px 10px;
+        max-height: 90vh;
     }
 
     .festive-preview-live {
-        padding: 28px 12px;
+        padding: 22px 8px;
     }
 
     .festive-preview-live h2 {
-        font-size: 24px;
+        font-size: 19px;
+    }
+
+    .festive-preview-live p {
+        font-size: 12px;
+    }
+
+    .festive-preview-swatch-row {
+        gap: 12px;
+    }
+
+    .festive-preview-swatch-row span {
+        width: 35px;
+        height: 35px;
     }
 
     .festive-preview-done {
         width: 100%;
+        padding: 10px;
     }
 }

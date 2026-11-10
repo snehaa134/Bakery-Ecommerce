@@ -35,7 +35,7 @@ const FeaturedProducts = () => {
                         }
                     >
                         <img
-                            src={`http://localhost:5000/uploads/${product.images?.[0]}`}
+                            src={product.images?.[0]}
                             alt={product.productName}
                         />
 

@@ -70,7 +70,7 @@ const ManageBanners = () => {
                                                     {banner.images.map((image, imageIndex) => (
                                                         <img
                                                             key={imageIndex}
-                                                            src={`http://localhost:5000/uploads/${image}`}
+                                                            src={image}
                                                             alt={`${banner.title} ${imageIndex + 1}`}
                                                             width="100"
                                                         />

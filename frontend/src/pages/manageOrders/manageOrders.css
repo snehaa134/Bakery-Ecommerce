@@ -342,16 +342,6 @@
 
 
 
-@media (max-width: 1024px) {
-    .manage-orders {
-        padding: 25px 20px;
-    }
-
-    .manage-orders-header h2 {
-        font-size: 28px;
-    }
-}
-
 @media (max-width: 768px) {
     .manage-orders {
         margin-left: 200px;
@@ -376,6 +366,8 @@
 
 @media (max-width: 480px) {
     .manage-orders {
+        width: calc(100% - 130px);
+        margin-left: 130px;
         padding: 18px 10px;
     }
 

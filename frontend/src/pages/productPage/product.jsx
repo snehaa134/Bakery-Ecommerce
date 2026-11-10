@@ -149,7 +149,7 @@ const Products = () => {
                             {filteredProducts.map((product) => (
                                 <div className="product-card" key={product._id}>
                                     <img
-                                        src={`http://localhost:5000/uploads/${product?.images[0]}`}
+                                        src={product?.images?.[0]}
                                         alt={product.productName}
                                     />
                                     <h3>{product.productName}</h3>

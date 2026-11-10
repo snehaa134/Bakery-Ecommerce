@@ -46,10 +46,13 @@
     border-radius: 8px;
     cursor: pointer;
     padding: 3px;
+  
+
 }
 
 .images .swiper + .swiper .swiper-slide-thumb-active img {
-    border-color: var(--primary-color);
+      border: 2px solid black;
+        border-color: var(--primary-color);
 }
 
 .content {

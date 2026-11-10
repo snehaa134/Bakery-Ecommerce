@@ -220,7 +220,7 @@ const UpdateProduct = () => {
                         existingImages.map((image) => (
                             <div key={image}>
                                 <img
-                                    src={`http://localhost:5000/uploads/${image}`}
+                                    src={image}
                                     alt="Product"
                                     className="productImage"
                                     width="60"

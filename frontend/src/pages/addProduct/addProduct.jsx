@@ -71,7 +71,7 @@ const AddProduct = () => {
 
     return (
         <>
-            <div className="main-section">
+            <div className="main-sectionn">
                 <h2>Add Product</h2>
 
                 <form onSubmit={formik.handleSubmit}>

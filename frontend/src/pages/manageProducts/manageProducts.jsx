@@ -85,7 +85,7 @@ const ManageProducts = () => {
                                     <tr key={product?._id}>
                                         <td>{index + 1}</td>
                                         <td>
-                                            <img src={`http://localhost:5000/uploads/${product?.images[0]}`} alt={product?.productName} width="60" />
+                                            <img src={product?.images[0]} alt={product?.productName} width="60" />
                                         </td>
                                         <td>{product?.productName}</td>
                                         <td>{product?.category?.categoryName}</td>

@@ -10,7 +10,7 @@ const addProduct = async (req, res) => {
         const sellingPrice = Number(req.body.sellingPrice);
         const stock = Number(req.body.stock);
 
-        const images = req.files?.map((file) => file.filename)
+        const images = req.files?.map((file) => file.path)
 
         const product = await Product.create({
             productName,
@@ -136,7 +136,7 @@ const updateProduct = async (req, res) => {
         );
 
 
-        const newImages = req.files ? req.files.map((file) => file.filename) : [];
+        const newImages = req.files ? req.files.map((file) => file.path) : [];
 
         if (existingImages.length + newImages.length > 6) {
             return res.status(400).json({

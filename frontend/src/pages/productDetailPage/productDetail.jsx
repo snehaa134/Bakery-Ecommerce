@@ -30,7 +30,7 @@ const ProductDetails = () => {
         return <p>Unable to Fetch Product Details</p>
     }
 
- 
+
 
     const handleAddToCart = async () => {
         try {
@@ -42,7 +42,7 @@ const ProductDetails = () => {
             toast.success(response?.message);
             navigate("/cart")
         } catch (error) {
-                toast.error(error?.data?.message || "failed to Add")
+            toast.error(error?.data?.message || "failed to Add")
         }
     }
 
@@ -54,7 +54,7 @@ const ProductDetails = () => {
                         {product?.images.length > 0 ? (
                             product?.images?.map((image, index) => (
                                 <SwiperSlide key={index}>
-                                    <img src={`http://localhost:5000/uploads/${image}`} alt={product.productName} />
+                                    <img src={image} alt={product.productName} />
                                 </SwiperSlide>
                             ))
                         ) : (
@@ -67,7 +67,7 @@ const ProductDetails = () => {
                     <Swiper onSwiper={setThumbsSwiper} slidesPerView={4} spaceBetween={10} watchSlidesProgress>
                         {product?.images?.map((image, index) => (
                             <SwiperSlide key={index}>
-                                <img src={`http://localhost:5000/uploads/${image}`} alt={product.productName} />
+                                <img src={image} alt={product.productName} />
                             </SwiperSlide>
                         ))}
                     </Swiper>

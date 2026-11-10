@@ -410,6 +410,8 @@
 
 @media (max-width: 480px) {
     .manage-festive-container {
+        width: calc(100% - 130px);
+        margin-left: 130px;
         padding: 15px 10px;
     }
 

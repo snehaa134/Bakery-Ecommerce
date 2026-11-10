@@ -12,7 +12,7 @@ const addBanner = async (req, res) => {
                 messgae: "Please upload at least one image"
             })
         }
-        const images = req.files.map((file) => file.filename)
+        const images = req.files.map((file) => file.path) || []
 
         const banner = await Banner.create({
           title,
@@ -84,7 +84,7 @@ const updateBanner = async (req, res) => {
             isActive
         }
         if (req.files && req.files.length > 0) {
-            updateData.images = req.files.map((file)=>file.filename);
+            updateData.images = req.files.map((file)=>file.path) || [];
         }
         const banner = await Banner.findByIdAndUpdate(
             req.params.id,

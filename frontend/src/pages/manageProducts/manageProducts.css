@@ -200,6 +200,8 @@
 
 @media (max-width: 480px) {
     .manage-products {
+        width: calc(100% - 130px);
+        margin-left: 130px;
         padding: 15px 10px;
     }
 

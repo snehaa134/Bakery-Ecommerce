@@ -6,7 +6,7 @@ const addCategory = async (req, res) => {
     try {
 
         const { categoryName, description } = req.body;
-        const image = req.file ? req.file.filename : "";
+        const image = req.file ? req.file.path : "";
 
         const category = await Category.create({
             categoryName,
@@ -95,7 +95,7 @@ const updateCategory = async (req, res) => {
             updateData.isActive=isActive
         }
         if (req.file) {
-            updateData.image = req.file.filename;
+            updateData.image = req.file.path;
         }
         const category = await Category.findByIdAndUpdate(
             req.params.id,

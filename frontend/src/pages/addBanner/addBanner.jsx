@@ -50,22 +50,25 @@ const AddBanner = () => {
 
     return (
         <>
-            <div className="main-section">
-                <h2>Add Banner</h2>
+            <div className="main-banner">
+                
 
                 <form onSubmit={formik.handleSubmit}>
+                    <h2>Add Banner</h2>
                     <div className="form-group">
+                        <label>Banner Title:</label>
                         <input type="text" name="title" placeholder="Enter Banner title here" value={formik.values.title} onChange={formik.handleChange} onBlur={formik.handleBlur} />
                         {formik.touched.title && formik.errors.title && (<p>{formik.errors.title}</p>)}
                     </div>
 
                     <div className="form-group">
+                        <label>Banner description:</label>
                         <input type="text" name="description" placeholder="Enter Banner description here" value={formik.values.description} onChange={formik.handleChange} onBlur={formik.handleBlur} />
                         {formik.touched.description && formik.errors.description && (<p>{formik.errors.description}</p>)}
                     </div>
 
                     <div className="form-group">
-                        <label>Images</label>
+                        <label>Banner Images:</label>
                         <input type = "file" placeholder="upload banner images here" name="images" accept="image/*" multiple                       onChange={(e)=>{
                             const selectedImages = Array.from(
                                 e.currentTarget.files || []

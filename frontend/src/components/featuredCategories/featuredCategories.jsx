@@ -27,9 +27,9 @@ const FeaturedCategories = () => {
 
                 {categories?.length > 0 && (
                     <div className="categories-gridd">
-                        {categories?.slice(0, 5).map((category) => (
+                        {categories?.slice(0, 6).map((category) => (
                             <div className="category-card" key={category._id} onClick={() => navigate(`/products/${category._id}`)}>
-                                <img src={`http://localhost:5000/uploads/${category.image}`} alt={category.categoryName} />
+                                <img src={category.image} alt={category.categoryName} />
                                 <h3>{category.categoryName}</h3>
                             </div>
 

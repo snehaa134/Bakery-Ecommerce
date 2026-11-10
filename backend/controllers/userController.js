@@ -243,7 +243,7 @@ const updateProfile = async (req, res) => {
         }
 
         if (req.file) {
-            user.profileImage = req.file.filename;
+            user.profileImage = req.file.path;
         }
 
         await user.save();

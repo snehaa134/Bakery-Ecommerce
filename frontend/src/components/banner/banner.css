@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-.main-banner {
+.main-banner_component {
     width: 100%;
     min-height: 450px;
     padding: 45px 8%;
@@ -102,7 +102,7 @@
 }
 
 @media (max-width: 780px) {
-    .main-banner {
+    .main-banner_component {
         min-height: auto;
         padding: 35px 4%;
         gap: 18px;
@@ -145,7 +145,7 @@
 }
 
 @media (max-width: 480px) {
-    .main-banner {
+    .main-banner_component {
         min-height: 0;
         padding: 24px 12px;
         flex-direction: row;

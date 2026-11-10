@@ -39,7 +39,7 @@ const Banner = () => {
 
     return (
         <>
-            <div className="main-banner">
+            <div className="main-banner_component">
                 <div className="banner-content">
                     <h2>{banner.title}</h2>
                     <p>{banner.description}</p>
@@ -57,7 +57,7 @@ const Banner = () => {
                 </div>
 
                 {banner?.images?.[0] && (
-                    <img src={`http://localhost:5000/uploads/${banner?.images[0]}`} alt={banner.title} className="banner-img" />
+                    <img src={banner?.images[0]} alt={banner.title} className="banner-img" />
                 )}
 
 

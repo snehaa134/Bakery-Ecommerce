@@ -34,7 +34,7 @@ const getFestivalDatesFromCalendar = async (festivalName) => {
     const startDate = matchingEvent.start.date || matchingEvent.start.dateTime;
     const endDate = matchingEvent.end.date || matchingEvent.end.dateTime;
 
-    
+
 
     let actualEndDate = endDate;
 
@@ -352,7 +352,6 @@ const deleteFestiveTheme = async (req, res) => {
 };
 
 
-
 const getActiveFestiveTheme = async (req, res) => {
     try {
         const currentDate = new Date();
@@ -383,6 +382,7 @@ const getActiveFestiveTheme = async (req, res) => {
                 expiryDate.getDate() + theme.expiryAfterDays
             );
 
+            expiryDate.setHours(23, 59, 59, 999);
             return (
                 theme.activationMode === "automatic" &&
                 currentDate >= activationDate &&
@@ -403,6 +403,8 @@ const getActiveFestiveTheme = async (req, res) => {
         });
     }
 };
+
+
 
 
 module.exports = {

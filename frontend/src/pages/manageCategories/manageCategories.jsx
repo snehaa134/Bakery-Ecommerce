@@ -79,7 +79,7 @@ const ManageCategories = () => {
                                         <td>{index + 1}</td>
                                         <td>{category.categoryName}</td>
                                         <td>
-                                            <img src={`http://localhost:5000/uploads/${category.image}`} alt={category.categoryName} width="60" />
+                                            <img src={category.image} alt={category.categoryName} width="60" />
                                         </td>
                                         <td>{category.description}</td>
                                         <td>
