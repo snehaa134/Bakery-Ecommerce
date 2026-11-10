@@ -5,7 +5,7 @@ export const userApi = createApi({
   reducerPath: "userApi",
 
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000",
+    baseUrl: "https://bakery-bliss-backend.onrender.com",
     credentials: "include"
   }),
 

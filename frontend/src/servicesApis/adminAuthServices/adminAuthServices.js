@@ -5,7 +5,7 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 export const adminAuthApi = createApi({
     reducerPath: "adminAuthApi",
     baseQuery: fetchBaseQuery({
-        baseUrl: "http://localhost:5000",
+        baseUrl: "https://bakery-bliss-backend.onrender.com",
         credentials: "include"
     }),
     endpoints: (builder) => ({

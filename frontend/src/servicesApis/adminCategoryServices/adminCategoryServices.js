@@ -3,7 +3,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const categoryApi = createApi({
     reducerPath: "categoryApi",
     baseQuery: fetchBaseQuery({
-        baseUrl: "http://localhost:5000",
+        // baseUrl: "http://localhost:5000",
+        baseUrl: "https://bakery-bliss-backend.onrender.com",
         credentials: "include"
     }),
     tagTypes: ["Category"],
@@ -18,7 +19,7 @@ export const categoryApi = createApi({
             invalidatesTags: ["Category"]
         }),
         updateCategory: builder.mutation({
-            query: ({ id, formData,...data }) => ({
+            query: ({ id, formData, ...data }) => ({
                 url: `/update-category/${id}`,
                 method: "PUT",
                 body: formData || data
