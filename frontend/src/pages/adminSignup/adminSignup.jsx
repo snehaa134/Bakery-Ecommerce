@@ -6,8 +6,8 @@ import { useContext } from "react";
 import { AuthContext } from "../../authContext/authContext";
 import { auth, googleProvider } from "../../firebase/firebase";
 import { signInWithPopup } from "firebase/auth";
-import "../adminSignup/adminSignUp.css";
 import { useAdminGoogleLoginMutation, useAdminSignUpMutation } from "../../servicesApis/adminAuthServices/adminAuthServices";
+import "../adminSignup/adminSignup.css";
 
 const AdminSignUp = () => {
     const [adminSignUp, { isLoading }] = useAdminSignUpMutation();
