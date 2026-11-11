@@ -11,7 +11,7 @@ const Cart = () => {
 
     const items = data?.data?.items || []
 
- 
+
 
     if (isLoading) {
         return <p>Loading Cart</p>
@@ -67,7 +67,7 @@ const Cart = () => {
 
                         return (
                             <div className="cart-items" key={productId}>
-                                <img src={`http://localhost:5000/uploads/${product.images?.[0]}`} alt={product.productName} />
+                                <img src={product.images?.[0]} alt={product.productName} />
 
                                 <div className="cart-details">
                                     <h2>{product?.productName}</h2>
