@@ -7,6 +7,7 @@ import { GiCupcake } from "react-icons/gi";
 import { AuthContext } from "../../authContext/authContext";
 import { useGetCartQuery } from "../../servicesApis/cartServices/cartServices";
 import FestiveDecorations from "../festiveDecoration/festiveDecoration";
+import { FaRegUser } from "react-icons/fa";
 
 const Navbar = () => {
     const { user, isLoggedIn } = useContext(AuthContext);
@@ -66,7 +67,7 @@ const Navbar = () => {
                         <Link to="/" className="navbar-logo">
                             <h2>
                                 <GiCupcake />
-                                Bakery Bliss
+                                BakeryBliss
                             </h2>
                         </Link>
                     </div>
@@ -102,7 +103,7 @@ const Navbar = () => {
                     </Link>
 
                     {isLoggedIn ? (
-                        <Link to="/profile">Profile</Link>
+                        <Link to="/profile" className="profile-icon"><FaRegUser /></Link>
                     ) : (
                         <button onClick={() => navigate("/login")}>
                             Login
