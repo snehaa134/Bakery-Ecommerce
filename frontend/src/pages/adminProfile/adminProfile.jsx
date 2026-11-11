@@ -1,11 +1,15 @@
+
 import { useContext, useState, useEffect } from "react";
 import { useLogoutMutation } from "../../servicesApis/authServices/authServices";
-
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../authContext/authContext";
 import { toast } from "react-toastify";
-import "../profile/profile.css";
-import { useGetCurrentUserQuery, useUpdateProfileMutation } from "../../servicesApis/userServices/userServices";
+import "../adminProfile/adminProfile.css";
+import {
+    useGetCurrentUserQuery,
+    useUpdateProfileMutation
+} from "../../servicesApis/userServices/userServices";
+
 const AdminProfile = () => {
     const [logout] = useLogoutMutation();
     const [updateProfile, { isLoading }] = useUpdateProfileMutation();
@@ -24,16 +28,10 @@ const AdminProfile = () => {
     useEffect(() => {
         if (user) {
             setName(user.name || "");
-            setPreview(
-                user.profileImage
-                    ? `http://localhost:5000/uploads/${user.profileImage}`
-                    : ""
-            );
+            setPreview(user.profileImage || "");
         }
     }, [user]);
 
-
-    
     const handleImageChange = (e) => {
         const file = e.target.files[0];
 
@@ -42,7 +40,6 @@ const AdminProfile = () => {
             setPreview(URL.createObjectURL(file));
         }
     };
-
 
     const handleUpdate = async (e) => {
         e.preventDefault();
@@ -60,9 +57,7 @@ const AdminProfile = () => {
             setName(response.data.name || "");
 
             if (response.data.profileImage) {
-                setPreview(
-                    `http://localhost:5000/uploads/${response.data.profileImage}`
-                );
+                setPreview(response.data.profileImage);
             }
 
             setImage(null);
@@ -78,8 +73,10 @@ const AdminProfile = () => {
     const handleLogout = async () => {
         try {
             await logout().unwrap();
+
             setIsLoggedIn(false);
             setUser(null);
+
             navigate("/");
         } catch (error) {
             console.log("error", error);
@@ -127,6 +124,7 @@ const AdminProfile = () => {
                         required
                     />
                 </div>
+
                 <div className="profile-field">
                     <label>Email</label>
                     <input
