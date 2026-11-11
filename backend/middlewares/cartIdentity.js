@@ -1,6 +1,6 @@
 const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
-const STATUS_CODE=require("../helpers/enum");
+const STATUS_CODE = require("../helpers/enum");
 
 const cartIdentity = (req, res, next) => {
 
@@ -28,8 +28,9 @@ const cartIdentity = (req, res, next) => {
             httpOnly: true,
             sameSite: "none",
             secure: true,
+            path: "/",
             maxAge: 30 * 24 * 60 * 60 * 1000
-        })
+        });
     }
     req.cartGuestId = guestId;
     next();
