@@ -86,7 +86,7 @@ const App = () => {
               <Route path="/add-festive-theme" element={<AddFestiveTheme />} />
               <Route path="/edit-festive-theme/:id" element={<EditFestiveTheme />} />
             </Route>
-            <Route path="admin-profile" element={<AdminProfile/>}/>
+            <Route path="/admin-profile" element={<AdminProfile/>}/>
           </Route>
 
         </Routes>
