@@ -66,8 +66,8 @@ const mergeGuestCart = async (req, res, userId) => {
 
     res.clearCookie("guestId", {
         httpOnly: true,
-        sameSite: "lax",
-        secure: process.env.NODE_ENV === "production",
+        secure: true,
+        sameSite: "none",
         path: "/"
     });
 };
@@ -112,9 +112,10 @@ const login = async (req, res) => {
 
         res.cookie("token", token, {
             httpOnly: true,
-            secure: false,
             maxAge: 24 * 60 * 60 * 1000,
-            sameSite: "lax"
+            sameSite: "none",
+            secure: true,
+            path: "/"
         });
 
         await mergeGuestCart(req, res, user._id);
@@ -144,8 +145,9 @@ const login = async (req, res) => {
 const logout = (req, res) => {
     res.clearCookie("token", {
         httpOnly: true,
-        secure: false,
-        sameSite: "lax"
+        secure: true,
+        sameSite: "none",
+        path: "/"
     });
 
     return res.json({
@@ -189,9 +191,10 @@ const googleLogin = async (req, res) => {
 
         res.cookie("token", token, {
             httpOnly: true,
-            secure: false,
+            secure: true,
             maxAge: 24 * 60 * 60 * 1000,
-            sameSite: "lax"
+            sameSite: "none",
+            path: "/"
         });
 
         await mergeGuestCart(req, res, user._id);

@@ -116,10 +116,11 @@ const verifyOtp = async (req, res) => {
 
         res.cookie("token", token, {
             httpOnly: true,
-            secure: false,
-            maxAge: 24 * 60 * 60 * 1000
-        })
-
+            secure: true,
+            sameSite: "none",
+            maxAge: 24 * 60 * 60 * 1000,
+            path: "/"
+        });
         const message = user.role === "admin" ? "Admin Verified sccessfully" : "user Verified successfully"
 
         return res.status(STATUS_CODE.OK).json({
@@ -254,7 +255,7 @@ const updateProfile = async (req, res) => {
                 name: user.name,
                 email: user.email,
                 profileImage: user.profileImage,
-                role:user.role
+                role: user.role
             }
         });
 
