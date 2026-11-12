@@ -21,8 +21,7 @@ app.use(cookieParser());
 app.use(cors({
     origin: [
         "http://localhost:5173",
-        "https://bakery-ecommerce-sooty.vercel.app",
-        "https://bakery-ecommerce-gg91.vercel.app"
+        "https://bakery-ecommerce-sooty.vercel.app"    
     ],
     credentials: true
 }))
