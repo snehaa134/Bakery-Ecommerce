@@ -20,8 +20,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
     origin: [
-        "http://localhost:5173",
-        "https://bakery-ecommerce-sooty.vercel.app"    
+        process.env.FRONTEND_URL,
+        process.env.FRONTEND_LIVE_URL 
     ],
     credentials: true
 }))
